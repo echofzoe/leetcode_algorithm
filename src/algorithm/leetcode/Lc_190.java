@@ -1,10 +1,8 @@
 package algorithm.leetcode;
 
-import java.math.BigInteger;
-
-public class leetcode_190 {
+public class Lc_190 {
     public static void main(String[] args) {
-        leetcode_190 lt = new leetcode_190();
+        Lc_190 lt = new Lc_190();
         int input1 = 43261596;
         int output1 = lt.reverseBits(input1);
         System.out.println(output1);

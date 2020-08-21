@@ -2,9 +2,9 @@ package algorithm.leetcode;
 
 import java.util.Arrays;
 
-public class leetcode_189 {
+public class Lc_189 {
     public static void main(String[] args) {
-        leetcode_189 lt = new leetcode_189();
+        Lc_189 lt = new Lc_189();
 
         int[] test1 = new int[]{1, 2, 3, 4, 5, 6, 7};
         int k1 = 3;
