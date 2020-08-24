@@ -9,7 +9,7 @@ public class Lc_111 {
     public static void main(String[] args) {
         Lc_111 lc = new Lc_111();
         TreeNode root = new TreeNode(0);
-        lc.TreeInitialize(root);
+        lc.TreeInitialize(root);    // [3,9,20,null,null,15,7]
 
         System.out.println("DFS: " + lc.minDepth_DFS(root) + "\nBFS: " + lc.minDepth_BFS(root));
     }
