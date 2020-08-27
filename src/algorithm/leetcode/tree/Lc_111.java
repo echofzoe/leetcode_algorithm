@@ -6,6 +6,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Lc_111 {
+
+    // 二叉树的最小深度
+    // https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
+
     public static void main(String[] args) {
         Lc_111 lc = new Lc_111();
         TreeNode root = new TreeNode(0);

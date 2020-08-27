@@ -3,6 +3,10 @@ package algorithm.leetcode;
 import java.util.Arrays;
 
 public class Lc_189 {
+
+    // 旋转数组
+    // https://leetcode-cn.com/problems/rotate-array/
+
     public static void main(String[] args) {
         Lc_189 lt = new Lc_189();
 

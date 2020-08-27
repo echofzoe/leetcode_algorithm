@@ -2,6 +2,8 @@ package algorithm.leetcode;
 
 public class Lc_26 {
 
+    // 删除排序数组中的重复项
+    // https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
     // 注意：题目要求 “原地”，这意味着不能复制数组
 
     public static void main(String[] args) {

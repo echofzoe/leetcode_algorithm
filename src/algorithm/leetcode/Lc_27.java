@@ -2,6 +2,8 @@ package algorithm.leetcode;
 
 public class Lc_27 {
 
+    // 移除元素
+    // https://leetcode-cn.com/problems/remove-element/
     // 注意：题目要求 “原地”，这意味着不能复制数组
 
     public static void main(String[] args) {

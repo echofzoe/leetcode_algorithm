@@ -1,6 +1,10 @@
 package algorithm.leetcode;
 
 public class Lc_190 {
+
+    // 颠倒二进制位
+    // https://leetcode-cn.com/problems/reverse-bits/
+
     public static void main(String[] args) {
         Lc_190 lt = new Lc_190();
         int input1 = 43261596;
@@ -20,6 +24,7 @@ public class Lc_190 {
             n >>>= 1;
             p -= 1;
         }
+
         return res;
     }
 
@@ -47,8 +52,8 @@ public class Lc_190 {
     }
 
     private int binaryToDecimal(String binNum) {
-        int decimal = 0;
-        int p = 0;
+        int decimal = 0;    // 十进制数
+        int p = 0;    // 幂次
 
         if (binNum.length() != 0) {
             for (int i = binNum.length() - 1; i >= 0; i--) {
