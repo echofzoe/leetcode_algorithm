@@ -2,7 +2,6 @@ package algorithm.leetcode.tree;
 
 import algorithm.leetcode.utils.TreeNode;
 import com.sun.source.tree.Tree;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -81,7 +80,7 @@ public class lc_103 {
     }
 
     // 比较结果是否正确
-    private boolean CompareAnswer(List<List<Integer>> correct, @NotNull List<List<Integer>> yourAnswer) {
+    private boolean CompareAnswer(List<List<Integer>> correct, List<List<Integer>> yourAnswer) {
         if (yourAnswer.size() == 0) return false;
 
         for (int i = 0; i < correct.size(); i++) {
