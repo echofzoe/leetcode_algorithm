@@ -15,4 +15,9 @@ public class testdemo {
         System.out.println(bin_a);
     }
 
+    @Test
+    public void test2() {
+
+    }
+
 }

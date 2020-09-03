@@ -2,16 +2,16 @@ package algorithm.leetcode.tree;
 
 import algorithm.leetcode.utils.TreeNode;
 
-public class jianzhi_offer_26 {
+public class jianzhi_offer_26_树的子结构 {
 
     // 树的子结构
     // https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/
     public static void main(String[] args) {
-        jianzhi_offer_26 lc = new jianzhi_offer_26();
+        jianzhi_offer_26_树的子结构 lc = new jianzhi_offer_26_树的子结构();
 
         // 给定的树 A
         TreeNode A = new TreeNode(0);
-        lc.TreeInitialize(A);
+        lc.treeInitialize(A);
 
         // 给定的树 B
         TreeNode B = new TreeNode(4);
@@ -39,7 +39,7 @@ public class jianzhi_offer_26 {
         }
     }
 
-    private void TreeInitialize(TreeNode root) {
+    private void treeInitialize(TreeNode root) {
         // depth = 1
         root.val = 3;
 

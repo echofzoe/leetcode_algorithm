@@ -7,14 +7,14 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
-public class jianzhi_offer_7 {
+public class jianzhi_offer_7_重建二叉树 {
 
     // 重建二叉树
     // https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/
 
     public static void main(String[] args) {
 
-        jianzhi_offer_7 lc = new jianzhi_offer_7();
+        jianzhi_offer_7_重建二叉树 lc = new jianzhi_offer_7_重建二叉树();
         int[] preorder = {3, 9, 20, 15, 7};
         int[] inorder = {9, 3, 15, 20, 7};
 
@@ -29,6 +29,7 @@ public class jianzhi_offer_7 {
     }
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
+
         if (preorder == null || preorder.length == 0) return null;
 
         Map<Integer, Integer> indexMap = new HashMap<>();
@@ -44,13 +45,13 @@ public class jianzhi_offer_7 {
 
         TreeNode root = buildTree(preorder, 0, length - 1, inorder, 0, length - 1, indexMap);
         return root;
+
     }
 
     private TreeNode buildTree(int[] preorder, int preorderStart, int preorderEnd, int[] inorder, int inorderStart, int inorderEnd, Map<Integer, Integer> indexMap) {
 
         if (preorderStart > preorderEnd) return null;    // 当前二叉树中没有节点
 
-        // 根节点
         int rootVal = preorder[preorderStart];
         TreeNode root = new TreeNode(rootVal);
 
@@ -65,15 +66,15 @@ public class jianzhi_offer_7 {
             // 递归遍历建立根节点的左子树
             // - 左子树节点区间为前序遍历数组的 [起始索引（根节点索引） + 1, 起始索引 + 左子树全部节点数量]
             // - 左子树节点区间为中序遍历数组的 [起始索引, 根节点索引 - 1]
-            TreeNode leftSubtree = buildTree(preorder, preorderStart + 1, preorderStart + leftNodes, inorder, inorderStart, rootIndex - 1, indexMap);
+            TreeNode leftSubTree = buildTree(preorder, preorderStart + 1, preorderStart + leftNodes, inorder, inorderStart, rootIndex - 1, indexMap);
 
             // 递归遍历建立根节点的右子树
             // - 右子树节点区间为前序遍历数组的 [末尾索引 - 右子树全部节点数量, 末尾索引]
             // - 右子树节点区间为中序遍历数组的 [根节点索引 + 1, 末尾索引]
-            TreeNode rightSubtree = buildTree(preorder, preorderEnd - rightNodes + 1, preorderEnd, inorder, rootIndex + 1, inorderEnd, indexMap);
+            TreeNode rightSubTree = buildTree(preorder, preorderEnd - rightNodes + 1, preorderEnd, inorder, rootIndex + 1, inorderEnd, indexMap);
 
-            root.left = leftSubtree;
-            root.right = rightSubtree;
+            root.left = leftSubTree;
+            root.right = rightSubTree;
             return root;
         }
 

@@ -1,11 +1,10 @@
 package algorithm.leetcode.tree;
 
 import algorithm.leetcode.utils.TreeNode;
-import com.sun.source.tree.Tree;
 
 import java.util.*;
 
-public class lc_103 {
+public class lc_103_二叉树的锯齿形层次遍历 {
 
     // 二叉树的锯齿形层次遍历
     // https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/
@@ -28,9 +27,9 @@ public class lc_103 {
     };
 
     public static void main(String[] args) {
-        lc_103 lc = new lc_103();
+        lc_103_二叉树的锯齿形层次遍历 lc = new lc_103_二叉树的锯齿形层次遍历();
         TreeNode root = new TreeNode(0);
-        lc.TreeInitialize(root);
+        lc.treeInitialize(root);
 
         if (lc.CompareAnswer(lc.correct, lc.zigzagLevelOrder(root))) {
             System.out.println("答案正确");
@@ -95,7 +94,7 @@ public class lc_103 {
     }
 
     // 二叉树初始化
-    private void TreeInitialize(TreeNode root) {
+    private void treeInitialize(TreeNode root) {
         // depth = 1
         TreeNode head = root;
         head.val = 3;

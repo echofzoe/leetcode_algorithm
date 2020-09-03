@@ -2,15 +2,15 @@ package algorithm.leetcode.tree;
 
 import algorithm.leetcode.utils.TreeNode;
 
-public class jianzhi_offer_68_II {
+public class jianzhi_offer_68_II_对称的二叉树 {
 
     // 二叉树的最近公共祖先
     // https://leetcode-cn.com/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/
 
     public static void main(String[] args) {
-        jianzhi_offer_68_II lc = new jianzhi_offer_68_II();
+        jianzhi_offer_68_II_对称的二叉树 lc = new jianzhi_offer_68_II_对称的二叉树();
         TreeNode root = new TreeNode(0);
-        lc.TreeInitialize(root);    // [3,5,1,6,2,0,8,null,null,7,4]
+        lc.treeInitialize(root);    // [3,5,1,6,2,0,8,null,null,7,4]
 
         TreeNode p = new TreeNode(5);
         TreeNode q = new TreeNode(1);
@@ -32,36 +32,24 @@ public class jianzhi_offer_68_II {
 
 
     // 二叉树初始化
-    private void TreeInitialize(TreeNode root) {
+    private void treeInitialize(TreeNode root) {
         // depth = 1
-        TreeNode head = root;
-        head.val = 3;
+        root.val = 3;
 
         // depth = 2
-        head.left = new TreeNode(5);
-        head.right = new TreeNode(1);
-
-        TreeNode headL = head.left;
-        TreeNode headR = head.right;
+        root.left = new TreeNode(5);
+        root.right = new TreeNode(1);
 
         // depth = 3
-        headL = head.left;
-        headL.left = new TreeNode(6);
-        headL.right = new TreeNode(2);
+        root.left.left = new TreeNode(6);
+        root.left.right = new TreeNode(2);
 
-        headR = head.right;
-        headR.left = new TreeNode(0);
-        headR.right = new TreeNode(8);
+        root.right.left = new TreeNode(0);
+        root.right.right = new TreeNode(8);
 
         // depth = 4
-        headL = headL.right;
-        headL.left = new TreeNode(7);
-        headL.right = new TreeNode(4);
-
-        // free
-        head = null;
-        headL = null;
-        headR = null;
+        root.left.right.left = new TreeNode(7);
+        root.left.right.right = new TreeNode(4);
     }
 
 }

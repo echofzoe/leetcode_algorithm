@@ -5,15 +5,15 @@ import algorithm.leetcode.utils.TreeNode;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Lc_111 {
+public class Lc_111_二叉树的最小深度 {
 
     // 二叉树的最小深度
     // https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
 
     public static void main(String[] args) {
-        Lc_111 lc = new Lc_111();
+        Lc_111_二叉树的最小深度 lc = new Lc_111_二叉树的最小深度();
         TreeNode root = new TreeNode(0);
-        lc.TreeInitialize(root);    // [3,9,20,null,null,15,7]
+        lc.treeInitialize(root);    // [3,9,20,null,null,15,7]
 
         System.out.println("DFS: " + lc.minDepth_DFS(root) + "\nBFS: " + lc.minDepth_BFS(root));
     }
@@ -80,7 +80,7 @@ public class Lc_111 {
     }
 
     // 二叉树初始化
-    private void TreeInitialize(TreeNode root) {
+    private void treeInitialize(TreeNode root) {
         TreeNode head = root;
         head.val = 3;
         head.left = new TreeNode(9);
