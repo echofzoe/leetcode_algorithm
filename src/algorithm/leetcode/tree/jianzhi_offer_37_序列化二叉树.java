@@ -1,5 +1,6 @@
 package algorithm.leetcode.tree;
 
+import algorithm.leetcode.utils.BinaryTreeSerialize;
 import algorithm.leetcode.utils.TreeNode;
 
 import java.util.LinkedList;
@@ -23,32 +24,8 @@ public class jianzhi_offer_37_序列化二叉树 {
 
         if (root == null) return "[]";
 
-        return fromBinaryTreeToString(root);
+        return BinaryTreeSerialize.serialize(root);
 
-    }
-
-    private String fromBinaryTreeToString(TreeNode root) {
-
-        StringBuffer buf = new StringBuffer("[");
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-
-        while (!queue.isEmpty()) {
-            TreeNode curr = queue.poll();
-
-            if (curr != null) {
-                buf.append(curr.val).append(",");
-                queue.offer(curr.left);
-                queue.offer(curr.right);
-            } else {
-                buf.append("null,");
-            }
-        }
-
-        buf.deleteCharAt(buf.length() - 1);
-        buf.append(']');
-
-        return buf.toString();
     }
 
     // Decodes your encoded data to tree.
