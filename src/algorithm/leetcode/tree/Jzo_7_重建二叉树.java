@@ -7,14 +7,14 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
-public class jianzhi_offer_7_重建二叉树 {
+public class Jzo_7_重建二叉树 {
 
     // 重建二叉树
     // https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/
 
     public static void main(String[] args) {
 
-        jianzhi_offer_7_重建二叉树 lc = new jianzhi_offer_7_重建二叉树();
+        Jzo_7_重建二叉树 lc = new Jzo_7_重建二叉树();
         int[] preorder = {3, 9, 20, 15, 7};
         int[] inorder = {9, 3, 15, 20, 7};
 

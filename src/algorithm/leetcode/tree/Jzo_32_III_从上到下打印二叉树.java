@@ -5,13 +5,13 @@ import algorithm.leetcode.utils.TreeNode;
 
 import java.util.*;
 
-public class jianzhi_offer_32_III_从上到下打印二叉树 {
+public class Jzo_32_III_从上到下打印二叉树 {
 
     // 从上到下打印二叉树
     // https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/
 
     public static void main(String[] args) {
-        jianzhi_offer_32_III_从上到下打印二叉树 lc = new jianzhi_offer_32_III_从上到下打印二叉树();
+        Jzo_32_III_从上到下打印二叉树 lc = new Jzo_32_III_从上到下打印二叉树();
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);
 

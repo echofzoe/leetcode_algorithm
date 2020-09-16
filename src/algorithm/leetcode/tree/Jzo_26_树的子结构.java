@@ -2,12 +2,12 @@ package algorithm.leetcode.tree;
 
 import algorithm.leetcode.utils.TreeNode;
 
-public class jianzhi_offer_26_树的子结构 {
+public class Jzo_26_树的子结构 {
 
     // 树的子结构
     // https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/
     public static void main(String[] args) {
-        jianzhi_offer_26_树的子结构 lc = new jianzhi_offer_26_树的子结构();
+        Jzo_26_树的子结构 lc = new Jzo_26_树的子结构();
 
         // 给定的树 A
         TreeNode A = new TreeNode(0);

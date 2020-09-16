@@ -6,13 +6,13 @@ import algorithm.leetcode.utils.TreeNode;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class jianzhi_offer_37_序列化二叉树 {
+public class Jzo_37_序列化二叉树 {
 
     // 序列化二叉树
     // https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/
 
     public static void main(String[] args) {
-        jianzhi_offer_37_序列化二叉树 lc = new jianzhi_offer_37_序列化二叉树();
+        Jzo_37_序列化二叉树 lc = new Jzo_37_序列化二叉树();
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);
 

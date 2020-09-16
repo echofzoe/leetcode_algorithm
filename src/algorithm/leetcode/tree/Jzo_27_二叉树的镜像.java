@@ -3,18 +3,15 @@ package algorithm.leetcode.tree;
 import algorithm.leetcode.utils.BinaryTreeSerialize;
 import algorithm.leetcode.utils.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Stack;
 
-public class jianzhi_offer_27_二叉树的镜像 {
+public class Jzo_27_二叉树的镜像 {
 
     // 二叉树的镜像
     // https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/
 
     public static void main(String[] args) {
-        jianzhi_offer_27_二叉树的镜像 lc = new jianzhi_offer_27_二叉树的镜像();
+        Jzo_27_二叉树的镜像 lc = new Jzo_27_二叉树的镜像();
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);
 
