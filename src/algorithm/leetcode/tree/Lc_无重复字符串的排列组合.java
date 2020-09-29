@@ -32,7 +32,7 @@ public class Lc_无重复字符串的排列组合 {
             }
         }
 
-        return res.toArray(new String[res.size()]);
+        return res.toArray(new String[0]);
     }
 
     private String swap(String s, int i, int j) {
