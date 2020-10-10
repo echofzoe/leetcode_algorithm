@@ -1,12 +1,12 @@
-package algorithm.leetcode;
+package algorithm.leetcode.bit;
 
-public class Lc_190 {
+public class Lc_190_颠倒二进制位 {
 
     // 颠倒二进制位
     // https://leetcode-cn.com/problems/reverse-bits/
 
     public static void main(String[] args) {
-        Lc_190 lt = new Lc_190();
+        Lc_190_颠倒二进制位 lt = new Lc_190_颠倒二进制位();
         int input1 = 43261596;
         int output1 = lt.reverseBits(input1);
         System.out.println(output1);

@@ -1,15 +1,14 @@
-package algorithm.leetcode;
+package algorithm.leetcode.recursion;
 
 import java.util.HashMap;
-import java.util.Map;
 
-public class Lc_292 {
+public class Lc_292_NimGame {
 
     // Nim Game
     // https://leetcode-cn.com/problems/nim-game/
 
     public static void main(String[] args) {
-        Lc_292 lc = new Lc_292();
+        Lc_292_NimGame lc = new Lc_292_NimGame();
         int n = 100;
 
         System.out.print("如果堆中有 " + n + " 块石头，那么你永远");
@@ -20,8 +19,6 @@ public class Lc_292 {
         }
         System.out.println("赢得比赛");
     }
-
-
 
     // brutal force - 时间复杂度太高
     private boolean canWinNim_1(int n) {

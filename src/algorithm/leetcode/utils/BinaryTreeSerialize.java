@@ -1,6 +1,5 @@
 package algorithm.leetcode.utils;
 
-import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -123,6 +122,11 @@ public class BinaryTreeSerialize {
 
         return buf.deleteCharAt(buf.length() - 1).append(']').toString();
     }
+
+
+    /*
+     * 其他
+     */
 
     public static String nextNodeSerialize(Node root, int levels) {
         if (root == null) return "[]";

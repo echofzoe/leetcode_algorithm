@@ -1,18 +1,19 @@
-package algorithm.leetcode;
+package algorithm.leetcode.array;
 
-public class Lc_27 {
+public class Lc_27_移除元素 {
 
     // 移除元素
     // https://leetcode-cn.com/problems/remove-element/
+
     // 注意：题目要求 “原地”，这意味着不能复制数组
 
     public static void main(String[] args) {
-        Lc_27 lc = new Lc_27();
+        Lc_27_移除元素 lc = new Lc_27_移除元素();
         int[] nums = {4, 1, 2, 3, 5};
         int val = 4;
 
         System.out.println(lc.removeElement_1(nums, 1));
-        System.out.println(lc.removeElement_1(nums, 4));
+        System.out.println(lc.removeElement_2(nums, 4));
     }
 
     // 快慢双指针 - 完全遍历
@@ -39,10 +40,9 @@ public class Lc_27 {
         int i = 0, n = nums.length;
         while (i < n) {
             if (nums[i] == val) {
-                nums[i] = nums[n - 1];
-                n--;
-            }
-            else {
+                nums[i] = nums[n - 1];    // 交换当前元素与最后一个元素
+                n--;    // 数组大小 - 1, 相当于删除重复元素
+            } else {
                 i++;
             }
         }

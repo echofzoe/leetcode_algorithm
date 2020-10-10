@@ -1,14 +1,14 @@
-package algorithm.leetcode;
+package algorithm.leetcode.array;
 
 import java.util.Arrays;
 
-public class Lc_189 {
+public class Lc_189_旋转数组 {
 
     // 旋转数组
     // https://leetcode-cn.com/problems/rotate-array/
 
     public static void main(String[] args) {
-        Lc_189 lt = new Lc_189();
+        Lc_189_旋转数组 lt = new Lc_189_旋转数组();
 
         int[] test1 = new int[]{1, 2, 3, 4, 5, 6, 7};
         int k1 = 3;
