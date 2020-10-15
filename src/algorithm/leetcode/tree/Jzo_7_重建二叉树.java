@@ -33,7 +33,7 @@ public class Jzo_7_重建二叉树 {
         if (preorder == null || preorder.length == 0) return null;
 
         Map<Integer, Integer> indexMap = new HashMap<>();
-        int length = preorder.length;
+        int length = inorder.length;
 
         // 为中序遍历数组建立哈希表，之后：
         // - 1. 通过前序遍历数组确定根节点
