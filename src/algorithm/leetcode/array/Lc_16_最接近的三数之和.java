@@ -17,8 +17,8 @@ public class Lc_16_最接近的三数之和 {
 
     public int threeSumClosest(int[] nums, int target) {
 
-//        int res = nums[0] + nums[1] + nums[2];
-        int res = Integer.MAX_VALUE;
+//        int res = Integer.MAX_VALUE;    // 负数运算时可能溢出
+        int res = nums[0] + nums[1] + nums[2];
         Arrays.sort(nums);
 
         for (int k = 0; k < nums.length - 2; k++) {
