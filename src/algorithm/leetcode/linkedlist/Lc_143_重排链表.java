@@ -18,7 +18,7 @@ public class Lc_143_重排链表 {
         lc.linkedListInitialize(input1, input2);
 
         System.out.print("链表 " + ListNodeSerialize.serialize(input1) + " 按题目要求重排后的结果为 ");
-        lc.reorderList_LinearTable(input1);
+        lc.reorderList_DoublePoint(input1);
         System.out.println(ListNodeSerialize.serialize(input1));
 
         System.out.print("链表 " + ListNodeSerialize.serialize(input2) + " 按题目要求重排后的结果为 ");
@@ -26,7 +26,30 @@ public class Lc_143_重排链表 {
         System.out.println(ListNodeSerialize.serialize(input2));
     }
 
-    // 快慢指针 + 原地修改链表 - 时间复杂度 O(N) - 空间复杂度 O(1)
+    // 线性表 - 时间复杂度 O(N) - 空间复杂度 O(N)
+    public void reorderList_LinearTable(ListNode head) {
+        if (head == null) return;
+
+        List<ListNode> list = new ArrayList<>();
+        ListNode node = head;
+        while (node != null) {
+            list.add(node);
+            node = node.next;
+        }
+
+        int i = 0, j = list.size() - 1;
+        while (i < j) {
+            list.get(i++).next = list.get(j);
+
+            if (i == j) break;
+
+            list.get(j--).next = list.get(i);
+        }
+
+        list.get(i).next = null;    // 原链表中点即新链表最后节点
+    }
+
+    // 快慢指针找中点 + 原地修改链表 - 时间复杂度 O(N) - 空间复杂度 O(1)
     public void reorderList_DoublePoint(ListNode head) {
         if (head == null || head.next == null || head.next.next == null) return;
 
@@ -51,29 +74,6 @@ public class Lc_143_重排链表 {
             head = head2.next;
             head2 = temp;
         }
-    }
-
-    // 线性表 - 时间复杂度 O(N) - 空间复杂度 O(N)
-    public void reorderList_LinearTable(ListNode head) {
-        if (head == null) return;
-
-        List<ListNode> list = new ArrayList<>();
-        ListNode node = head;
-        while (node != null) {
-            list.add(node);
-            node = node.next;
-        }
-
-        int i = 0, j = list.size() - 1;
-        while (i < j) {
-            list.get(i++).next = list.get(j);
-
-            if (i == j) break;
-
-            list.get(j--).next = list.get(i);
-        }
-
-        list.get(i).next = null;    // 原链表中点即新链表最后节点
     }
 
     private ListNode reverseList(ListNode head) {
