@@ -19,7 +19,7 @@ public class Lc_145_二叉树的后序遍历 {
         root.right.left = new TreeNode(3);
 
 
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 3) + " 的后序遍历结果是 " + lc.postorderTraversal_Recursive(root));
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 3) + " 的后序遍历结果是 " + lc.postorderTraversal_Iteration(root));
     }
 
     List<Integer> res = new LinkedList<>();
