@@ -3,9 +3,6 @@ package algorithm.leetcode.linkedlist;
 import algorithm.leetcode.utils.ListNode;
 import algorithm.leetcode.utils.ListNodeSerialize;
 
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.Stack;
 
 public class Jzo_24_反转链表 {
