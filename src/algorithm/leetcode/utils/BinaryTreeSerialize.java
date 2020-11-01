@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class BinaryTreeSerialize {
 
-    /*
+    /**
      * 针对 TreeNode 节点
      */
 
@@ -65,7 +65,7 @@ public class BinaryTreeSerialize {
 
 
 
-    /*
+    /**
      * 针对 Node 节点
      */
 
