@@ -1,9 +1,6 @@
 package algorithm.leetcode.array;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Lc_1207_独一无二的出现次数 {
 
@@ -14,7 +11,7 @@ public class Lc_1207_独一无二的出现次数 {
         Lc_1207_独一无二的出现次数 lc = new Lc_1207_独一无二的出现次数();
         int[] arr = {1, 2, 2, 1, 1, 3};
 
-        System.out.println("数组" + "中的每个数的出现次数" + (lc.uniqueOccurrences(arr) ? "都是" : "不是") + "独一无二的.");
+        System.out.println("数组" + Arrays.toString(arr) + "中的每个数的出现次数" + (lc.uniqueOccurrences(arr) ? "都是" : "不是") + "独一无二的.");
     }
 
     // 两次哈希 - 时间复杂度 O(N) - 空间复杂度 O(N)

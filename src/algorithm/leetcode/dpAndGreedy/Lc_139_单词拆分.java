@@ -1,4 +1,4 @@
-package algorithm.leetcode.dp_and_greedy;
+package algorithm.leetcode.dpAndGreedy;
 
 import java.util.Arrays;
 import java.util.HashSet;
