@@ -6,6 +6,47 @@ import org.junit.Test;
 
 public class MyTest {
 
+    public static void main(String[] args) {
+        MyTest main = new MyTest();
+
+        main.drawGraphics();
+
+        int a = 1, b = 2, c = 3, d = 4;
+        main.swap(a, b);
+        main.swap(c, d);
+    }
+
+    private void drawGraphics() {
+        for (int i = 7; i > 0; i -= 2) {
+
+            int temp = i, space = 7 - temp;
+
+            while (space > 0) {
+                System.out.print(" ");
+                space -= 2;
+            }
+
+            while (temp > 0) {
+                System.out.print("*");
+                temp--;
+            }
+
+            System.out.println();
+        }
+    }
+
+    private void swap(int i1, int i2) {
+        System.out.println("交换前 i1 = " + i1 + ", i2 = " + i2);
+
+        if (i1 != i2) {
+            i1 ^= i2;
+            i2 ^= i1;
+            i1 ^= i2;
+        }
+
+        System.out.println("交换后 i1 = " + i1 + ", i2 = " + i2);
+    }
+
     @Test
     public void test1() {
         TreeNode root = new TreeNode(1);

@@ -61,7 +61,7 @@ public class Lc_845_数组中的最长山脉 {
 
         while (left + 2 < len) {
             int right = left + 1;
-            
+
             // 1.固定左边山脚
             if (A[left] < A[left + 1]) {
                 // 2.从左山脚开始遍历到山顶
