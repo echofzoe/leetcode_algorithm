@@ -12,7 +12,7 @@ public class Lc_845_数组中的最长山脉 {
         int[] input = {2, 1, 4, 7, 3, 2, 5};
 
         System.out.print("数组" + Arrays.toString(input) + "中");
-        int temp = lc.longestMountain_DP(input);
+        int temp = lc.longestMountainDoublePoint(input);
         if (temp > 0) {
             System.out.println("含有山脉,最长的山脉长度为 " + temp + ".");
         } else {
@@ -21,7 +21,7 @@ public class Lc_845_数组中的最长山脉 {
     }
 
     // DP - 枚举山顶 - 时间复杂度 O(N) - 空间复杂度 O(N)
-    public int longestMountain_DP(int[] A) {
+    public int longestMountainDP(int[] A) {
         int len = A.length;
         if (len < 3) return 0;
 
@@ -54,21 +54,26 @@ public class Lc_845_数组中的最长山脉 {
     }
 
     // 双指针 - 枚举山脚 - 时间复杂度 O(N) - 空间复杂度 O(1)
-    public int longestMountain_DoublePoint(int[] A) {
+    public int longestMountainDoublePoint(int[] A) {
         int len = A.length;
         int res = 0;
         int left = 0;
 
         while (left + 2 < len) {
             int right = left + 1;
+            
+            // 1.固定左边山脚
             if (A[left] < A[left + 1]) {
+                // 2.从左山脚开始遍历到山顶
                 while (right + 1 < len && A[right] < A[right + 1]) {
                     right++;
                 }
+                // 3.从山顶开始遍历到右边山脚
                 if (right < len - 1 && A[right] > A[right + 1]) {
                     while (right + 1 < len && A[right] > A[right + 1]) {
                         right++;
                     }
+                    // 4.保存状态
                     res = Math.max(res, right - left + 1);
                 }
             }
