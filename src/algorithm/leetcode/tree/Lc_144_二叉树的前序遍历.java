@@ -3,7 +3,6 @@ package algorithm.leetcode.tree;
 import algorithm.leetcode.utils.BinaryTreeSerialize;
 import algorithm.leetcode.utils.TreeNode;
 
-import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,13 +17,13 @@ public class Lc_144_二叉树的前序遍历 {
         TreeNode root = new TreeNode(1);
         lc.treeInitialize(root);    // [1,null,2,3]
 
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 3) + " 的前序遍历序列是 " + lc.preorderTraversal_Iteration(root).toString());
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 3) + " 的前序遍历序列是 " + lc.preorderTraversalIteration(root).toString());
     }
 
     List<Integer> res = new LinkedList<>();
 
     // 递归 - 时间复杂度 O(N) 遍历所有节点 - 空间复杂度 O(N) 为递归栈的开销,平均情况下为 O(logN),最坏情况下树呈链状为 O(N)
-    public List<Integer> preorderTraversal_Recursion(TreeNode root) {
+    public List<Integer> preorderTraversalRecursion(TreeNode root) {
         if (root == null) return res;
         dfs(root);
         return res;
@@ -38,7 +37,7 @@ public class Lc_144_二叉树的前序遍历 {
     }
 
     // 迭代 - 时间复杂度 O(N) - 空间复杂度 O(N) 为迭代过程中显示栈的开销
-    public List<Integer> preorderTraversal_Iteration(TreeNode root) {
+    public List<Integer> preorderTraversalIteration(TreeNode root) {
         if (root == null) return res;
 
         Deque<TreeNode> stack = new LinkedList<>() {{
