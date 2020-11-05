@@ -9,6 +9,7 @@ public class Lc_127_单词接龙 {
 
     public static void main(String[] args) {
         Lc_127_单词接龙 lc = new Lc_127_单词接龙();
+
         String beginWord = "hit";
         String endWord = "cog";
         List<String> wordList = Arrays.asList(new String[]{"hot", "dot", "dog", "lot", "log", "cog"}.clone());
@@ -55,7 +56,7 @@ public class Lc_127_单词接龙 {
         char[] chars = curWord.toCharArray();
         for (int i = 0; i < endWord.length(); i++) {
             char tmp = chars[i];
-            for (char j = 'a'; j < 'z'; j++) {
+            for (char j = 'a'; j <= 'z'; j++) {
                 if (j == tmp) {
                     continue;
                 }
