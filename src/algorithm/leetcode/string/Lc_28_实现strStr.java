@@ -21,7 +21,7 @@ public class Lc_28_实现strStr {
                 index++;
                 i++;
             } else if (index == needle.length()) {
-                return i - index;
+                break;
             } else {
                 i = i - index + 1;
                 index = 0;
