@@ -22,8 +22,7 @@ public class Lc_509_斐波那契数 {
     // 递归 - 时间复杂度 O(2^N) 存在大量重复计算 - 空间复杂度 O(N) 为递归栈的开销
     public int fibRecursive(int N) {
         // base case
-        if (N == 0) return 0;
-        if (N == 1 || N == 2) return 1;
+        if (N < 2) return N;
 
         return fibRecursive(N - 1) + fibRecursive(N - 2);
     }
@@ -41,7 +40,7 @@ public class Lc_509_斐波那契数 {
 
     private int helper(int[] memo, int N) {
         // base case
-        if (N < 3) return 1;
+        if (N < 2) return N;
 
         // 已经计算过
         if (memo[N] != 0) return memo[N];
@@ -55,14 +54,13 @@ public class Lc_509_斐波那契数 {
     // dp + 迭代 自底向上 - 时间复杂度 O(N) - 空间复杂度 O(N) 为dp数组的开销
     public int fibDp(int N) {
         // 特判
-        if (N == 0) return 0;
-        if (N < 3) return 1;
+        if (N < 2) return N;
 
         int[] dp = new int[N + 1];
         // base case
-        dp[1] = dp[2] = 1;    // dp[0] = 0
+        dp[1] = 1;    // 初始化默认 dp[0] = 0
 
-        for (int i = 3; i <= N; i++) {
+        for (int i = 2; i <= N; i++) {
             dp[i] = dp[i - 1] + dp[i - 2];
         }
 
@@ -72,11 +70,10 @@ public class Lc_509_斐波那契数 {
     // dp + 迭代 优化空间复杂度 - 时间复杂度 O(N) - 空间复杂度 O(1) 只保存前两个状态
     public int fibDpOptimization(int N) {
         // 特判
-        if (N == 0) return 0;
-        if (N < 3) return 1;
+        if (N < 2) return N;
 
         // base case
-        int s1 = 1, s2 = 1;    // 前两个status
+        int s1 = 0, s2 = 1;    // 前两个status
 
         for (int i = 3; i <= N; i++) {
             int sum = s1 + s2;
