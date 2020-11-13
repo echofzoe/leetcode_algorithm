@@ -44,6 +44,7 @@ public class Lc_905_按奇偶排序数组 {
 
         while (i < j) {
             if ((A[i] & 1) > (A[j] & 1)) {
+                // 前奇后偶即交换
                 NumsUtils.swap(A, i, j);
             }
 
