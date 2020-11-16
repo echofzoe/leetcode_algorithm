@@ -1,11 +1,9 @@
 package algorithm.leetcode.tree;
 
 import algorithm.leetcode.utils.TreeNode;
+import com.sun.source.tree.Tree;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 public class Jzo_7_重建二叉树 {
 
@@ -15,8 +13,8 @@ public class Jzo_7_重建二叉树 {
     public static void main(String[] args) {
 
         Jzo_7_重建二叉树 lc = new Jzo_7_重建二叉树();
-        int[] preorder = {3, 9, 20, 15, 7};
-        int[] inorder = {9, 3, 15, 20, 7};
+        int[] preorder = {3, 9, 8, 12, 20, 15, 7};
+        int[] inorder = {8, 9, 12, 3, 15, 20, 7};
 
         TreeNode root = lc.buildTree(preorder, inorder);
 
@@ -55,7 +53,9 @@ public class Jzo_7_重建二叉树 {
         int rootVal = preorder[preorderStart];
         TreeNode root = new TreeNode(rootVal);
 
-        if (preorderStart == preorderEnd) return root;    // 当前二叉树中只有一个节点
+        if (preorderStart == preorderEnd) {
+            return root;    // 当前二叉树中只有一个节点
+        }
 
         // 当前二叉树中有多个节点
         else {
@@ -82,36 +82,33 @@ public class Jzo_7_重建二叉树 {
 
     // 检查答案
     private boolean checkAnswer(int[] preorder, TreeNode root) {
-        Queue<TreeNode> queue = new LinkedList<>();
-        int[] res = new int[preorder.length];
-        int index = 0;
-        queue.offer(root);
-        while (!queue.isEmpty()) {
+        List<TreeNode> myAnswer = preorder(root);
 
-            int size = queue.size();
-            while (size > 0) {
-                TreeNode curr = queue.poll();
-                res[index] = curr.val;
-
-                if (curr.left != null) {
-                    queue.offer(curr.left);
-                }
-                if (curr.right != null) {
-                    queue.offer(curr.right);
-                }
-
-                size--;
-                index++;
-            }
-        }
-
-        for (int i = 0; i < preorder.length; i++) {
-            if (res[i] != preorder[i]) {
+        for (int i = 0; i < myAnswer.size(); i++) {
+            if (myAnswer.get(i).val != preorder[i]) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    private List<TreeNode> preorder(TreeNode root) {
+        List<TreeNode> res = new LinkedList<>();
+        if (root == null) return res;
+
+        Deque<TreeNode> stack = new LinkedList<>() {{
+            offerFirst(root);
+        }};
+
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pollFirst();
+            res.add(node);
+            if (node.right != null) stack.offerFirst(node.right);
+            if (node.left != null) stack.offerFirst(node.left);
+        }
+
+        return res;
     }
 
 }
