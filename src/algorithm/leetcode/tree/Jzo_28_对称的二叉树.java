@@ -13,14 +13,15 @@ public class Jzo_28_对称的二叉树 {
     public static void main(String[] args) {
         Jzo_28_对称的二叉树 lc = new Jzo_28_对称的二叉树();
         TreeNode root = new TreeNode(0);
-        lc.treeInitialize(root);
+        lc.treeInitialize(root);    // [1,2,2,3,4,4,3]
 
-        System.out.println("(递归方法)该二叉树是镜像对称的吗？ " + lc.isSymmetric(root));
+        System.out.println("(递归方法)该二叉树是镜像对称的吗？ -" + lc.isSymmetricRecursive(root));
 
-        System.out.println("(非递归 - BFS 方法)该二叉树是镜像对称的吗？ " + lc.isSymmetric_2(root));
+        System.out.println("(BFS)该二叉树是镜像对称的吗？ -" + lc.isSymmetricBFS(root));
     }
 
-    public boolean isSymmetric(TreeNode root) {
+    // 递归 - 时间复杂度 O(N) - 空间复杂度 O(N) 最差情况下,二叉树退化成链表
+    public boolean isSymmetricRecursive(TreeNode root) {
         if (root == null) return true;
 
         return recur(root.left, root.right);
@@ -33,7 +34,8 @@ public class Jzo_28_对称的二叉树 {
         return recur(left.left, right.right) && recur(left.right, right.left);
     }
 
-    private boolean isSymmetric_2(TreeNode root) {
+    // BFS - 时间复杂度 O(N) - 空间复杂度 O(N)
+    public boolean isSymmetricBFS(TreeNode root) {
         if (root == null) return true;
 
         Queue<TreeNode> queue = new LinkedList<>() {{
