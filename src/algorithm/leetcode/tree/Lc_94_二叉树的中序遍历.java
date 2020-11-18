@@ -19,7 +19,7 @@ public class Lc_94_二叉树的中序遍历 {
         root.right.left = new TreeNode(3);
 
 
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 3) + " 的中序遍历结果是 " + lc.inorderTraversalRecursive(root));
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 3) + " 的中序遍历结果是 " + lc.inorderTraversalIteration(root));
     }
 
     List<Integer> res = new LinkedList<>();
@@ -47,9 +47,7 @@ public class Lc_94_二叉树的中序遍历 {
     public List<Integer> inorderTraversalIteration(TreeNode root) {
         if (root == null) return res;
 
-        Deque<TreeNode> stack = new LinkedList<>() {{
-            offerFirst(root);
-        }};
+        Deque<TreeNode> stack = new LinkedList<>();
 
         TreeNode dummy = root;
         while (dummy != null || !stack.isEmpty()) {
