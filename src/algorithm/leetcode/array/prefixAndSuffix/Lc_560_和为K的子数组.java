@@ -44,16 +44,15 @@ public class Lc_560_和为K的子数组 {
 
     // 前缀和优化 - 时间复杂度 O(N) - 空间复杂度 O(N)
     public int subarraySumPrefixOptimization(int[] nums, int k) {
-        int n = nums.length;
         // map: k - 前缀和, v - 前缀和出现的次数
         Map<Integer, Integer> prefixSum = new HashMap<>();
         // base case
         prefixSum.put(0, 1);
 
         int res = 0, curPrefixSum = 0;
-        for (int i = 0; i < n; i++) {
+        for (int num : nums) {
             // 当前索引下的前缀和
-            curPrefixSum += nums[i];
+            curPrefixSum += num;
 
             // 寻找目标前缀和
             int tmp = curPrefixSum - k;
