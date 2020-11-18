@@ -7,25 +7,25 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Lc_145_二叉树的后序遍历 {
+public class Lc_94_二叉树的中序遍历 {
 
-    // 二叉树的后序遍历
-    // https://leetcode-cn.com/problems/binary-tree-postorder-traversal/
+    // 二叉树的中序遍历
+    // https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
 
     public static void main(String[] args) {
-        Lc_145_二叉树的后序遍历 lc = new Lc_145_二叉树的后序遍历();
+        Lc_94_二叉树的中序遍历 lc = new Lc_94_二叉树的中序遍历();
         TreeNode root = new TreeNode(1);
         root.right = new TreeNode(2);
         root.right.left = new TreeNode(3);
 
 
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 3) + " 的后序遍历结果是 " + lc.postorderTraversalIteration(root));
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 3) + " 的中序遍历结果是 " + lc.inorderTraversalRecursive(root));
     }
 
     List<Integer> res = new LinkedList<>();
 
     // 递归 - 时间复杂度 O(N) - 空间复杂度 O(N)
-    public List<Integer> postorderTraversalRecursive(TreeNode root) {
+    public List<Integer> inorderTraversalRecursive(TreeNode root) {
         if (root == null) return res;
 
         dfs(root);
@@ -38,29 +38,36 @@ public class Lc_145_二叉树的后序遍历 {
 
         dfs(node.left);
 
-        dfs(node.right);
-
         res.add(node.val);
+
+        dfs(node.right);
     }
 
     // 迭代 - 时间复杂度 O(N) - 空间复杂度 O(N)
-    public List<Integer> postorderTraversalIteration(TreeNode root) {
+    public List<Integer> inorderTraversalIteration(TreeNode root) {
         if (root == null) return res;
 
         Deque<TreeNode> stack = new LinkedList<>() {{
             offerFirst(root);
         }};
 
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pollFirst();
+        TreeNode dummy = root;
+        while (dummy != null || !stack.isEmpty()) {
 
-            res.add(0, node.val);
+            while (dummy != null) {
+                stack.offerFirst(dummy);
+                dummy = dummy.left;
+            }
 
-            if (node.left != null) stack.offerFirst(node.left);
+            dummy = stack.pollFirst();
 
-            if (node.right != null) stack.offerFirst(node.right);
+            res.add(dummy.val);
+
+            dummy = dummy.right;
+
         }
 
         return res;
     }
+
 }

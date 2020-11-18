@@ -23,16 +23,21 @@ public class Lc_144_二叉树的前序遍历 {
     List<Integer> res = new LinkedList<>();
 
     // 递归 - 时间复杂度 O(N) 遍历所有节点 - 空间复杂度 O(N) 为递归栈的开销,平均情况下为 O(logN),最坏情况下树呈链状为 O(N)
-    public List<Integer> preorderTraversalRecursion(TreeNode root) {
+    public List<Integer> preorderTraversalRecursive(TreeNode root) {
         if (root == null) return res;
+
         dfs(root);
+
         return res;
     }
 
     private void dfs(TreeNode node) {
         if (node == null) return;
+
         res.add(node.val);
+
         dfs(node.left);
+
         dfs(node.right);
     }
 
@@ -46,8 +51,11 @@ public class Lc_144_二叉树的前序遍历 {
 
         while (!stack.isEmpty()) {
             TreeNode node = stack.pollFirst();
+
             res.add(node.val);
+
             if (node.right != null) stack.offerFirst(node.right);
+
             if (node.left != null) stack.offerFirst(node.left);
         }
 
