@@ -15,12 +15,12 @@ public class Jzo_24_反转链表 {
         ListNode head = new ListNode(1);
         lc.listInitialize(head);    // [1,2,3,4,5]
 
-        System.out.println("链表 " + ListNodeSerialize.serialize(head) + " 反转后的结果为 " + ListNodeSerialize.serialize(lc.reverseList_Stack(head)));
+        System.out.println("链表 " + ListNodeSerialize.serialize(head) + " 反转后的结果为 " + ListNodeSerialize.serialize(lc.reverseListStack(head)));
     }
 
-    // 直接更改指针 - 时间复杂度 O(N) - 空间复杂度 O(1)
-    public ListNode reverseList(ListNode head) {
-        if (head == null) return null;
+    // 迭代 - 时间复杂度 O(N) - 空间复杂度 O(1)
+    public ListNode reverseListIteration(ListNode head) {
+        if (head == null || head.next == null) return null;
 
         ListNode tail = head;
         head = head.next;
@@ -37,10 +37,10 @@ public class Jzo_24_反转链表 {
     }
 
     // 递归 - 时间复杂度 O(N) - 空间复杂度 O(N) 为递归栈的开销
-    public ListNode reverseList_Recursive(ListNode head) {
+    public ListNode reverseListRecursive(ListNode head) {
         if (head == null || head.next == null) return head;
 
-        ListNode newHead = reverseList_Recursive(head.next);
+        ListNode newHead = reverseListRecursive(head.next);
 
         head.next.next = head;
         head.next = null;
@@ -49,7 +49,7 @@ public class Jzo_24_反转链表 {
     }
 
     // 栈 - 时间复杂度 O(N) - 空间复杂度 O(N)
-    public ListNode reverseList_Stack(ListNode head) {
+    public ListNode reverseListStack(ListNode head) {
         if (head == null) return null;
 
         Stack<ListNode> stack = new Stack<>();
