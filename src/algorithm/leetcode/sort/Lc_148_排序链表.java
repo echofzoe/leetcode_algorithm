@@ -1,4 +1,4 @@
-package algorithm.leetcode.mergeSort;
+package algorithm.leetcode.sort;
 
 import algorithm.leetcode.utils.ListNode;
 import algorithm.leetcode.utils.ListNodeSerialize;
