@@ -1,8 +1,5 @@
-package algorithm.leetcode.array;
+package algorithm.leetcode.doublePoint;
 
-import org.junit.Test;
-
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;

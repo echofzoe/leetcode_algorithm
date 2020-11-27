@@ -1,4 +1,4 @@
-package algorithm.leetcode.tree;
+package algorithm.leetcode.string;
 
 import java.util.ArrayList;
 import java.util.Arrays;

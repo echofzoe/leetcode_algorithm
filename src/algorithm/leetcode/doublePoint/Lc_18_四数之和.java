@@ -1,4 +1,4 @@
-package algorithm.leetcode.array;
+package algorithm.leetcode.doublePoint;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +17,7 @@ public class Lc_18_四数之和 {
         System.out.println("数组" + Arrays.toString(input) + "中四数之和等于" + target + "的不包含重复的四元组集合为 " + Arrays.deepToString(lc.fourSum(input, target).toArray()));
     }
 
+    // 排序 + 双指针 - 时间复杂度 O(N^3) - 空间复杂度 O(logN) 为排序所用额外空间
     public List<List<Integer>> fourSum(int[] nums, int target) {
         List<List<Integer>> res = new ArrayList<>();
         if (nums == null || nums.length < 4) return res;
