@@ -59,5 +59,4 @@ public class MyTest {
 
         System.out.println(BinaryTreeSerialize.serialize(root, 3));
     }
-
 }
