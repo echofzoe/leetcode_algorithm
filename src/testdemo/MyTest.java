@@ -2,7 +2,6 @@ package testdemo;
 
 import algorithm.leetcode.utils.BinaryTreeSerialize;
 import algorithm.leetcode.utils.TreeNode;
-import org.hamcrest.core.Is;
 import org.junit.Test;
 
 import java.util.*;
@@ -58,5 +57,21 @@ public class MyTest {
         root.right.right = new TreeNode(4);
 
         System.out.println(BinaryTreeSerialize.serialize(root, 3));
+    }
+
+    @Test
+    public void test2() {
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> set2 = new HashSet<>();
+        for (int i = 0; i < 6; i++) {
+            set1.add(i);
+            set2.add(i + 6);
+        }
+        set1.addAll(set2);
+        System.out.println(set1);
+
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new LinkedList<>();
+        List<Integer> list3 = Collections.synchronizedList(new ArrayList<>());
     }
 }
