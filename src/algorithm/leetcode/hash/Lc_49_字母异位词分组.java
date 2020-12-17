@@ -37,7 +37,7 @@ public class Lc_49_字母异位词分组 {
         return res;
     }
 
-    // 计数 - 时间复杂度 O() - 空间复杂度 O()
+    // 计数 - 时间复杂度 O(n(k+∣Σ∣)) - 空间复杂度 O(n(k+∣Σ∣))
     public List<List<String>> groupAnagramsCount(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
         

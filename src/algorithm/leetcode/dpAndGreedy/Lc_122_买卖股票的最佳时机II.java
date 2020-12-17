@@ -58,18 +58,19 @@ public class Lc_122_买卖股票的最佳时机II {
     // - dp[i][0] 表示第i天不持有股票状态下的最大利润
     // - dp[i][1] 表示第i天持有股票状态下的最大利润
     public int maxProfitDp(int[] prices) {
-        int[][] dp = new int[prices.length + 1][2];
+        int n = prices.length;
+        int[][] dp = new int[n][2];
 
         // base case
-        dp[1][0] = 0;    // 第一天,下标从1开始
-        dp[1][1] = -prices[0];
+        dp[0][0] = 0;
+        dp[0][1] = -prices[0];
 
-        for (int i = 2; i <= prices.length; i++) {
-            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i - 1]);
-            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i - 1]);
+        for (int i = 1; i < n; i++) {
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
         }
 
-        return dp[prices.length][0];
+        return dp[n - 1][0];
     }
 
     // dp + 空间优化 - 时间复杂度 O(N) - 空间复杂度 O(1)
@@ -80,9 +81,9 @@ public class Lc_122_买卖股票的最佳时机II {
         int dp0 = 0, dp1 = -prices[0];
 
         for (int i = 1; i < prices.length; i++) {
-            int tmp = Math.max(dp0, dp1 + prices[i]);
-            dp1 = Math.max(dp1, dp0 - prices[i]);
-            dp0 = tmp;
+            int tmp = dp0;
+            dp0 = Math.max(dp0, dp1 + prices[i]);
+            dp1 = Math.max(dp1, tmp - prices[i]);
         }
 
         return dp0;
