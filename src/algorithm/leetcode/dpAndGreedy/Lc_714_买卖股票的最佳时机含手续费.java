@@ -15,7 +15,7 @@ public class Lc_714_买卖股票的最佳时机含手续费 {
         int fee = 2;
 
         System.out.println("在股票价格区间" + Arrays.toString(prices1) + "和交易手续费" + fee + "的条件下所能获取的最大利润为" + lc.maxProfitDp(prices1, fee));
-        System.out.println("在股票价格区间" + Arrays.toString(prices2) + "和交易手续费" + fee + "的条件下所能获取的最大利润为" + lc.maxProfitDpOptimization(prices2, fee));
+        System.out.println("在股票价格区间" + Arrays.toString(prices2) + "和交易手续费" + fee + "的条件下所能获取的最大利润为" + lc.maxProfitGreedy(prices2, fee));
     }
 
     // DP - 时间复杂度 O(N) - 空间复杂度 O(N)
@@ -54,6 +54,25 @@ public class Lc_714_买卖股票的最佳时机含手续费 {
         }
 
         return dp0;
+    }
+    
+    // 贪心 - 时间复杂度 O(N) - 空间复杂度 O(1)
+    public int maxProfitGreedy(int[] prices, int fee) {
+        int n = prices.length;
+
+        int buy = prices[0] + fee;
+
+        int profit = 0;
+        for (int i = 1; i < n; i++) {
+            if (prices[i] + fee < buy) {
+                buy = prices[i] + fee;
+            } else if (prices[i] > buy) {
+                profit += prices[i] - buy;
+                buy = prices[i];
+            }
+        }
+
+        return profit;
     }
 
 }
