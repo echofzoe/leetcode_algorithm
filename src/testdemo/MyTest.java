@@ -74,4 +74,32 @@ public class MyTest {
         List<Integer> list2 = new LinkedList<>();
         List<Integer> list3 = Collections.synchronizedList(new ArrayList<>());
     }
+
+    @Test
+    public void test3() {
+
+    }
+
+    public int maxResult(int[] nums, int k) {
+        int n = nums.length, res = nums[0];
+
+        int index = 1;
+        while (index < n) {
+            int max = Integer.MIN_VALUE, maxIndex = 0;
+
+            for (int i = 0; i < k && index + i < n; i++) {
+                if (nums[index + i] >= max) {
+                    max = nums[index + i];
+                    maxIndex = index + i;
+                }
+            }
+
+            res += nums[maxIndex];
+
+            index = maxIndex + 1;
+        }
+
+        return res;
+    }
+
 }
