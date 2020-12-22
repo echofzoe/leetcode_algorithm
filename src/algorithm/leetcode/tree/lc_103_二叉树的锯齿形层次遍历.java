@@ -9,23 +9,6 @@ public class lc_103_二叉树的锯齿形层次遍历 {
     // 二叉树的锯齿形层次遍历
     // https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/
 
-    // 正确答案
-    List<List<Integer>> correct = new ArrayList<>() {
-        {
-            add(new ArrayList<>() {{
-                add(3);
-            }});
-            add(new ArrayList<>() {{
-                add(20);
-                add(9);
-            }});
-            add(new ArrayList<>() {{
-                add(15);
-                add(7);
-            }});
-        }
-    };
-
     public static void main(String[] args) {
         lc_103_二叉树的锯齿形层次遍历 lc = new lc_103_二叉树的锯齿形层次遍历();
         TreeNode root = new TreeNode(0);
@@ -37,46 +20,54 @@ public class lc_103_二叉树的锯齿形层次遍历 {
             System.out.println("答案错误");
         }
     }
-
-
+    
     private List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
 
-        List<List<Integer>> answer = new ArrayList<>();
-        List<Integer> list;
-        TreeNode curr;
+        Deque<TreeNode> deque = new LinkedList<>() {{
+            offerLast(root);
+        }};
 
-        if (root == null) return answer;
+        boolean flag = true;
 
-        boolean flag = true;    // 1 表奇数层正向保存节点，0 表偶数层反向保存节点
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
+        while (!deque.isEmpty()) {
+            int size = deque.size();
+            List<Integer> tmp = new ArrayList<>();
 
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            list = new ArrayList<>();
             while (size > 0) {
-                curr = queue.poll();
+                TreeNode cur = deque.pollFirst();
 
-                if (flag) {
-                    list.add(curr.val);    // 尾插
-                } else {
-                    list.add(0, curr.val);    // 头插
-                }
+                if (flag) tmp.add(cur.val);
+                else tmp.add(0, cur.val);
 
-                if (curr.left != null) {
-                    queue.offer(curr.left);
-                }
-                if (curr.right != null) {
-                    queue.offer(curr.right);
-                }
+                if (cur.left != null) deque.offerLast(cur.left);
+                if (cur.right != null) deque.offerLast(cur.right);
 
                 size--;
             }
+
             flag = !flag;
-            answer.add(list);
+            res.add(tmp);
         }
-        return answer;
+
+        return res;
     }
+
+    // 正确答案
+    List<List<Integer>> correct = new ArrayList<>() {{
+        add(new ArrayList<>() {{
+            add(3);
+        }});
+        add(new ArrayList<>() {{
+            add(20);
+            add(9);
+        }});
+        add(new ArrayList<>() {{
+            add(15);
+            add(7);
+        }});
+    }};
 
     // 比较结果是否正确
     private boolean CompareAnswer(List<List<Integer>> correct, List<List<Integer>> yourAnswer) {
@@ -96,21 +87,15 @@ public class lc_103_二叉树的锯齿形层次遍历 {
     // 二叉树初始化
     private void treeInitialize(TreeNode root) {
         // depth = 1
-        TreeNode head = root;
-        head.val = 3;
+        root.val = 3;
 
         // depth = 2
-        head.left = new TreeNode(9);
-        head.right = new TreeNode(20);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
 
         // depth = 3
-        TreeNode headR = head.right;
-        headR.left = new TreeNode(15);
-        headR.right = new TreeNode(7);
-
-        // free
-        head = null;
-        headR = null;
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
     }
 
 }
