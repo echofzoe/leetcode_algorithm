@@ -20,7 +20,7 @@ public class lc_103_二叉树的锯齿形层次遍历 {
             System.out.println("答案错误");
         }
     }
-    
+
     private List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
         if (root == null) return res;
