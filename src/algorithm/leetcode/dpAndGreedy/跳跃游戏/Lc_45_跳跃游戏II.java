@@ -1,4 +1,4 @@
-package algorithm.leetcode.dpAndGreedy;
+package algorithm.leetcode.dpAndGreedy.跳跃游戏;
 
 import java.util.Arrays;
 
@@ -16,21 +16,22 @@ public class Lc_45_跳跃游戏II {
 
     // 贪心 从前往后 - 时间复杂度 O(N) - 空间复杂度 O(1)
     public int jumpGreedy(int[] nums) {
-        int n = nums.length, res = 0;
+        int n = nums.length;
 
-        int nextMaxPosition = 0, curEndPosition = 0;
+        int end = 0, curMaxPos = 0, res = 0;
 
         for (int i = 0; i < n - 1; i++) {
-            nextMaxPosition = Math.max(nextMaxPosition, nums[i] + i);
-            if (i == curEndPosition) {
-                curEndPosition = nextMaxPosition;
+            curMaxPos = Math.max(curMaxPos, i + nums[i]);
+
+            if (i == end) {
                 res++;
+                end = curMaxPos;
             }
         }
 
         return res;
     }
-    
+
     // 贪心 从后往前 - 时间复杂度 O(N^2) - 空间复杂度 O(1)
     public int jumpGreedy2(int[] nums) {
         int endPosition = nums.length - 1, res = 0;
@@ -47,7 +48,7 @@ public class Lc_45_跳跃游戏II {
 
         return res;
     }
-    
+
     // DP - 时间复杂度 O(N^2) - 空间复杂度 O(N)
     public int jumpDP(int[] nums) {
         int n = nums.length;
@@ -57,9 +58,9 @@ public class Lc_45_跳跃游戏II {
         // base case
         dp[0] = 0;
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n - 1; i++) {
             int nextPos = i + 1;
-            for (int j = 1; j <= nums[i] && nextPos < n; j++, nextPos++) {
+            for (int j = 0; j < nums[i] && nextPos < n; j++, nextPos++) {
                 dp[nextPos] = Math.min(dp[nextPos], dp[i] + 1);
             }
         }
