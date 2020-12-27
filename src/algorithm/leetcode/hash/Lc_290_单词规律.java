@@ -19,28 +19,25 @@ public class Lc_290_单词规律 {
 
     // 哈希 - 时间复杂度 O(n + m) - 空间复杂度 O(n + m)
     public boolean wordPattern(String pattern, String s) {
-        Map<Character, String> c2str = new HashMap<>();
-        Map<String, Character> str2c = new HashMap<>();
+        String[] arr = s.split(" ");
 
-        int index = 0, n = s.length();
-        for (char c : pattern.toCharArray()) {
-            if (index >= n) return false;
+        int n = pattern.length();
+        if (n != arr.length) return false;
 
-            int end = index;
-            while (end < n && s.charAt(end) != ' ') end++;
-            String tmp = s.substring(index, end);
+        Map<Character, String> p2s = new HashMap<>();
+        Map<String, Character> s2p = new HashMap<>();
 
-            if (c2str.containsKey(c) && !c2str.get(c).equals(tmp)) return false;
+        for (int i = 0; i < n; i++) {
+            char c = pattern.charAt(i);
+            String tmp = arr[i];
 
-            if (str2c.containsKey(tmp) && str2c.get(tmp) != c) return false;
+            if (p2s.containsKey(c) && !p2s.get(c).equals(tmp) || s2p.containsKey(tmp) && s2p.get(tmp) != c) return false;
 
-            c2str.put(c, tmp);
-            str2c.put(tmp, c);
-
-            index = end + 1;
+            p2s.put(c, tmp);
+            s2p.put(tmp, c);
         }
 
-        return index >= n;
+        return true;
     }
 
 }
