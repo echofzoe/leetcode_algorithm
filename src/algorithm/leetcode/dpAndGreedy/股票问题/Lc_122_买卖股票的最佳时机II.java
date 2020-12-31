@@ -1,4 +1,4 @@
-package algorithm.leetcode.dpAndGreedy;
+package algorithm.leetcode.dpAndGreedy.股票问题;
 
 import java.util.Arrays;
 
@@ -14,10 +14,10 @@ public class Lc_122_买卖股票的最佳时机II {
         int[] prices3 = {7, 6, 1, 3, 1, 4, 8};
 
 
-        System.out.println("在股票价格区间" + Arrays.toString(prices1) + "内所能获取的最大利润为" + lc.maxProfitGreedy(prices1));
-        System.out.println("在股票价格区间" + Arrays.toString(prices2) + "内所能获取的最大利润为" + lc.maxProfitHill(prices2));
-        System.out.println("在股票价格区间" + Arrays.toString(prices3) + "内所能获取的最大利润为" + lc.maxProfitDp(prices3));
-        System.out.println("在股票价格区间" + Arrays.toString(prices3) + "内所能获取的最大利润为" + lc.maxProfitDpOptimization(prices3));
+        System.out.println("在股票价格数组" + Arrays.toString(prices1) + "内所能获取的最大利润为" + lc.maxProfitGreedy(prices1));
+        System.out.println("在股票价格数组" + Arrays.toString(prices2) + "内所能获取的最大利润为" + lc.maxProfitHill(prices2));
+        System.out.println("在股票价格数组" + Arrays.toString(prices3) + "内所能获取的最大利润为" + lc.maxProfitDp(prices3));
+        System.out.println("在股票价格数组" + Arrays.toString(prices3) + "内所能获取的最大利润为" + lc.maxProfitDpOptimization(prices3));
     }
 
     // 贪心 - 时间复杂度 O(N) - 空间复杂度 O(1)

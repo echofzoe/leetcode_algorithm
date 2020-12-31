@@ -1,7 +1,6 @@
-package algorithm.leetcode.dpAndGreedy;
+package algorithm.leetcode.dpAndGreedy.股票问题;
 
 import java.util.Arrays;
-import java.util.Map;
 
 public class Lc_714_买卖股票的最佳时机含手续费 {
 
@@ -14,8 +13,8 @@ public class Lc_714_买卖股票的最佳时机含手续费 {
         int[] prices2 = {2, 3, 1, 16, 7, 9};
         int fee = 2;
 
-        System.out.println("在股票价格区间" + Arrays.toString(prices1) + "和交易手续费" + fee + "的条件下所能获取的最大利润为" + lc.maxProfitDp(prices1, fee));
-        System.out.println("在股票价格区间" + Arrays.toString(prices2) + "和交易手续费" + fee + "的条件下所能获取的最大利润为" + lc.maxProfitGreedy(prices2, fee));
+        System.out.println("在股票价格数组" + Arrays.toString(prices1) + "和交易手续费" + fee + "的条件下所能获取的最大利润为" + lc.maxProfitDp(prices1, fee));
+        System.out.println("在股票价格数组" + Arrays.toString(prices2) + "和交易手续费" + fee + "的条件下所能获取的最大利润为" + lc.maxProfitGreedy(prices2, fee));
     }
 
     // DP - 时间复杂度 O(N) - 空间复杂度 O(N)

@@ -3,7 +3,6 @@ package algorithm.leetcode.sort;
 import algorithm.leetcode.utils.NumsUtils;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -82,13 +81,10 @@ public class Lc_215_数组中的第K个最大元素 {
     // 大根堆（库函数） - 时间复杂度O(N*logN) - 空间复杂度(N)
     public int findKthLargestHeap(int[] nums, int k) {
         Queue<Integer> pg = new PriorityQueue<>((o1, o2) -> o2 - o1);
-        for (int num : nums) {
-            pg.offer(num);
-        }
 
-        for (int i = 0; i < k - 1; i++) {
-            pg.poll();
-        }
+        for (int num : nums) pg.offer(num);
+
+        for (int i = 0; i < k - 1; i++) pg.poll();
 
         return pg.poll();
     }
@@ -96,39 +92,39 @@ public class Lc_215_数组中的第K个最大元素 {
     // 大根堆（自己实现堆） - 时间复杂度O(N*logN) - 空间复杂度(N)
     public int findKthLargestMyHeap(int[] nums, int k) {
         int heapSize = nums.length;
+
+        // 建堆
         buildMaxHeap(nums, heapSize);
-        for (int i = nums.length - 1; i >= nums.length - k + 1; --i) {
-            swap(nums, 0, i);
-            --heapSize;
+
+        for (int i = nums.length - 1; i >= nums.length - k + 1; i--) {
+            // 将堆尾元素与堆顶元素互换（堆顶是最大元素）
+            NumsUtils.swap(nums, 0, i, true);
+
+            // 删除堆尾元素（最大元素），即，将堆尾元素排除在外并从堆顶开始调整大根堆
+            heapSize--;
             maxHeapify(nums, 0, heapSize);
         }
+
         return nums[0];
     }
 
-    public void buildMaxHeap(int[] a, int heapSize) {
-        for (int i = heapSize / 2; i >= 0; --i) {
-            maxHeapify(a, i, heapSize);
+    private void buildMaxHeap(int[] nums, int heapSize) {
+        for (int i = heapSize / 2; i >= 0; i--) {
+            maxHeapify(nums, i, heapSize);
         }
     }
 
-    public void maxHeapify(int[] a, int i, int heapSize) {
-        int l = i * 2 + 1, r = i * 2 + 2, largest = i;
-        if (l < heapSize && a[l] > a[largest]) {
-            largest = l;
-        }
-        if (r < heapSize && a[r] > a[largest]) {
-            largest = r;
-        }
+    private void maxHeapify(int[] nums, int i, int heapSize) {
+        int left = i * 2 + 1, right = i * 2 + 2, largest = i;
+
+        if (left < heapSize && nums[left] > nums[largest]) largest = left;
+
+        if (right < heapSize && nums[right] > nums[largest]) largest = right;
+
         if (largest != i) {
-            swap(a, i, largest);
-            maxHeapify(a, largest, heapSize);
+            NumsUtils.swap(nums, i, largest, true);
+            maxHeapify(nums, largest, heapSize);
         }
-    }
-
-    public void swap(int[] a, int i, int j) {
-        int temp = a[i];
-        a[i] = a[j];
-        a[j] = temp;
     }
 
 }
