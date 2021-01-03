@@ -77,94 +77,12 @@ public class MyTest {
 
     @Test
     public void test3() {
-        int[] apples = {3,1,1,0,0,2};
-        int[] days = {3,1,1,0,0,2};
-        System.out.println(eatenApples(apples, days));
-    }
-
-    public int eatenApples(int[] apples, int[] days) {
-        int n = apples.length;
-
-        int len = 0;
-        for (int i = 0; i < n; i++) {
-            len = Math.max(len, i + days[i]);
-        }
-
-        int[] expire = new int[len];
-
-        int res = 0;
-
-        int store = 0;
-
-        for (int i = 0; i < n; i++) {
-
-            if (apples[i] > 0) {
-                store += apples[i];
-                expire[i + days[i] - 1] += apples[i];
-            }
-
-            if (store > 0) {
-                store--;
-                res++;
-            }
-
-
-            for (int j = 0; j < len; j++) {
-                if (expire[j] > 0) {
-                    expire[j]--;
-                    break;
-                }
-            }
-
-            store = Math.max(store - expire[i], 0);
-            expire[i] = 0;
-        }
-
-        int tmp = res;
-        for (int i = n; i < len; i++) {
-            if (store > 0) {
-                store--;
-                res++;
-            }
-
-            if (expire[i] > 0) {
-                expire[i] -= res - tmp;
-                tmp = res;
-            }
-
-            store = Math.max(store - expire[i], 0);
-        }
-
-        return res;
-    }
-
-    public int maxResult(int[] nums, int k) {
-        int n = nums.length, res = nums[0];
-
-        int index = 1;
-        while (index < n) {
-            int max = Integer.MIN_VALUE, maxIndex = 0;
-
-            for (int i = 0; i < k && index + i < n; i++) {
-                if (nums[index + i] >= max) {
-                    max = nums[index + i];
-                    maxIndex = index + i;
-                }
-            }
-
-            res += nums[maxIndex];
-
-            index = maxIndex + 1;
-        }
-
-        return res;
+        
     }
 
     @Test
     public void test4() {
-        String s = "dog cat cat fish";
-        String[] arr = s.split(" ");
-        System.out.println(Arrays.toString(arr));
+
     }
 
 }
