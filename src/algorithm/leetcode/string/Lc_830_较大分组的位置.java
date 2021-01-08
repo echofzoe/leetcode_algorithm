@@ -63,7 +63,6 @@ public class Lc_830_较大分组的位置 {
             tmp.add(start);
             tmp.add(end - 1);
             res.add(tmp);
-            start = end;
         }
 
         return res;

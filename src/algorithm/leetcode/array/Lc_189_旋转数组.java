@@ -14,7 +14,7 @@ public class Lc_189_旋转数组 {
         int k1 = 3;
 
         int[] test2 = new int[]{-1, -100, 3, 99};
-        int k2 = 5;
+        int k2 = 6;
 
         lt.rotate1(test1, k1);
         System.out.println(Arrays.toString(test1));
@@ -27,12 +27,12 @@ public class Lc_189_旋转数组 {
     // 1.暴力 - 时间复杂度 O(n*k) - 空间复杂度 O(1)
     public void rotate1(int[] nums, int k) {
         if (k == 0) return;
-        int len = nums.length;
+        int n = nums.length;
 
         int temp, previous;
         for (int i = 0; i < k; i++) {
-            previous = nums[len - 1];
-            for (int j = 0; j < len; j++) {
+            previous = nums[n - 1];
+            for (int j = 0; j < n; j++) {
                 // 将每一个元素换成它的前一个元素，所以要使用 temp 临时保存前一个元素
                 temp = nums[j];
                 nums[j] = previous;
@@ -44,35 +44,34 @@ public class Lc_189_旋转数组 {
     // 2.使用额外的数组 - 时间复杂度 O(n) - 空间复杂度 O(n)
     public void rotate2(int[] nums, int k) {
         if (k == 0) return;
-        int len = nums.length;
+        int n = nums.length;
 
         int[] extra = new int[nums.length];
-        for (int i = 0; i < len; i++) {
-            extra[(i + k) % len] = nums[i];
+        for (int i = 0; i < n; i++) {
+            extra[(i + k) % n] = nums[i];
         }
-        for (int i = 0; i < len; i++) {
-            nums[i] = extra[i];
-        }
+        System.arraycopy(extra, 0, nums, 0, n);
     }
 
     // 3.反转数组
     public void rotate3(int[] nums, int k) {
         if (k == 0) return;
-        int len = nums.length;
+        int n = nums.length;
 
         // 旋转数组 k 次，则 k % n 个尾部元素会被移动到头部，剩下的元素将会后移
-        k %= len;
-        reverse(nums, 0, len - 1);   // 先将数组整个反转，这样 k % n 个尾部元素会被移动到头部，但其顺序是颠倒的；另一部分元素亦然
-        reverse(nums, 0, k - 1);   // 再将颠倒的头部元素反转
-        reverse(nums, k, len - 1);
+        k %= n;
+        reverse(nums, 0, n);   // 先将数组整个反转，这样 k % n 个尾部元素会被移动到头部，但其顺序是颠倒的；另一部分元素亦然
+        reverse(nums, 0, k);   // 再将颠倒的头部元素反转
+        reverse(nums, k, n);
     }
 
     // 解法3辅助函数
     private void reverse(int[] nums, int start, int end) {
-        while (start < end) {
+        while (start < end - 1) {
             int temp = nums[start];
-            nums[start] = nums[end];
-            nums[end] = temp;
+            nums[start] = nums[end - 1];
+            nums[end - 1] = temp;
+
             start++;
             end--;
         }
