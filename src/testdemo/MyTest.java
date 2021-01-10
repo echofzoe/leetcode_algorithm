@@ -77,7 +77,6 @@ public class MyTest {
 
     @Test
     public void test3() {
-        
     }
 
     @Test
