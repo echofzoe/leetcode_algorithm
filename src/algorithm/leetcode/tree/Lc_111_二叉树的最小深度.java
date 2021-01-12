@@ -15,68 +15,60 @@ public class Lc_111_二叉树的最小深度 {
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);    // [3,9,20,null,null,15,7]
 
-        System.out.println("DFS: " + lc.minDepth_DFS(root) + "\nBFS: " + lc.minDepth_BFS(root));
+        System.out.println("DFS: " + lc.minDepthDFS(root) + "\nBFS: " + lc.minDepthBFS(root));
     }
 
-    // 深度优先搜索
-    public int minDepth_DFS(TreeNode root) {
+    // 递归 - 时间复杂度 O(N) - 空间复杂度 O(N)
+    public int minDepthRecur(TreeNode root) {
+        if (root == null) return 0;
+
+        if (root.left != null && root.right != null)
+            return 1 + Math.min(minDepthRecur(root.left), minDepthRecur(root.right));
+
+        if (root.left != null || root.right != null)
+            return 1 + Math.max(minDepthRecur(root.left), minDepthRecur(root.right));
+
+        return 1;
+    }
+
+    // DFS - 时间复杂度 O(N) - 空间复杂度 O(H) H为树高，最坏情况下树退化成链表，为O(H)，平均情况下为O(logN)
+    public int minDepthDFS(TreeNode root) {
         if (root == null) return 0;
 
         if (root.left == null && root.right == null) return 1;
 
-        int depth = Integer.MAX_VALUE;
-        if (root.left != null) {
-            depth = Math.min(minDepth_DFS(root.left), depth);
-        }
+        int minDepth = Integer.MAX_VALUE;
 
-        if (root.right != null) {
-            depth = Math.min(minDepth_DFS(root.right), depth);
-        }
+        if (root.left != null) minDepth = Math.min(minDepthDFS(root.left), minDepth);
 
-        return depth + 1;
+        if (root.right != null) minDepth = Math.min(minDepthDFS(root.right), minDepth);
+
+        return 1 + minDepth;
     }
 
-    // 广度优先搜索
-    public int minDepth_BFS(TreeNode root) {
+    // BFS - 时间复杂度 O(N) - 空间复杂度 O(N)
+    public int minDepthBFS(TreeNode root) {
         if (root == null) return 0;
 
-        if (root.left == null && root.right == null) return 1;
+        Queue<QueueNode> queue = new LinkedList<>() {{
+            offer(new QueueNode(root, 1));
+        }};
 
-        Queue<QueueNode> queue = new LinkedList<QueueNode>();
-        queue.offer(new QueueNode(root, 1));
         while (!queue.isEmpty()) {
-            // 队头出队，用于判定
-            QueueNode nodeDepth = queue.poll();
-            TreeNode node = nodeDepth.node;
-            int depth = nodeDepth.depth;
+            QueueNode curQueueNode = queue.poll();
 
-            if (node.left == null && node.right == null) {
-                // 遇到叶子节点直接返回
-                return depth;
-            }
+            TreeNode curNode = curQueueNode.node;
+            int curDepth = curQueueNode.depth;
 
-            if (node.left != null) {
-                // 非空子节点入队，下一轮进行判定
-                queue.offer(new QueueNode(root.left, depth + 1));
-            }
+            // 遇到叶子节点直接返回
+            if (curNode.left == null && curNode.right == null) return curDepth;
 
-            if (node.right != null) {
-                queue.offer(new QueueNode(root.right, depth + 1));
-            }
+            // 非空子节点入队，下一轮进行判定
+            if (curNode.left != null) queue.offer(new QueueNode(curNode.left, curDepth + 1));
+            if (curNode.right != null) queue.offer(new QueueNode(curNode.right, curDepth + 1));
         }
 
         return 0;
-    }
-
-    // BFS 所用队列结构 - 节点 + 当前深度
-    class QueueNode {
-        TreeNode node;
-        int depth;
-
-        public QueueNode(TreeNode node, int depth) {
-            this.node = node;
-            this.depth = depth;
-        }
     }
 
     // 二叉树初始化
@@ -88,5 +80,16 @@ public class Lc_111_二叉树的最小深度 {
         head = head.right;
         head.left = new TreeNode(15);
         head.right = new TreeNode(7);
+    }
+}
+
+// BFS 所用队列结构 - 节点 + 当前深度
+class QueueNode {
+    TreeNode node;
+    int depth;
+
+    public QueueNode(TreeNode node, int depth) {
+        this.node = node;
+        this.depth = depth;
     }
 }
