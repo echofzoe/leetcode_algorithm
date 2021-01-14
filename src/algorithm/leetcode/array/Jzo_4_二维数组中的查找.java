@@ -20,12 +20,11 @@ public class Jzo_4_二维数组中的查找 {
 
         int target = 5;
 
-        System.out.println("二维数组 " + Arrays.deepToString(matrix) + " 中" + (lc.findNumberIn2DArray_Linear(matrix, target) ? "包含" : "不包含") + "整数 " + target);
+        System.out.println("二维数组" + Arrays.deepToString(matrix) + "中" + (lc.findNumberIn2DArrayLinear(matrix, target) ? "包含" : "不包含") + "整数 " + target);
     }
 
     // 时间复杂度 O(N*M) - 空间复杂度 O(1)
-    public boolean findNumberIn2DArray_BruteForce(int[][] matrix, int target) {
-
+    public boolean findNumberIn2DArrayBruteForce(int[][] matrix, int target) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return false;
 
         int rows = matrix.length, columns = matrix[0].length;
@@ -42,21 +41,22 @@ public class Jzo_4_二维数组中的查找 {
     }
 
     // 时间复杂度 O(N+M) - 空间复杂度 O(1)
-    public boolean findNumberIn2DArray_Linear(int[][] matrix, int target) {
-
+    public boolean findNumberIn2DArrayLinear(int[][] matrix, int target) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return false;
 
         int rows = matrix.length, columns = matrix[0].length;
-        int row = 0, column = columns - 1;
 
-        while (row < rows && column >= 0) {
-            int num = matrix[row][column];
+        int row = rows - 1, column = 0;
 
-            if (num == target) return true;
-            else if (num > target) column--;
-            else row++;
+        while (row >= 0 && column < columns) {
+            int cur = matrix[row][column];
+
+            if (cur > target) row--;
+            else if (cur < target) column++;
+            else return true;
         }
 
         return false;
     }
+
 }
