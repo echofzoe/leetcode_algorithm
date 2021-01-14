@@ -1,5 +1,6 @@
 package algorithm.leetcode.dpAndGreedy;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -19,16 +20,19 @@ public class Lc_649_Dota2参议院 {
     public String predictPartyVictory(String senate) {
         int n = senate.length();
 
-        Deque<Integer> radiant = new LinkedList<>();
-        Deque<Integer> dire = new LinkedList<>();
+        Deque<Integer> radiant = new ArrayDeque<>();
+        Deque<Integer> dire = new ArrayDeque<>();
 
         for (int i = 0; i < n; i++) {
-            if (senate.charAt(i) == 'R') radiant.offerFirst(i);
-            else dire.offerFirst(i);
+            if (senate.charAt(i) == 'R') {
+                radiant.offerLast(i);
+            } else {
+                dire.offerLast(i);
+            }
         }
 
         while (!radiant.isEmpty() && !dire.isEmpty()) {
-            int radiantIndex = radiant.poll(), direIndex = dire.poll();
+            int radiantIndex = radiant.pollFirst(), direIndex = dire.pollFirst();
             if (radiantIndex < direIndex) radiant.offerLast(radiantIndex + n);
             else dire.offerLast(direIndex + n);
         }
