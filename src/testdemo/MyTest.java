@@ -77,6 +77,37 @@ public class MyTest {
 
     @Test
     public void test3() {
+        int[][] r = {{5, 8}, {3, 9}, {3, 12}};
+        System.out.println(countGoodRectangles(r));
+    }
+
+    public int countGoodRectangles(int[][] rectangles) {
+        for (int[] r : rectangles) {
+            Arrays.sort(r);
+        }
+
+        System.out.println(Arrays.deepToString(rectangles));
+
+        Arrays.sort(rectangles, (x, y) -> x[0] - y[0]);
+
+        System.out.println(Arrays.deepToString(rectangles));
+
+        int cur = 0, res = 0;
+        for (int i = 0; i < rectangles.length; i++) {
+            if (i == 0) {
+                cur = 1;
+                continue;
+            }
+
+            if (rectangles[i][0] == rectangles[i - 1][0]) {
+                cur++;
+                res = Math.max(res, cur);
+            } else {
+                cur = 1;
+            }
+        }
+
+        return res;
     }
 
     @Test
