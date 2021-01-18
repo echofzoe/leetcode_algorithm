@@ -21,6 +21,8 @@ public class Lc_1726_同积元组 {
         int n = nums.length;
         int res = 0;
 
+        Arrays.sort(nums);
+
         for (int a = 0; a < n - 3; a++) {
             for (int d = n - 1; d >= a + 3; d--) {
                 int b = a + 1, c = d - 1;
