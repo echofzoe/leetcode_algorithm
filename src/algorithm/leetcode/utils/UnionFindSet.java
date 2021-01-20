@@ -10,16 +10,12 @@ public class UnionFindSet {
         this.parent = new int[n];
 
         // 初始化 - 自己与自己联通
-        for (int i = 0; i < n; i++) {
-            parent[i] = i;
-        }
+        for (int i = 0; i < n; i++) parent[i] = i;
     }
 
     // 找到x的根节点
     public int find(int x) {
-        if (parent[x] == x) {
-            return x;
-        }
+        if (parent[x] == x) return x;
 
         // 路径压缩
         parent[x] = find(parent[x]);
@@ -29,6 +25,7 @@ public class UnionFindSet {
     // 联通
     public void union(int x, int y) {
         int index1 = find(x), index2 = find(y);
+
         if (index1 == index2) return;
         parent[index1] = index2;
     }

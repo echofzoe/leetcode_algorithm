@@ -15,9 +15,12 @@ public class TestDemo {
 
     @Test
     public void test1() {
-        int a = -2;
+        int a = -1;
+        int b = -2;
         String bin_a = Integer.toBinaryString(a);
+        String bin_b = Integer.toBinaryString(b);
         System.out.println(bin_a);
+        System.out.println(bin_b);
 
         a = a << 31;
         bin_a = Integer.toBinaryString(a);
