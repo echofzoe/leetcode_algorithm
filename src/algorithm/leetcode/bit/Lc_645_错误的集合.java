@@ -1,4 +1,4 @@
-package algorithm.leetcode.search;
+package algorithm.leetcode.bit;
 
 import java.util.Arrays;
 

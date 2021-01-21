@@ -13,10 +13,11 @@ public class Lc_1584_连接所有点的最小费用 {
         Lc_1584_连接所有点的最小费用 lc = new Lc_1584_连接所有点的最小费用();
         int[][] points = {{0, 0}, {2, 2}, {3, 10}, {5, 2}, {7, 0}};
 
-        System.out.println("连接" + Arrays.deepToString(points) + "中所有点的最小费用是" + lc.minCostConnectPoints(points));
+        System.out.println("连接" + Arrays.deepToString(points) + "中所有点的最小费用是" + lc.minCostConnectPointsKruskal(points));
     }
 
-    public int minCostConnectPoints(int[][] points) {
+    // Kruskal - 时间复杂度 O(N^2*logN) - 空间复杂度 O(N^2) 为边集数组
+    public int minCostConnectPointsKruskal(int[][] points) {
         int m = points.length;
         if (m == 0) return 0;
 
