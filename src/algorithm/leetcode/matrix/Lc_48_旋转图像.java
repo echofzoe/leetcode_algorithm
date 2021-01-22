@@ -45,7 +45,6 @@ public class Lc_48_旋转图像 {
                 matrix[j][n - 1 - i] = tmp;
             }
         }
-
     }
 
     // BF - 时间复杂度 O(N^2) - 空间复杂度 O(N^2)
@@ -60,9 +59,7 @@ public class Lc_48_旋转图像 {
         }
 
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                matrix[i][j] = tmp[i][j];
-            }
+            System.arraycopy(tmp[i], 0, matrix[i], 0, n);
         }
     }
 
