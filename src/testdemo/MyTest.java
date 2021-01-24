@@ -112,7 +112,9 @@ public class MyTest {
 
     @Test
     public void test4() {
-        System.out.println((3 ^ 2));
+        System.out.println((10 ^ 9));
+        System.out.println((10 ^ 9 ^ 5));
     }
+
 
 }

@@ -35,4 +35,12 @@ public class UnionFindSet {
         return find(x) == find(y);
     }
 
+    public int[] getParent() {
+        return parent;
+    }
+
+    public int getN() {
+        return n;
+    }
+
 }
