@@ -15,11 +15,8 @@ public class UnionFindSet {
 
     // 找到x的根节点
     public int find(int x) {
-        if (parent[x] == x) return x;
-
         // 路径压缩
-        parent[x] = find(parent[x]);
-        return parent[x];
+        return parent[x] == x ? x : (parent[x] = find(parent[x]));
     }
 
     // 联通

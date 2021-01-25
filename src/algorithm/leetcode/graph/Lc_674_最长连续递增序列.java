@@ -21,7 +21,7 @@ public class Lc_674_最长连续递增序列 {
         if (nums == null || nums.length == 0) return 0;
 
         int n = nums.length;
-        UFS ufs = new UFS(n);
+        UFS674 ufs = new UFS674(n);
 
         for (int i = 0; i < n - 1; i++) {
             if (nums[i] < nums[i + 1]) ufs.union(i, i + 1);
@@ -53,11 +53,11 @@ public class Lc_674_最长连续递增序列 {
 
 }
 
-class UFS extends UnionFindSet {
+class UFS674 extends UnionFindSet {
 
     private int n;
 
-    public UFS(int n) {
+    public UFS674(int n) {
         super(n);
         this.n = getN();
     }
