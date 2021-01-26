@@ -30,15 +30,17 @@ public class Jzo_12_矩阵中的路径 {
      * 深度优先搜索
      *
      * @param board - 矩阵
-     * @param words  - 目标字符串
+     * @param words - 目标字符串
      * @param i     - 行索引
      * @param j     - 列索引
      * @param k     - 目标字符在 word 中的索引
      * @return
      */
     private boolean dfs(char[][] board, char[] words, int i, int j, int k) {
+        // 边界条件
         if (i > board.length - 1 || i < 0 || j > board[0].length - 1 || j < 0 || board[i][j] != words[k]) return false;
 
+        // 结束条件
         if (k == words.length - 1) return true;
 
         board[i][j] = '/';    // 设置访问位
