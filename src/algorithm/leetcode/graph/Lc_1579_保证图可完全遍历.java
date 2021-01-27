@@ -17,7 +17,7 @@ public class Lc_1579_保证图可完全遍历 {
         System.out.println(Arrays.deepToString(edges) + "在保证图可以完全遍历的情况下可以删除的最大边数是 " + lc.maxNumEdgesToRemove(n, edges));
     }
 
-    // 并查集 - 时间复杂度 O() - 空间复杂度 O()
+    // 并查集 - 时间复杂度 O(N) - 空间复杂度 O(N)
     public int maxNumEdgesToRemove(int n, int[][] edges) {
         UnionFindSet u1 = new UnionFindSet(n);
         UnionFindSet u2 = new UnionFindSet(n);

@@ -10,7 +10,8 @@ public class Lc_50_Pow {
         double input1 = 2.00000, input2 = 2.10000;
         int n1 = 0, n2 = 3;
 
-        System.out.println(input1 + "的" + n1 + "次方是" + lc.myPowRecursive(input1, n1) + ", " + input2 + "的" + n2 + "次方是" + lc.myPowIteration(input2, n2));
+        System.out.println(input1 + "的" + n1 + "次方是" + lc.myPowRecursive(input1, n1));
+        System.out.println(input2 + "的" + n2 + "次方是" + lc.myPowIteration(input2, n2));
     }
 
     // 快速幂 + 递归 - 时间复杂度 O(logN) 为递归的层数 - 空间复杂度 O(logN) 为递归的层数
