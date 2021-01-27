@@ -2,14 +2,19 @@ package algorithm.leetcode.utils;
 
 public class UnionFindSet {
 
-    private int[] parent;
+    // 大小
     private int n;
+    // 根节点数组
+    private int[] parent;
+    // 连通分量数目
+    private int setCount;
 
     public UnionFindSet(int n) {
         this.n = n;
         this.parent = new int[n];
+        this.setCount = n;
 
-        // 初始化 - 自己与自己联通
+        // 初始化 - 自己与自己连通
         for (int i = 0; i < n; i++) parent[i] = i;
     }
 
@@ -19,12 +24,14 @@ public class UnionFindSet {
         return parent[x] == x ? x : (parent[x] = find(parent[x]));
     }
 
-    // 联通
+    // 连通
     public void union(int x, int y) {
         int index1 = find(x), index2 = find(y);
 
         if (index1 == index2) return;
         parent[index1] = index2;
+
+        setCount--;
     }
 
     // 判断是否联通
@@ -40,4 +47,7 @@ public class UnionFindSet {
         return n;
     }
 
+    public int getSetCount() {
+        return setCount;
+    }
 }
