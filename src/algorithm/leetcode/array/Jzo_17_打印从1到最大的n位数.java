@@ -16,6 +16,7 @@ public class Jzo_17_打印从1到最大的n位数 {
         System.out.println("从1到最大的" + n + "位数的数组为: " + Arrays.toString(lc.printNumbers_BigNumberPrint(n)));
     }
 
+    // 暴力 无法解决大数问题 - 时间复杂度 O(10^N) - 空间复杂度 O(10^N)
     public int[] printNumbers_BruteForce(int n) {
         if (n == 0) return new int[0];
 
@@ -29,43 +30,50 @@ public class Jzo_17_打印从1到最大的n位数 {
         return res;
     }
 
-    int n;
-    int start;    // 非0数字起始位置
-    int nine = 0;    // 9的个数
-    int count = 0;    // 结果集记数位,结果集大小为 [1, 10^n]
+    int[] res;    // 结果集
+    /**
+     * n - 数位
+     * start - 非0数字的起始位置
+     * nine - 当前字符串中9的个数
+     * count - 结果集记数位,结果集大小为 [1, 10^n]
+     */
+    int n, count, nonZeroBit, nine;
+    char[] cur;    // 当前字符串
+    char[] loop;    // 取值范围
 
-    char[] loop = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};    // 每一位可能的数字
-    char[] num;    // 当前数字的字符数组
-
-    int res[];    // 结果集
-
+    // DFS - 时间复杂度 O(10^N) - 空间复杂度 O(10^N)
     public int[] printNumbers_BigNumberPrint(int n) {
-        // 特判
         if (n == 0) return new int[0];
 
-        // 初始化
+        this.res = new int[(int) Math.pow(10, n) - 1];
         this.n = n;
-        res = new int[(int) Math.pow(10, n) - 1];
-        num = new char[n];
-        start = n - 1;
+        this.cur = new char[n];
+        this.loop = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+        this.count = 0;
+        this.nonZeroBit = n - 1;
+        this.nine = 0;
 
-        dfs(0);    // 从第0位开始递归至第n位
+        dfs(0);
 
         return res;
     }
 
-    private void dfs(int x) {
-        if (x == n) {
-            String s = String.valueOf(num).substring(start);
+    private void dfs(int b) {
+        if (b == n) {
+            String s = String.valueOf(cur).substring(nonZeroBit);
             if (!s.equals("0")) res[count++] = Integer.parseInt(s);
-            if (n - start == nine) start--;
+
+            if (n - nonZeroBit == nine) nonZeroBit--;
+
             return;
         }
 
         for (char c : loop) {
             if (c == '9') nine++;
-            num[x] = c;
-            dfs(x + 1);
+            cur[b] = c;
+
+            // 往下dfs
+            dfs(b + 1);
         }
 
         nine--;
