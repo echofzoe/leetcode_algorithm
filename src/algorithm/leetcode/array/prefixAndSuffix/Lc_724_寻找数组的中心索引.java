@@ -9,7 +9,9 @@ public class Lc_724_寻找数组的中心索引 {
 
     public static void main(String[] args) {
         Lc_724_寻找数组的中心索引 lc = new Lc_724_寻找数组的中心索引();
+        int[] nums = {1, 7, 3, 6, 5, 6};
 
+        System.out.println(Arrays.toString(nums) + "的中心索引是 " + lc.pivotIndex(nums));
     }
 
     // 前缀和 - 时间复杂度 O(N) - 空间复杂度 O(1)
