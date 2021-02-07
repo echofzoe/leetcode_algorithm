@@ -13,6 +13,7 @@ public class Lc_424_替换后的最长重复字符 {
         System.out.println("在字符串\"" + s + "\"中任意替换" + k + "个字符能够得到的包含重复字符的最长子串的长度为 " + lc.characterReplacement(s, k));
     }
 
+    // 滑动窗口（双指针） - 时间复杂度 O(N) - 空间复杂度 O(1) 为长度为26的数组空间
     public int characterReplacement(String s, int k) {
         int n = s.length();
 

@@ -114,6 +114,36 @@ public class MyTest {
     public void test4() {
         System.out.println((10 ^ 9));
         System.out.println((10 ^ 9 ^ 5));
+
+        String word1 = "cabaa", word2 = "bcaaa";
+        System.out.println(largestMerge(word1, word2));
+    }
+
+    public String largestMerge(String word1, String word2) {
+        int n1 = word1.length(), n2 = word2.length();
+        StringBuilder merge = new StringBuilder(), w1 = new StringBuilder(word1), w2 = new StringBuilder(word2);
+
+        while (w1.length() > 0 || w2.length() > 0) {
+            int idx1 = 0, idx2 = 0;
+
+            while (idx1 < w1.length() && idx2 < w2.length() && w1.charAt(idx1) == w2.charAt(idx2)) {
+                idx1++;
+                idx2++;
+            }
+
+            while (idx1 < w1.length() && w1.charAt(idx1) == w2.charAt(idx2)) idx1++;
+            while (idx2 < w2.length() && w1.charAt(idx1) == w2.charAt(idx2)) idx2++;
+
+            if (w1.charAt(idx1) < w2.charAt(idx2)) {
+                merge.append(w2.substring(0, idx2 + 1));
+                w2.delete(0, idx2 + 1);
+            } else {
+                merge.append(w1.substring(0, idx1 + 1));
+                w1.delete(0, idx1 + 1);
+            }
+        }
+
+        return merge.toString();
     }
 
 }
