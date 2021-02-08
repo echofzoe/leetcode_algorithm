@@ -18,7 +18,7 @@ public class Lc_215_数组中的第K个最大元素 {
 //        int k = 4;
         int k = 2;
 
-        System.out.println("无序数组" + Arrays.toString(nums) + "中第" + k + "个最大的元素是" + lc.findKthLargestMyHeap(nums, k));
+        System.out.println("无序数组" + Arrays.toString(nums) + "中第" + k + "个最大的元素是" + lc.findKthLargestQuicklySortOptimization(nums, k));
     }
 
     // 完全快速排序 + 遍历 - 时间复杂度 O(N*logN) - 空间复杂度 O(logN) 为递归栈的开销
@@ -40,9 +40,9 @@ public class Lc_215_数组中的第K个最大元素 {
 
             if (i >= j) break;
 
-            NumsUtils.swap(nums, i, j, true);
+            NumsUtils.swap(nums, i, j);
         }
-        NumsUtils.swap(nums, left, j, true);
+        NumsUtils.swap(nums, left, j);
 
         quicklySort(nums, left, j - 1);
         quicklySort(nums, j + 1, right);
@@ -70,10 +70,10 @@ public class Lc_215_数组中的第K个最大元素 {
             while (i < right && nums[++i] <= pivot) ;
             while (j > left && nums[--j] >= pivot) ;
             if (i >= j) break;
-            NumsUtils.swap(nums, i, j, true);
+            NumsUtils.swap(nums, i, j);
         }
 
-        NumsUtils.swap(nums, left, j, true);
+        NumsUtils.swap(nums, left, j);
 
         return j;
     }
@@ -98,7 +98,7 @@ public class Lc_215_数组中的第K个最大元素 {
 
         for (int i = nums.length - 1; i >= nums.length - k + 1; i--) {
             // 将堆尾元素与堆顶元素互换（堆顶是最大元素）
-            NumsUtils.swap(nums, 0, i, true);
+            NumsUtils.swap(nums, 0, i);
 
             // 删除堆尾元素（最大元素），即，将堆尾元素排除在外并从堆顶开始调整大根堆
             heapSize--;
@@ -122,7 +122,7 @@ public class Lc_215_数组中的第K个最大元素 {
         if (right < heapSize && nums[right] > nums[largest]) largest = right;
 
         if (largest != i) {
-            NumsUtils.swap(nums, i, largest, true);
+            NumsUtils.swap(nums, i, largest);
             maxHeapify(nums, largest, heapSize);
         }
     }

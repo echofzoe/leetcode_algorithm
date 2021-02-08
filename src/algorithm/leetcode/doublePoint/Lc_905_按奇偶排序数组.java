@@ -30,7 +30,7 @@ public class Lc_905_按奇偶排序数组 {
                 }
 
                 if (j < A.length) {
-                    NumsUtils.swap(A, i, j, true);
+                    NumsUtils.swap(A, i, j);
                 }
             }
         }
@@ -45,7 +45,7 @@ public class Lc_905_按奇偶排序数组 {
         while (i < j) {
             if ((A[i] & 1) > (A[j] & 1)) {
                 // 前奇后偶即交换
-                NumsUtils.swap(A, i, j, true);
+                NumsUtils.swap(A, i, j);
             }
 
             if ((A[i] & 1) == 0) i++;    // i的位置正确

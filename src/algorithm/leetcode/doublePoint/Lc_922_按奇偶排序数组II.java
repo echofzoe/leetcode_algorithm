@@ -27,7 +27,7 @@ public class Lc_922_按奇偶排序数组II {
                     i += 2;
                 }
             }
-            NumsUtils.swap(A, i, j, true);
+            NumsUtils.swap(A, i, j);
         }
 
         return A;
