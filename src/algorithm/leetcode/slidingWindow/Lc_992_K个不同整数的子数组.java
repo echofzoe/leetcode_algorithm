@@ -21,6 +21,7 @@ public class Lc_992_K个不同整数的子数组 {
         return subarraysWithMostKDistinct(A, K) - subarraysWithMostKDistinct(A, K - 1);
     }
 
+    // 滑动窗口 - 时间复杂度 O(N) - 空间复杂度 O(N)
     private int subarraysWithMostKDistinct(int[] A, int K) {
         int n = A.length;
 
