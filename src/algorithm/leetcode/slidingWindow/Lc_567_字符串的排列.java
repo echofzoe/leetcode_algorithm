@@ -31,7 +31,7 @@ public class Lc_567_字符串的排列 {
         for (int i = n1; i < n2; i++) {
             freq2[s2.charAt(i) - 'a']++;
             freq2[s2.charAt(i - n1) - 'a']--;
-            
+
             if (Arrays.equals(freq1, freq2)) return true;
         }
 
