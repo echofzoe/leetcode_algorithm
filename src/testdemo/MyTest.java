@@ -10,57 +10,10 @@ public class MyTest {
 
     public static void main(String[] args) {
         MyTest main = new MyTest();
-
-        main.drawGraphics();
-
-        int a = 1, b = 2, c = 3, d = 4;
-        main.swap(a, b);
-        main.swap(c, d);
-    }
-
-    private void drawGraphics() {
-        for (int i = 7; i > 0; i -= 2) {
-
-            int temp = i, space = 7 - temp;
-
-            while (space > 0) {
-                System.out.print(" ");
-                space -= 2;
-            }
-
-            while (temp > 0) {
-                System.out.print("*");
-                temp--;
-            }
-
-            System.out.println();
-        }
-    }
-
-    private void swap(int i1, int i2) {
-        System.out.println("交换前 i1 = " + i1 + ", i2 = " + i2);
-
-        if (i1 != i2) {
-            i1 ^= i2;
-            i2 ^= i1;
-            i1 ^= i2;
-        }
-
-        System.out.println("交换后 i1 = " + i1 + ", i2 = " + i2);
     }
 
     @Test
     public void test1() {
-        TreeNode root = new TreeNode(1);
-        root.right = new TreeNode(2);
-        root.right.left = new TreeNode(3);
-        root.right.right = new TreeNode(4);
-
-        System.out.println(BinaryTreeSerialize.serialize(root, 3));
-    }
-
-    @Test
-    public void test2() {
         Set<Integer> set1 = new HashSet<>();
         Set<Integer> set2 = new HashSet<>();
         for (int i = 0; i < 6; i++) {
@@ -76,74 +29,8 @@ public class MyTest {
     }
 
     @Test
-    public void test3() {
-        int[][] r = {{5, 8}, {3, 9}, {3, 12}};
-        System.out.println(countGoodRectangles(r));
-    }
-
-    public int countGoodRectangles(int[][] rectangles) {
-        for (int[] r : rectangles) {
-            Arrays.sort(r);
-        }
-
-        System.out.println(Arrays.deepToString(rectangles));
-
-        Arrays.sort(rectangles, (x, y) -> x[0] - y[0]);
-
-        System.out.println(Arrays.deepToString(rectangles));
-
-        int cur = 0, res = 0;
-        for (int i = 0; i < rectangles.length; i++) {
-            if (i == 0) {
-                cur = 1;
-                continue;
-            }
-
-            if (rectangles[i][0] == rectangles[i - 1][0]) {
-                cur++;
-                res = Math.max(res, cur);
-            } else {
-                cur = 1;
-            }
-        }
-
-        return res;
-    }
-
-    @Test
-    public void test4() {
-        System.out.println((10 ^ 9));
-        System.out.println((10 ^ 9 ^ 5));
-
-        String word1 = "cabaa", word2 = "bcaaa";
-        System.out.println(largestMerge(word1, word2));
-    }
-
-    public String largestMerge(String word1, String word2) {
-        int n1 = word1.length(), n2 = word2.length();
-        StringBuilder merge = new StringBuilder(), w1 = new StringBuilder(word1), w2 = new StringBuilder(word2);
-
-        while (w1.length() > 0 || w2.length() > 0) {
-            int idx1 = 0, idx2 = 0;
-
-            while (idx1 < w1.length() && idx2 < w2.length() && w1.charAt(idx1) == w2.charAt(idx2)) {
-                idx1++;
-                idx2++;
-            }
-
-            while (idx1 < w1.length() && w1.charAt(idx1) == w2.charAt(idx2)) idx1++;
-            while (idx2 < w2.length() && w1.charAt(idx1) == w2.charAt(idx2)) idx2++;
-
-            if (w1.charAt(idx1) < w2.charAt(idx2)) {
-                merge.append(w2.substring(0, idx2 + 1));
-                w2.delete(0, idx2 + 1);
-            } else {
-                merge.append(w1.substring(0, idx1 + 1));
-                w1.delete(0, idx1 + 1);
-            }
-        }
-
-        return merge.toString();
+    public void test2() {
+        List<Integer> list = new LinkedList<>();
     }
 
 }
