@@ -34,8 +34,13 @@ public class Lc_1438_绝对差不超过限制的最长连续子数组 {
             maxQue.offerLast(nums[hi]);
 
             while (!minQue.isEmpty() && !maxQue.isEmpty() && maxQue.peekFirst() - minQue.peekFirst() > limit) {
-                if (nums[lo] == minQue.peekFirst()) minQue.pollFirst();
-                if (nums[lo] == maxQue.peekFirst()) maxQue.pollFirst();
+                if (nums[lo] == minQue.peekFirst()) {
+                    minQue.pollFirst();
+                }
+
+                if (nums[lo] == maxQue.peekFirst()) {
+                    maxQue.pollFirst();
+                }
 
                 lo++;
             }
@@ -47,7 +52,7 @@ public class Lc_1438_绝对差不超过限制的最长连续子数组 {
         return res;
     }
 
-    // 滑动窗口 + 有序集合 - 时间复杂度 O(N) - 空间复杂度 O(N)
+    // 滑动窗口 + 有序集合 - 时间复杂度 O(N*logN) - 空间复杂度 O(N)
     public int longestSubarray2(int[] nums, int limit) {
         int n = nums.length;
 
@@ -59,7 +64,9 @@ public class Lc_1438_绝对差不超过限制的最长连续子数组 {
 
             while (map.lastKey() - map.firstKey() > limit) {
                 map.put(nums[lo], map.get(nums[lo]) - 1);
-                if (map.get(nums[lo]) == 0) map.remove(nums[lo]);
+                if (map.get(nums[lo]) == 0) {
+                    map.remove(nums[lo]);
+                }
 
                 lo++;
             }

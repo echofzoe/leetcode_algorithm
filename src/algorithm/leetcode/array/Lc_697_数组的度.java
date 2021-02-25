@@ -23,14 +23,14 @@ public class Lc_697_数组的度 {
         Map<Integer, int[]> map = new HashMap<>();
         for (int i = 0; i < n; i++) {
             if (map.containsKey(nums[i])) {
-                map.get(nums[i])[0]++;
-                map.get(nums[i])[2] = i;
+                map.get(nums[i])[0]++;  // 频数（度）
+                map.get(nums[i])[2] = i;  // 结束位置
             } else {
                 map.put(nums[i], new int[] {1, i, i});
             }
         }
 
-        int maxDegree = 0, res = 0;
+        int maxDegree = Integer.MIN_VALUE, res = 0;
         for (int[] arr : map.values()) {
             if (maxDegree < arr[0]) {
                 maxDegree = arr[0];
