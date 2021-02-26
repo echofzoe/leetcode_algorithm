@@ -30,7 +30,14 @@ public class MyTest {
 
     @Test
     public void test2() {
-        List<Integer> list = new LinkedList<>();
+        int tmp = 0b10101;
+        int a = tmp;
+
+        while (a > 0) {
+            System.out.print(Integer.toBinaryString(a - 1) + " - ");
+            a = (a - 1) & tmp;
+            System.out.println(Integer.toBinaryString(a));
+        }
     }
 
 }
