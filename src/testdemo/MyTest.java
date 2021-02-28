@@ -40,4 +40,14 @@ public class MyTest {
         }
     }
 
+    @Test
+    public void test3() {
+        int[] a1 = {1, 2, 3}, a2 = {4, 5, 6};
+        int[] tmp = a1;
+        a1 = a2;
+        a2 = tmp;
+
+        System.out.println(Arrays.toString(a1) + " " + Arrays.toString(a2));
+    }
+
 }
