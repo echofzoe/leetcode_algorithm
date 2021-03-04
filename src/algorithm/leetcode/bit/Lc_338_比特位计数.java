@@ -34,6 +34,7 @@ public class Lc_338_比特位计数 {
         int[] res = new int[num + 1];
 
         for (int i = 1; i <= num; i++) {
+            // 操作 i & (i - 1) 将 i 的二进制表示中的最后一个 1 变成 0
             res[i] = res[i & (i - 1)] + 1;
         }
 
@@ -41,11 +42,13 @@ public class Lc_338_比特位计数 {
     }
 
     // 动态规划 + 最低有效位 - 时间复杂度 O(num) - 空间复杂度 O(1)
-    // - 操作 i >> 1 会把 i 的最低位去掉
     public int[] countBitsDp2(int num) {
         int[] res = new int[num + 1];
 
         for (int i = 1; i <= num; i++) {
+            // 操作 i >> 1 会把 i 的最低位去掉
+            // - 若 i 为偶数（偶数最低位是0，右移一位对二进制中1的个数没有影响），则 res[i] = res[i >> 1]
+            // - 若 i 为奇数，则 res[i] = res[i >> 1] + 1
             res[i] = res[i >> 1] + (i & 1);
         }
 

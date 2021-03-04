@@ -42,12 +42,13 @@ public class MyTest {
 
     @Test
     public void test3() {
-        int[] a1 = {1, 2, 3}, a2 = {4, 5, 6};
-        int[] tmp = a1;
-        a1 = a2;
-        a2 = tmp;
+        int a = -3;
+        System.out.println(Integer.toBinaryString(a));
 
-        System.out.println(Arrays.toString(a1) + " " + Arrays.toString(a2));
+        for (int i = 0; i < 1; i++) {
+            a >>= 1;
+        }
+        System.out.println(Integer.toBinaryString(a));
     }
 
 }
