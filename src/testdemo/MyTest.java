@@ -51,4 +51,9 @@ public class MyTest {
         System.out.println(Integer.toBinaryString(a));
     }
 
+    @Test
+    public void test4() {
+        System.out.println(System.currentTimeMillis());
+    }
+
 }
