@@ -53,7 +53,6 @@ public class MyTest {
 
     @Test
     public void test4() {
-        System.out.println(System.currentTimeMillis());
     }
 
 }
