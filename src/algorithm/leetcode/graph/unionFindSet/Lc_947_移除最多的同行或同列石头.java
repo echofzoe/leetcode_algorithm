@@ -1,6 +1,4 @@
-package algorithm.leetcode.graph;
-
-import algorithm.leetcode.utils.UnionFindSet;
+package algorithm.leetcode.graph.unionFindSet;
 
 import java.util.ArrayList;
 import java.util.Arrays;

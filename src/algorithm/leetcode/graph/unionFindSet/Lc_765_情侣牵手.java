@@ -1,4 +1,4 @@
-package algorithm.leetcode.graph;
+package algorithm.leetcode.graph.unionFindSet;
 
 import algorithm.leetcode.utils.NumsUtils;
 import algorithm.leetcode.utils.UnionFindSet;
