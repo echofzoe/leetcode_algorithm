@@ -1,5 +1,6 @@
 package algorithm.leetcode.stack;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -15,6 +16,7 @@ public class Lc_224_基本计算器 {
         System.out.println("字符串表达式\"" + s + "\"在经过计算器计算后得到的结果是" + lc.calculate(s));
     }
 
+    // 符号栈 - 时间复杂度 O(N) - 空间复杂度 O(N)
     public int calculate(String s) {
         int n = s.length();
         char[] cs = s.toCharArray();
@@ -22,7 +24,7 @@ public class Lc_224_基本计算器 {
         int res = 0, curSign = 1;
 
         Deque<Integer> sign = new LinkedList<>();
-        sign.offerLast(1);
+        sign.offerLast(curSign);
 
         for (int i = 0; i < n; i++) {
             if (cs[i] == ' ') continue;
