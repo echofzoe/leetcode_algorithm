@@ -40,8 +40,12 @@ public class Lc_84_柱状图中最大的矩形 {
             stack.push(i);
         }
 
+        System.out.println("left: " + Arrays.toString(left));
+        System.out.println("right: " + Arrays.toString(right));
+
         int res = 0;
         for (int i = 0; i < n; i++) {
+//            res = Math.max(res, ((right[i] - 1) - (left[i] + 1) + 1) * heights[i]);
             res = Math.max(res, (right[i] - left[i] - 1) * heights[i]);
         }
         
