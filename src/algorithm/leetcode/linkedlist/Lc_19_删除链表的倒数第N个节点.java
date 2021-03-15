@@ -2,7 +2,6 @@ package algorithm.leetcode.linkedlist;
 
 import algorithm.leetcode.utils.ListNode;
 import algorithm.leetcode.utils.ListNodeSerialize;
-import org.junit.Test;
 
 import java.util.Stack;
 

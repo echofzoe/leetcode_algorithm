@@ -1,9 +1,7 @@
 package algorithm.leetcode.string;
 
-import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Lc_763_划分字母区间 {
@@ -14,7 +12,7 @@ public class Lc_763_划分字母区间 {
     public static void main(String[] args) {
         Lc_763_划分字母区间 lc = new Lc_763_划分字母区间();
         String S = "ababcbacadefegdehijhklij";
-        
+
         System.out.println("把字符串 " + S + " 划分为尽可能多的片段,同一个字母只会出现在其中的一个片段,划分后每个字符串片段的长度为: " + lc.partitionLabels(S).toString());
     }
 

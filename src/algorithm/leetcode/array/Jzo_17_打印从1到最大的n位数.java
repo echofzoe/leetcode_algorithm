@@ -1,7 +1,5 @@
 package algorithm.leetcode.array;
 
-import org.junit.Test;
-
 import java.util.Arrays;
 
 public class Jzo_17_打印从1到最大的n位数 {

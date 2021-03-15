@@ -1,7 +1,5 @@
 package algorithm.leetcode.pathfinding;
 
-import org.junit.Test;
-
 public class Jzo_13_机器人的运动范围 {
 
     // 机器人的运动范围
