@@ -27,32 +27,23 @@ public class Lc_54_螺旋矩阵 {
 
         int top = 0, left = 0;
         int bottom = m - 1, right = n - 1;
-        int total = m * n;
 
-        while (res.size() < total) {
-            for (int col = left; col <= right; col++) {
-                res.add(matrix[top][col]);
-            }
+        while (left <= right && top <= bottom) {
+            for (int col = left; col <= right; col++) res.add(matrix[top][col]);
 
-            for (int row = top + 1; row <= bottom; row++) {
-                res.add(matrix[row][right]);
-            }
+            for (int row = top + 1; row <= bottom; row++) res.add(matrix[row][right]);
 
             // 只有一行或一列时，按第一个for循环的行或列遍历
             if (left < right && top < bottom) {
-                for (int col = right - 1; col >= left; col--) {
-                    res.add(matrix[bottom][col]);
-                }
+                for (int col = right - 1; col >= left; col--) res.add(matrix[bottom][col]);
 
-                for (int row = bottom - 1; row > top; row--) {
-                    res.add(matrix[row][left]);
-                }
+                for (int row = bottom - 1; row > top; row--) res.add(matrix[row][left]);
             }
 
-            left++;
-            right--;
             top++;
+            right--;
             bottom--;
+            left++;
         }
 
         return res;
