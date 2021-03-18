@@ -20,7 +20,7 @@ public class Jzo_24_反转链表 {
 
     // 迭代 - 时间复杂度 O(N) - 空间复杂度 O(1)
     public ListNode reverseListIteration(ListNode head) {
-        if (head == null || head.next == null) return null;
+        if (head == null || head.next == null) return head;
 
         ListNode tail = head;
         head = head.next;
@@ -71,9 +71,10 @@ public class Jzo_24_反转链表 {
     }
 
     private void listInitialize(ListNode head) {
-        head.next = new ListNode(2);
-        head.next.next = new ListNode(3);
-        head.next.next.next = new ListNode(4);
-        head.next.next.next.next = new ListNode(5);
+        head.val = 1;
+        for (int i = 1; i < 5; i++) {
+            head.next = new ListNode(i + 1);
+            head = head.next;
+        }
     }
 }
