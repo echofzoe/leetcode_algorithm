@@ -43,5 +43,8 @@ public class Demo {
         }
 
         countDownLatch.await();
+        long end = System.currentTimeMillis();
+        
+        System.out.println(Thread.currentThread().getName() + ", 耗时: " + (end - start) + ", count = " + count);
     }
 }
