@@ -61,15 +61,18 @@ public class Lc_88_合并两个有序数组 {
 
     // 双指针 从后往前 - 时间复杂度 O(n+m) - 空间复杂度 O(1)
     public void mergeDoublePoint2(int[] nums1, int m, int[] nums2, int n) {
-        int p1 = m - 1;    // 指向nums1
-        int p2 = n - 1;    // 指向nums2
-        int p = m + n - 1;    // 指向nums1
+        int idx1 = m - 1;    // 指向nums1
+        int idx2 = n - 1;    // 指向nums2
+        int idx = m + n - 1;    // 指向nums1
 
-        while (p1 >= 0 && p2 >= 0) {
-            nums1[p--] = nums1[p1] < nums2[p2] ? nums2[p2--] : nums1[p1--];
+        while (idx1 >= 0 && idx2 >= 0) {
+            nums1[idx--] = nums1[idx1] < nums2[idx2] ? nums2[idx2--] : nums1[idx1--];
         }
 
-        System.arraycopy(nums2, 0, nums1, 0, p2 + 1);
+//        while (idx2 >= 0) {
+//            nums1[idx--] = nums2[idx2--];
+//        }
+        System.arraycopy(nums2, 0, nums1, 0, idx2 + 1);
     }
 
 }
