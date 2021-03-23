@@ -17,13 +17,15 @@ public class Lc_15_三数之和 {
 
     }
 
+    // 排序 + 双指针 - 时间复杂度 O(N^2) - 空间复杂度 O(logN) 为排序数组所使用的额外空间
     public List<List<Integer>> threeSum(int[] nums) {
-        if (nums.length < 3) return null;
+        int n = nums.length;
+        if (n < 3) return null;
 
         Arrays.sort(nums);
         List<List<Integer>> res = new ArrayList<>();
 
-        for (int k = 0; k < nums.length - 2; k++) {
+        for (int k = 0; k < n - 2; k++) {
             if (nums[k] > 0) break;
 
             if (k > 0 && nums[k] == nums[k - 1]) continue;
