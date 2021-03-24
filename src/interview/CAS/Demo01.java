@@ -3,12 +3,12 @@ package interview.CAS;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-public class Demo {
+public class Demo01 {
 
     // 总访问量
     static int count = 0;
 
-    // 模拟访问的方法
+    // 模拟访问的方法 - 不加锁
     public static void request() throws InterruptedException {
         // 模拟单次访问耗时5毫秒
         TimeUnit.MILLISECONDS.sleep(5);
