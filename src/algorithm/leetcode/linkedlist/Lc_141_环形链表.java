@@ -16,11 +16,11 @@ public class Lc_141_环形链表 {
         ListNode head = new ListNode(3);
         lc.linkedListInitialize(head);    // head = [3,2,0,-4], pos = 1
 
-        System.out.println("链表 " + lc.linkedListToString(head) + " 中" + (lc.hasCycle_Point(head) ? "存在" : "不存在") + "环.");
+        System.out.println("链表 " + lc.linkedListToString(head) + " 中" + (lc.hasCycleFloyd(head) ? "存在" : "不存在") + "环.");
     }
 
     // 哈希表 - 时间复杂度 O(N) - 空间复杂度 O(N)
-    public boolean hasCycle_Hash(ListNode head) {
+    public boolean hasCycleHash(ListNode head) {
         Set<ListNode> seen = new HashSet<>();
 
         while (head != null) {
@@ -33,8 +33,8 @@ public class Lc_141_环形链表 {
         return false;
     }
 
-    // Floyd - 时间复杂度 O(N) - 空间复杂度 O(1)
-    public boolean hasCycle_Point(ListNode head) {
+    // Floyd 判圈算法 - 时间复杂度 O(N) - 空间复杂度 O(1)
+    public boolean hasCycleFloyd(ListNode head) {
         ListNode slow = head, fast = head;
 
         do {

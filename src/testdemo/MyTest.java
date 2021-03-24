@@ -53,7 +53,8 @@ public class MyTest {
 
     @Test
     public void test4() {
-
+        int a = 12;
+        System.out.println(Integer.highestOneBit(a));
     }
 
 }
