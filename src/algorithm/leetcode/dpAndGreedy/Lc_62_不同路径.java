@@ -15,25 +15,14 @@ public class Lc_62_不同路径 {
     }
 
     // DFS - 时间复杂度 O() - 空间复杂度 O()
+    private final int[][] directions = {{1, 0}, {0, 1}};
+    private int[][] memo;
     public int uniquePathsDfs(int m, int n) {
-        int[][] memo = new int[m][n];
-
-        return dfs(m, n, 0, 0, memo);
+        this.memo = new int[m][n];
+        return dfs(m, n, 0, 0);
     }
 
-    private int[][] directions = {{1, 0}, {0, 1}};
-
-    /**
-     * dfs algorithm
-     *
-     * @param m    网格纵深
-     * @param n    网格横深
-     * @param x    当前纵坐标
-     * @param y    当前横坐标
-     * @param memo 记忆化数组
-     * @return 路径数
-     */
-    private int dfs(int m, int n, int x, int y, int[][] memo) {
+    private int dfs(int m, int n, int x, int y) {
         // boundary
         if (x >= m || y >= n) return 0;
 
@@ -41,14 +30,12 @@ public class Lc_62_不同路径 {
         if (x == m - 1 && y == n - 1) return 1;
 
         int sum = 0;
-        for (int[] direction : directions) {
-            int x1 = x + direction[0];
-            int y1 = y + direction[1];
-            sum += dfs(m, n, x1, y1, memo);
+        for (int[] dir : directions) {
+            int x1 = x + dir[0], y1 = y + dir[1];
+            sum += dfs(m, n, x1, y1);
         }
 
         memo[x][y] = sum;
-
         return sum;
     }
 

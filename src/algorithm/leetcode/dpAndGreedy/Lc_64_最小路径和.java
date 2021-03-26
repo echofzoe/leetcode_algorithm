@@ -16,9 +16,9 @@ public class Lc_64_最小路径和 {
 
     // DP - 时间复杂度 O(N) - 空间复杂度 O(1)
     public int minPathSum(int[][] grid) {
-        int m = grid.length;
-        if (m == 0) return 0;
-        int n = grid[0].length;
+        if (grid == null || grid.length == 0 || grid[0].length == 0) return 0;
+
+        int m = grid.length, n = grid[0].length;
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
