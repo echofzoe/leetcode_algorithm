@@ -16,6 +16,7 @@ public class Lc_83_删除排序链表中的重复元素 {
         System.out.println("去除" + ListNodeSerialize.serialize(head) + "中所有重复的元素，使得每个元素只出现一次的结果是" + ListNodeSerialize.serialize(lc.deleteDuplicates(head)));
     }
 
+    // 模拟 - 时间复杂度 O(N) - 空间复杂度 O(1)
     public ListNode deleteDuplicates(ListNode head) {
         if (head == null) return head;
 
