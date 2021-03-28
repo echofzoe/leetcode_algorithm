@@ -17,7 +17,7 @@ public class Jzo_18_删除链表的节点 {
         System.out.println("链表 " + ListNodeSerialize.serialize(head) + " 删除了节点 " + val + " 后的结果为 " + ListNodeSerialize.serialize(lc.deleteNode(head, val)));
     }
 
-    // 时间复杂度 O(N) - 空间复杂度 O(1)
+    // 模拟 - 时间复杂度 O(N) - 空间复杂度 O(1)
     public ListNode deleteNode(ListNode head, int val) {
         if (head == null) return null;
 
