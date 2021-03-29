@@ -6,10 +6,10 @@ public class Lc_190_颠倒二进制位 {
     // https://leetcode-cn.com/problems/reverse-bits/
 
     public static void main(String[] args) {
-        Lc_190_颠倒二进制位 lt = new Lc_190_颠倒二进制位();
-        int input1 = 43261596;
-        int output1 = lt.reverseBits(input1);
-        System.out.println(output1);
+        Lc_190_颠倒二进制位 lc = new Lc_190_颠倒二进制位();
+        int input = 43261596;
+
+        System.out.println("将数字" + input + "的二进制位颠倒后得到的结果是" + lc.reverseBits_special(input));
     }
 
     public int reverseBits_special(int n) {
@@ -28,7 +28,7 @@ public class Lc_190_颠倒二进制位 {
         return res;
     }
 
-    public int reverseBits(int n) {
+    public int reverseBits1(int n) {
         StringBuffer numArray = new StringBuffer();
         // 转成二进制字符串，此时已经逆转
         while ((n / 2) != 0) {
@@ -57,7 +57,7 @@ public class Lc_190_颠倒二进制位 {
 
         if (binNum.length() != 0) {
             for (int i = binNum.length() - 1; i >= 0; i--) {
-                decimal += Integer.valueOf(String.valueOf(binNum.charAt(i))) * Math.pow(2, p);
+                decimal += Integer.parseInt(String.valueOf(binNum.charAt(i))) * Math.pow(2, p);
                 p++;
             }
         }
