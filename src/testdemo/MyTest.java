@@ -53,7 +53,7 @@ public class MyTest {
 
     @Test
     public void test4() {
-        System.out.println(Integer.toBinaryString(~(1 << 31)));
+//        System.out.println(Integer.toBinaryString((-1 << 11)));
     }
 
 }
