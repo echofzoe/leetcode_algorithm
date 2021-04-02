@@ -44,20 +44,27 @@ public class Lc_42_接雨水 {
     public int trapStack(int[] height) {
         if (height == null || height.length == 0) return 0;
 
-        int res = 0, n = height.length, cur = 0;
+        int n = height.length;
+
         Deque<Integer> stack = new LinkedList<>();
+        int res = 0, idx = 0;
 
-        while (cur < n) {
-            while (!stack.isEmpty() && height[cur] > height[stack.peek()]) {
-                int top = stack.pollFirst();
+        while (idx < n) {
+            while (!stack.isEmpty() && height[idx] > height[stack.peekLast()]) {
+                int low = stack.pollLast();  // idx 左边最矮的柱子
 
-                if (stack.isEmpty()) break;
+                if (stack.isEmpty()) continue;  // 如果栈内没有元素，说明当前位置左边没有比low高的柱子
 
-                int dist = cur - stack.peek() - 1;
-                int boundedHeight = Math.min(height[cur], height[stack.peek()]) - height[top];
-                res += dist * boundedHeight;
+                int top = stack.peekLast();  // idx 左边比其low高的柱子
+
+                int w = idx - top + 1 - 2;  // 宽
+
+                int h = Math.min(height[top], height[idx]) - height[low];
+
+                res += w * h;
             }
-            stack.offerFirst(cur++);
+
+            stack.offerLast(idx++);
         }
 
         return res;
