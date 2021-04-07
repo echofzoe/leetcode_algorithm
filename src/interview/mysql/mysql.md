@@ -88,7 +88,7 @@
 
   - 索引结构：
 
-    ![innodb聚簇索引结构](.\static\innodb聚簇索引结构.png)
+    ![innodb聚簇索引结构](..\assets\statics\innodb聚簇索引结构.png)
 
 - 非聚集索引（`MyIsam`默认使用）：
 
@@ -96,7 +96,7 @@
 
   - 索引结构：
 
-    ![myisam非聚簇索引结构](.\static\myisam非聚簇索引结构.png)
+    ![myisam非聚簇索引结构](..\assets\statics\myisam非聚簇索引结构.png)
 
 - 覆盖索引：`select`的数据列只用从索引中就能够获得，不必读取数据行。换句话说，查询列要被所建的索引覆盖
 
