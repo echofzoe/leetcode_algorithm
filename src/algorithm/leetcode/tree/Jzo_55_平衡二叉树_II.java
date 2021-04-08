@@ -2,13 +2,13 @@ package algorithm.leetcode.tree;
 
 import algorithm.leetcode.utils.TreeNode;
 
-public class Jzo_55_II_平衡二叉树 {
+public class Jzo_55_平衡二叉树_II {
 
     // 平衡二叉树
     // https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/
 
     public static void main(String[] args) {
-        Jzo_55_II_平衡二叉树 lc = new Jzo_55_II_平衡二叉树();
+        Jzo_55_平衡二叉树_II lc = new Jzo_55_平衡二叉树_II();
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);    // [3,9,20,null,null,15,7,null,null,null,null,1]
 

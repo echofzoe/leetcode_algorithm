@@ -8,13 +8,13 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Jzo_32_I_从上到下打印二叉树 {
+public class Jzo_32_从上到下打印二叉树_I {
 
     // 从上到下打印二叉树
     // https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/
 
     public static void main(String[] args) {
-        Jzo_32_I_从上到下打印二叉树 lc = new Jzo_32_I_从上到下打印二叉树();
+        Jzo_32_从上到下打印二叉树_I lc = new Jzo_32_从上到下打印二叉树_I();
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);
 

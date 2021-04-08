@@ -5,13 +5,13 @@ import algorithm.leetcode.utils.TreeNode;
 
 import java.util.*;
 
-public class Jzo_32_III_从上到下打印二叉树 {
+public class Jzo_32_从上到下打印二叉树_II {
 
     // 从上到下打印二叉树
-    // https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/
+    // https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/
 
     public static void main(String[] args) {
-        Jzo_32_III_从上到下打印二叉树 lc = new Jzo_32_III_从上到下打印二叉树();
+        Jzo_32_从上到下打印二叉树_II lc = new Jzo_32_从上到下打印二叉树_II();
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);
 
@@ -26,7 +26,6 @@ public class Jzo_32_III_从上到下打印二叉树 {
         Queue<TreeNode> queue = new LinkedList<>() {{
             add(root);
         }};
-        boolean flag = false;    // false = 从左往右打印; true = 从右往左打印
 
         while (!queue.isEmpty()) {
             int size = queue.size();
@@ -34,12 +33,7 @@ public class Jzo_32_III_从上到下打印二叉树 {
 
             while (size > 0) {
                 TreeNode curr = queue.poll();
-
-                if (flag) {
-                    list.add(0, curr.val);
-                } else {
-                    list.add(curr.val);
-                }
+                list.add(curr.val);
 
                 if (curr.left != null) queue.offer(curr.left);
                 if (curr.right != null) queue.offer(curr.right);
@@ -47,7 +41,6 @@ public class Jzo_32_III_从上到下打印二叉树 {
                 size--;
             }
 
-            flag = !flag;
             res.add(list);
         }
 

@@ -2,21 +2,18 @@ package algorithm.leetcode.tree;
 
 import algorithm.leetcode.utils.BinaryTreeSerialize;
 import algorithm.leetcode.utils.Node;
-import algorithm.leetcode.utils.TreeConstruction;
 import algorithm.leetcode.utils.TreeConstructionAdapter;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
-public class Lc_117_II_填充每个节点的下一个右侧节点指针 extends TreeConstructionAdapter {
+public class Lc_117_填充每个节点的下一个右侧节点指针_II extends TreeConstructionAdapter {
 
     // 填充每个节点的下一个右侧节点指针 II
     // https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node-ii/
 
     public static void main(String[] args) {
-        Lc_117_II_填充每个节点的下一个右侧节点指针 lc = new Lc_117_II_填充每个节点的下一个右侧节点指针();
+        Lc_117_填充每个节点的下一个右侧节点指针_II lc = new Lc_117_填充每个节点的下一个右侧节点指针_II();
         Node root = new Node(0);
         lc.treeConstruct(root);
 

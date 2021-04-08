@@ -2,13 +2,13 @@ package algorithm.leetcode.tree;
 
 import algorithm.leetcode.utils.TreeNode;
 
-public class Jzo_68_I_二叉树的最近公共祖先 {
+public class Jzo_68_二叉树的最近公共祖先_I {
 
     // 二叉树的最近公共祖先
     // https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof/
 
     public static void main(String[] args) {
-        Jzo_68_I_二叉树的最近公共祖先 lc = new Jzo_68_I_二叉树的最近公共祖先();
+        Jzo_68_二叉树的最近公共祖先_I lc = new Jzo_68_二叉树的最近公共祖先_I();
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);    // root = [6,2,8,0,4,7,9,null,null,3,5]
 

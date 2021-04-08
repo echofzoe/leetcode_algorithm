@@ -4,13 +4,13 @@ import algorithm.leetcode.utils.TreeNode;
 
 import java.util.*;
 
-public class Jzo_55_I_二叉树的深度 {
+public class Jzo_55_二叉树的深度_I {
 
     // 二叉树的深度
     // https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/
 
     public static void main(String[] args) {
-        Jzo_55_I_二叉树的深度 lc = new Jzo_55_I_二叉树的深度();
+        Jzo_55_二叉树的深度_I lc = new Jzo_55_二叉树的深度_I();
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);
 
