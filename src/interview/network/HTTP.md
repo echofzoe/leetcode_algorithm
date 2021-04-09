@@ -158,16 +158,16 @@
     Set-Cookie: tasty_cookie=strawberry
     
     [page content]
-  ```
-  
-- 客户端之后对同一个服务器发送请求时，会从浏览器中取出`Cookie`信息，并使请求首部字段携带上`Cookie`，再发送给服务器
-  
-    ```http
-    // 请求字段
-    GET /sample_page.html HTTP/1.1
-    Host: www.example.org
-    Cookie: yummy_cookie=choco; tasty_cookie=strawberry
     ```
+    
+  - 客户端之后对同一个服务器发送请求时，会从浏览器中取出`Cookie`信息，并使请求首部字段携带上`Cookie`，再发送给服务器
+    
+      ```http
+      // 请求字段
+      GET /sample_page.html HTTP/1.1
+      Host: www.example.org
+      Cookie: yummy_cookie=choco; tasty_cookie=strawberry
+      ```
 
 #### - Session
 
@@ -241,5 +241,4 @@
   - 在使用` XMLHttpRequest`的`POST`方法时，浏览器会先发送`Header`再发送`Data`。但并不是所有浏览器会这么做，例如火狐就不会
   - 在使用` XMLHttpRequest`的`GET`方法时，`Header`和`Data`会一起发送
 
-- 
 
