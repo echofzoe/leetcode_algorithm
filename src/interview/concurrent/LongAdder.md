@@ -1,6 +1,4 @@
-## ConcurrentHashMap
-
-### LongAdder
+## LongAdder
 
 - 统计器类，是用作在***高并发情况下实现高性能统计***的类
 
@@ -345,5 +343,4 @@
   }
   ```
 
-- 啊
 
