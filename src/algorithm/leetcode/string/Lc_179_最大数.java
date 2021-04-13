@@ -1,9 +1,6 @@
 package algorithm.leetcode.string;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 最大数
@@ -25,13 +22,22 @@ public class Lc_179_最大数 {
     public String largestNumber(int[] nums) {
         int n = nums.length;
 
-        Map<String, Integer> cnt = new HashMap<>();
+        String[] ss = new String[n];
+        for (int i = 0; i < n; i++) ss[i] = "" + nums[i];
 
-        int t = 0;
-        for (int i : nums) cnt.put(String.valueOf(i), cnt.getOrDefault(i, 0) + 1);
+        Arrays.sort(ss, (a, b) -> {
+            String sa = a + b, sb = b + a;
+            return sb.compareTo(sa);
+        });
 
-        
+        StringBuilder sb = new StringBuilder();
+        for (String s : ss) sb.append(s);
 
+        // 去除前导0
+        int k = 0;
+        while (k < n - 1 && sb.charAt(k) == '0') k++;
+
+        return sb.substring(k);
     }
 
 }
