@@ -1,4 +1,4 @@
-package interview.RBTree;
+package interview.rbtree;
 
 import java.util.Scanner;
 

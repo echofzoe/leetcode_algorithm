@@ -1,4 +1,4 @@
-package interview.RBTree;
+package interview.rbtree;
 
 public class TreeOperation {
      /*
