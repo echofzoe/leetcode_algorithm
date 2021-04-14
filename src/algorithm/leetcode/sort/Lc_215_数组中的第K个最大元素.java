@@ -63,17 +63,19 @@ public class Lc_215_数组中的第K个最大元素 {
         return nums[k2];
     }
 
-    private int quicklySort2(int[] nums, int left, int right) {
-        int i = left, j = right + 1, pivot = nums[left];
+    private int quicklySort2(int[] nums, int lo, int hi) {
+        int i = lo, j = hi + 1, pivot = nums[lo];
 
         while (true) {
-            while (i < right && nums[++i] <= pivot) ;
-            while (j > left && nums[--j] >= pivot) ;
+            while (i < hi && nums[++i] <= pivot) ;
+            while (j > lo && nums[--j] >= pivot) ;
+
             if (i >= j) break;
+
             NumsUtils.swap(nums, i, j);
         }
 
-        NumsUtils.swap(nums, left, j);
+        NumsUtils.swap(nums, lo, j);
 
         return j;
     }
@@ -114,15 +116,15 @@ public class Lc_215_数组中的第K个最大元素 {
         }
     }
 
-    private void maxHeapify(int[] nums, int i, int heapSize) {
-        int left = i * 2 + 1, right = i * 2 + 2, largest = i;
+    private void maxHeapify(int[] nums, int start, int heapSize) {
+        int lo = start * 2 + 1, hi = start * 2 + 2, largest = start;
 
-        if (left < heapSize && nums[left] > nums[largest]) largest = left;
+        if (lo < heapSize && nums[lo] > nums[largest]) largest = lo;
 
-        if (right < heapSize && nums[right] > nums[largest]) largest = right;
+        if (hi < heapSize && nums[hi] > nums[largest]) largest = hi;
 
-        if (largest != i) {
-            NumsUtils.swap(nums, i, largest);
+        if (largest != start) {
+            NumsUtils.swap(nums, start, largest);
             maxHeapify(nums, largest, heapSize);
         }
     }
