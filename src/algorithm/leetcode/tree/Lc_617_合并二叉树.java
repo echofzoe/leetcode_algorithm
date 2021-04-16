@@ -17,7 +17,7 @@ public class Lc_617_合并二叉树 {
         TreeNode root2 = new TreeNode(0);
         lc.treeInitialize2(root2);
 
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root1, 3) + " 和 " + BinaryTreeSerialize.serialize(root2, 3) + " 合并后的二叉树为 " + BinaryTreeSerialize.serialize(lc.mergeTrees_Iteration(root1, root2), 3));
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root1) + " 和 " + BinaryTreeSerialize.serialize(root2) + " 合并后的二叉树为 " + BinaryTreeSerialize.serialize(lc.mergeTrees_Iteration(root1, root2)));
     }
 
     // 递归 - 时间复杂度 O(N) - 空间复杂度 O(N)

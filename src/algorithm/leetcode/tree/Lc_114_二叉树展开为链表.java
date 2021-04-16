@@ -18,7 +18,7 @@ public class Lc_114_二叉树展开为链表 {
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);    // [1,2,5,3,4,null,6]
 
-        System.out.println("二叉树" + BinaryTreeSerialize.serialize(root, 3) + "平展后的结果为");
+        System.out.println("二叉树" + BinaryTreeSerialize.serialize(root) + "平展后的结果为");
         lc.flattenIteration(root);
         System.out.println(BinaryTreeSerialize.serialize(root));
     }

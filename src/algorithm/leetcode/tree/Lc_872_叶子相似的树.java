@@ -31,7 +31,7 @@ public class Lc_872_叶子相似的树 {
         root2.right.right = new TreeNode(4);
         root2.right.right.right = new TreeNode(1);
 
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root1, 4) + " 和 " + BinaryTreeSerialize.serialize(root2, 4) + (lc.leafSimilar(root1, root2) ? " 是 " : " 不是 ") + "叶相似的");
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root1) + " 和 " + BinaryTreeSerialize.serialize(root2) + (lc.leafSimilar(root1, root2) ? " 是 " : " 不是 ") + "叶相似的");
     }
 
     public boolean leafSimilar(TreeNode root1, TreeNode root2) {

@@ -18,7 +18,7 @@ public class Jzo_34_二叉树中和为某一值的路径 {
         lc.treeInitialize(root);
         int sum = 22;
 
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 4) + " 中和为 " + sum + " 的路径有 " + Arrays.toString(lc.pathSum(root, sum).toArray()));
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root) + " 中和为 " + sum + " 的路径有 " + Arrays.toString(lc.pathSum(root, sum).toArray()));
     }
 
     List<List<Integer>> res = new LinkedList<>();    // 结果

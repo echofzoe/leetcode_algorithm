@@ -13,7 +13,7 @@ public class Lc_222_完全二叉树的节点个数 {
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);    // [1,2,3,4,5,6,null]
 
-        System.out.println("完全二叉树" + BinaryTreeSerialize.serialize(root,3) + "的节点个数为" + lc.countNodes(root));
+        System.out.println("完全二叉树" + BinaryTreeSerialize.serialize(root) + "的节点个数为" + lc.countNodes(root));
     }
 
     // 递归 - 时间复杂度 O(N) - 空间复杂度 O(N)

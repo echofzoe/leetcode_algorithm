@@ -17,7 +17,7 @@ public class Lc_144_二叉树的前序遍历 {
         TreeNode root = new TreeNode(1);
         lc.treeInitialize(root);    // [1,null,2,3]
 
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 3) + " 的前序遍历序列是 " + lc.preorderTraversalIteration(root).toString());
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root) + " 的前序遍历序列是 " + lc.preorderTraversalIteration(root).toString());
     }
 
     List<Integer> res = new LinkedList<>();

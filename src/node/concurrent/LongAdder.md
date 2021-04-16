@@ -10,7 +10,7 @@
 
 - 流程：
 
-  ![LongAdder](.\static\LongAdder.jpg)
+  ![LongAdder](..\assets\statics\LongAdder.jpg)
 
 - `LongAdder`并不含有`base,cell`等字段，它们是从`Striped64`继承来的
 

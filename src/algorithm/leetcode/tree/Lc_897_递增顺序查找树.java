@@ -16,7 +16,7 @@ public class Lc_897_递增顺序查找树 {
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);
 
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 4) + " 的递增顺序查找树为 " + BinaryTreeSerialize.serialize(lc.increasingBST2(root), 9));
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root) + " 的递增顺序查找树为 " + BinaryTreeSerialize.serialize(lc.increasingBST2(root)));
     }
 
     TreeNode cur;

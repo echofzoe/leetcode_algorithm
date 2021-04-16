@@ -14,7 +14,7 @@ public class Lc_1373_二叉搜索子树的最大键值和 {
         // [4,3,null,1,2]
         lc.treeInitialize(root);
 
-        System.out.println("树" + BinaryTreeSerialize.serialize(root, 3) + "中，二叉搜索子树的最大键值和是" + lc.maxSumBST(root));
+        System.out.println("树" + BinaryTreeSerialize.serialize(root) + "中，二叉搜索子树的最大键值和是" + lc.maxSumBST(root));
     }
 
     int maxSum = 0;

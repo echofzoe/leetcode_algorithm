@@ -17,7 +17,7 @@ public class Lc_572_另一个树的子树 {
         target.left = new TreeNode(1);
         target.right = new TreeNode(2);
 
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(target, 2) + (lc.isSubtree(root, target) ? " 是 " : " 不是 ") + BinaryTreeSerialize.serialize(root, 4) + " 的一颗子树");
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(target) + (lc.isSubtree(root, target) ? " 是 " : " 不是 ") + BinaryTreeSerialize.serialize(root) + " 的一颗子树");
     }
 
     public boolean isSubtree(TreeNode s, TreeNode t) {

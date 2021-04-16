@@ -17,7 +17,7 @@ public class Lc_129_求根到叶子节点数字之和 {
         lc.treeInitialize(root);    // [4,9,0,5,1]
 
         long l1 = System.currentTimeMillis();
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 3) + " 中，从根到叶子节点路径 1->2->3 代表数字 123，则根到叶子结点的数字之和为 " + lc.sumNumbers_BFS(root));
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root) + " 中，从根到叶子节点路径 1->2->3 代表数字 123，则根到叶子结点的数字之和为 " + lc.sumNumbers_BFS(root));
         long l2 = System.currentTimeMillis();
         System.out.println(l2 - l1);
     }

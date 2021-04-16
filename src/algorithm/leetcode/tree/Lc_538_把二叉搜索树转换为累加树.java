@@ -16,7 +16,7 @@ public class Lc_538_把二叉搜索树转换为累加树 {
         root.left = new TreeNode(2);
         root.right = new TreeNode(13);
 
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 2) + " 的累加树为 " + BinaryTreeSerialize.serialize(lc.convertBST(root), 2));
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root) + " 的累加树为 " + BinaryTreeSerialize.serialize(lc.convertBST(root)));
     }
 
     int sum = 0;

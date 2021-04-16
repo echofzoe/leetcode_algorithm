@@ -15,7 +15,7 @@ public class Jzo_27_二叉树的镜像 {
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);    // [4,2,7,1,3,6,9]
 
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 3) + " 的镜像二叉树是：" + BinaryTreeSerialize.serialize(lc.mirrorTreeRecursive(root), 3));
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root) + " 的镜像二叉树是：" + BinaryTreeSerialize.serialize(lc.mirrorTreeRecursive(root)));
     }
 
     // 辅助栈 - 时间复杂度 O(N) - 空间复杂度 O(N) 最差情况下,stack需要承受满二叉树的最多N/2个节点

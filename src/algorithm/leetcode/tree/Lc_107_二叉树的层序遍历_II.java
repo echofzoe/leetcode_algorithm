@@ -19,7 +19,7 @@ public class Lc_107_二叉树的层序遍历_II {
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);
 
-        System.out.println("二叉树" + BinaryTreeSerialize.serialize(root, 3) + "的自底向上的层序遍历的结果是" + lc.levelOrderBottom1(root));
+        System.out.println("二叉树" + BinaryTreeSerialize.serialize(root) + "的自底向上的层序遍历的结果是" + lc.levelOrderBottom1(root));
     }
 
     // BFS - 时间复杂度 O(N) - 空间复杂度 O(N)

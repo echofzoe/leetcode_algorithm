@@ -18,7 +18,7 @@ public class Lc_117_填充每个节点的下一个右侧节点指针_II extends 
         lc.treeConstruct(root);
 
         lc.connectSpaceComplexityOptimization(root);
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 3) + " 经过填充 next 节点后的结果为 " + BinaryTreeSerialize.nextNodeSerialize(root, 3));
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root) + " 经过填充 next 节点后的结果为 " + BinaryTreeSerialize.nextNodeSerialize(root));
     }
 
     // 时间复杂度 - O(N) - 空间复杂度 - O(N)

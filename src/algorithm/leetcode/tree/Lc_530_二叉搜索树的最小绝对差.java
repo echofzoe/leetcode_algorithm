@@ -17,7 +17,7 @@ public class Lc_530_二叉搜索树的最小绝对差 {
         root.right = new TreeNode(3);
         root.right.left = new TreeNode(2);
 
-        System.out.println("二叉搜索树 " + BinaryTreeSerialize.serialize(root, 3) + " 的最小绝对差是 " + lc.getMinimumDifference(root));
+        System.out.println("二叉搜索树 " + BinaryTreeSerialize.serialize(root) + " 的最小绝对差是 " + lc.getMinimumDifference(root));
     }
 
     public int getMinimumDifference(TreeNode root) {

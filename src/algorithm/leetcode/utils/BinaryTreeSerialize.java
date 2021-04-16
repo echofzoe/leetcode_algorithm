@@ -1,6 +1,8 @@
 package algorithm.leetcode.utils;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class BinaryTreeSerialize {
@@ -8,155 +10,86 @@ public class BinaryTreeSerialize {
     /**
      * 针对 TreeNode 节点
      */
-
     public static String serialize(TreeNode root) {
-        if (root == null) return "[]";
+        List<Integer> res = new ArrayList<>();
 
-        StringBuffer buf = new StringBuffer("[");
         Queue<TreeNode> queue = new LinkedList<>() {{
             offer(root);
         }};
 
         while (!queue.isEmpty()) {
-            TreeNode curr = queue.poll();
-
-            if (curr != null) {
-                buf.append(curr.val).append(",");
-                queue.offer(curr.left);
-                queue.offer(curr.right);
-            } else {
-                buf.append("null,");
-            }
-        }
-
-        return buf.deleteCharAt(buf.length() - 1).append(']').toString();
-    }
-
-    public static String serialize(TreeNode root, int levels) {
-        if (root == null) return "[]";
-
-        StringBuffer buf = new StringBuffer("[");
-        Queue<TreeNode> queue = new LinkedList<>() {{
-            offer(root);
-        }};
-
-        while (!queue.isEmpty() && levels > 0) {
             int size = queue.size();
 
             while (size > 0) {
-                TreeNode curr = queue.poll();
+                TreeNode cur = queue.poll();
 
-                if (curr != null) {
-                    buf.append(curr.val).append(",");
-                    queue.offer(curr.left);
-                    queue.offer(curr.right);
+                if (cur != null) {
+                    res.add(cur.val);
+                    queue.offer(cur.left);
+                    queue.offer(cur.right);
                 } else {
-                    buf.append("null,");
+                    res.add(null);
                 }
 
                 size--;
             }
-
-            levels--;
         }
 
-        return buf.deleteCharAt(buf.length() - 1).append(']').toString();
+        while (res.get(res.size() - 1) == null) res.remove(res.size() - 1);
+
+        return res.toString();
     }
-
-
 
     /**
      * 针对 Node 节点
      */
-
     public static String serialize(Node root) {
-        if (root == null) return "[]";
+        List<Integer> res = new ArrayList<>();
 
-        StringBuffer buf = new StringBuffer("[");
         Queue<Node> queue = new LinkedList<>() {{
             offer(root);
         }};
 
         while (!queue.isEmpty()) {
-            Node curr = queue.poll();
+            Node cur = queue.poll();
 
-            if (curr != null) {
-                buf.append(curr.val).append(",");
-                queue.offer(curr.left);
-                queue.offer(curr.right);
+            if (cur != null) {
+                res.add(cur.val);
+                queue.offer(cur.left);
+                queue.offer(cur.right);
             } else {
-                buf.append("null,");
+                res.add(null);
             }
         }
 
-        return buf.deleteCharAt(buf.length() - 1).append(']').toString();
+        while (res.get(res.size() - 1) == null) res.remove(res.size() - 1);
+
+        return res.toString();
     }
 
-    public static String serialize(Node root, int levels) {
-        if (root == null) return "[]";
+    public static String nextNodeSerialize(Node root) {
+        List<String> res = new ArrayList<>();
 
-        StringBuffer buf = new StringBuffer("[");
         Queue<Node> queue = new LinkedList<>() {{
             offer(root);
         }};
 
-        while (!queue.isEmpty() && levels > 0) {
+        while (!queue.isEmpty()) {
             int size = queue.size();
 
             while (size > 0) {
-                Node curr = queue.poll();
+                Node cur = queue.poll();
+                if (cur.left != null) queue.offer(cur.left);
+                if (cur.right != null) queue.offer(cur.right);
 
-                if (curr != null) {
-                    buf.append(curr.val).append(",");
-                    queue.offer(curr.left);
-                    queue.offer(curr.right);
-                } else {
-                    buf.append("null,");
-                }
+                res.add(String.valueOf(cur.val));
+                if (cur.next == null) res.add("#");
 
                 size--;
             }
-
-            levels--;
         }
 
-        return buf.deleteCharAt(buf.length() - 1).append(']').toString();
-    }
-
-
-    /*
-     * 其他
-     */
-
-    public static String nextNodeSerialize(Node root, int levels) {
-        if (root == null) return "[]";
-
-        StringBuffer buf = new StringBuffer("[");
-        Queue<Node> queue = new LinkedList<>() {{
-            offer(root);
-        }};
-
-        while (!queue.isEmpty() && levels > 0) {
-            int size = queue.size();
-
-            while (size > 0) {
-                Node curr = queue.poll();
-                if (curr.left != null) queue.offer(curr.left);
-                if (curr.right != null) queue.offer(curr.right);
-
-                if (curr.next == null) {
-                    buf.append(curr.val).append(",#,");
-                } else {
-                    buf.append(curr.val).append(",");
-                }
-
-                size--;
-            }
-
-            levels--;
-        }
-
-        return buf.deleteCharAt(buf.length() - 1).append(']').toString();
+        return res.toString();
     }
 
 }

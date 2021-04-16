@@ -20,7 +20,9 @@ public class Lc_198_打家劫舍 {
 
     // DP - 时间复杂度 O(N) - 空间复杂度 O(N) 可优化为O(1)
     // - dp[i]表示偷窃到第i间房子时所能得到的最高偷窃金额
-    // - 状态转移方程: dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1])
+    // - 状态转移方程: {
+    //   dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1])
+    // }
     public int robDp(int[] nums) {
         int n = nums.length;
         if (n == 0) return 0;

@@ -19,7 +19,7 @@ public class Jzo_33_二叉搜索树的后序遍历序列 {
         int[] postorder1 = new int[] {1,6,3,2,5};
         int[] postorder2 = new int[] {1,3,2,6,5};
 
-        System.out.print("整数数组" + Arrays.toString(postorder2) + (lc.verifyPostorder_Recursion(postorder2) ? "是" : "不是") + "二叉搜索树" + BinaryTreeSerialize.serialize(root, 3) + "的后序遍历结果");
+        System.out.print("整数数组" + Arrays.toString(postorder2) + (lc.verifyPostorder_Recursion(postorder2) ? "是" : "不是") + "二叉搜索树" + BinaryTreeSerialize.serialize(root) + "的后序遍历结果");
     }
 
     public boolean verifyPostorder_Recursion(int[] postorder) {

@@ -15,7 +15,7 @@ public class Lc_814_二叉树剪枝 {
         TreeNode root = new TreeNode(0);
         lc.treeInitialize(root);
         
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root, 3) + " 按题目要求剪枝后的结果树为 " + BinaryTreeSerialize.serialize(lc.pruneTree(root), 3));
+        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root) + " 按题目要求剪枝后的结果树为 " + BinaryTreeSerialize.serialize(lc.pruneTree(root)));
     }
 
     public TreeNode pruneTree(TreeNode root) {
