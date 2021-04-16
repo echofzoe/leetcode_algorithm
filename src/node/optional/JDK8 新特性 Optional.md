@@ -11,45 +11,49 @@
 
 ### 方法
 
-- 创建`Optional`：
+#### 创建`Optional`
 
-  - `of`方法：创建一个不允许空值的`Optional`对象。如果构造参数为空，立即抛出异常，而不是等到访问这个空值的属性时才返回一个错误
+- `of`方法：创建一个不允许空值的`Optional`对象。如果构造参数为空，立即抛出异常，而不是等到访问这个空值的属性时才返回一个错误
 
-    ```java
-    public static <T> Optional<T> of(T value) {
-        return new Optional<>(value);
-    }
-    
-    private Optional(T value) {
-        this.value = Objects.requireNonNull(value);
-    }
-    
-    // requireNonNull 为 Object 类的方法
-    public static <T> T requireNonNull(T obj) {
-        if (obj == null)
-            throw new NullPointerException();
-        return obj;
-    }
-    ```
+  ```java
+  public static <T> Optional<T> of(T value) {
+      return new Optional<>(value);
+  }
+  
+  private Optional(T value) {
+      this.value = Objects.requireNonNull(value);
+  }
+  
+  // requireNonNull 为 Object 类的方法
+  public static <T> T requireNonNull(T obj) {
+      if (obj == null)
+          throw new NullPointerException();
+      return obj;
+  }
+  ```
 
-  - `ofNullable`方法：创建一个允许空值的`Optional`对象
+- `ofNullable`方法：创建一个允许空值的`Optional`对象
 
-    ```java
-    public static <T> Optional<T> ofNullable(T value) {
-        return value == null ? empty() : of(value);
-    }
-    ```
+  ```java
+  public static <T> Optional<T> ofNullable(T value) {
+      return value == null ? empty() : of(value);
+  }
+  ```
 
-  - `empty`方法：创建一个空的`Optional`对象
+- `empty`方法：创建一个空的`Optional`对象
 
-    ```java
-    public static<T> Optional<T> empty() {
-        @SuppressWarnings("unchecked")
-        Optional<T> t = (Optional<T>) EMPTY;
-        return t;
-    }
-    
-    private static final Optional<?> EMPTY = new Optional<>();
-    ```
+  ```java
+  public static<T> Optional<T> empty() {
+      @SuppressWarnings("unchecked")
+      Optional<T> t = (Optional<T>) EMPTY;
+      return t;
+  }
+  
+  private static final Optional<?> EMPTY = new Optional<>();
+  ```
 
-- 啊
+#### 常用方法
+
+- `get()`：最简单但也最不安全的方法。如果变量存在，直接返回封装的变量值，否则抛出`NoSuchElementException`异常
+- https://www.bilibili.com/video/BV1EJ411c7hd?from=search&seid=15703425006213898588
+- min = 24
