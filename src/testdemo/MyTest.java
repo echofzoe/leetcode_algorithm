@@ -56,6 +56,38 @@ public class MyTest {
     @Test
     public void test4() {
 //        System.out.println(Integer.toBinaryString((-1 << 11)));
+        int[][] tasks = {{1, 2}, {2, 4}, {3, 2}, {4, 1}};
+        System.out.println(Arrays.toString(getOrder(tasks)));
+    }
+
+    public int[] getOrder(int[][] tasks) {
+        int n = tasks.length;
+
+        Arrays.sort(tasks, (a, b) -> {
+            if (a[0] != b[0]) return a[0] - b[0];
+            else return a[1] - b[1];
+        });
+
+        int max = tasks[n - 1][0];
+        Deque<Integer> ready = new LinkedList<>();
+
+        int idx = 0;
+        for (int i = 1; i <= max; ) {
+            while (tasks[idx][0] == i) {
+                ready.add(idx);
+                idx++;
+
+                if (idx == n) break;
+            }
+            i++;
+        }
+
+        int[] res = new int[n];
+        for (int i = 0; i < ready.size(); i++) {
+            res[i] = ready.pollFirst();
+        }
+
+        return res;
     }
 
 }
