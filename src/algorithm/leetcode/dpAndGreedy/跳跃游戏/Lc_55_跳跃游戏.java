@@ -20,14 +20,14 @@ public class Lc_55_跳跃游戏 {
     public boolean canJumpGreedy(int[] nums) {
         int n = nums.length;
 
-        int right = 0;    // 维护一个最远到达位置
+        int last = 0;  // 实时最远到达位置
 
         for (int i = 0; i < n; i++) {
-            if (i <= right) {
-                right = Math.max(right, i + nums[i]);
-            }
+            last = Math.max(last, i + nums[i]);
 
-            if (right >= n - 1) return true;
+            if (last >= n - 1) return true;
+
+            if (last == i) break;
         }
 
         return false;
