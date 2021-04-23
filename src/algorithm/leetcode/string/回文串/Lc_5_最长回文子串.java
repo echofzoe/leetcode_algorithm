@@ -49,6 +49,7 @@ public class Lc_5_最长回文子串 {
                     dp[lo][hi] = false;
                 }
 
+                // 更新最长回文子串
                 if (dp[lo][hi] && hi - lo + 1 > maxLen) {
                     begin = lo;
                     maxLen = hi - lo + 1;
