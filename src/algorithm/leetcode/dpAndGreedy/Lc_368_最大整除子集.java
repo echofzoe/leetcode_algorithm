@@ -21,7 +21,7 @@ public class Lc_368_最大整除子集 {
         System.out.println("无重复的正整数数组" + Arrays.toString(nums) + "中的最大整除子集是" + lc.largestDivisibleSubset(nums));  // [8,4,2,1]
     }
 
-    // DP - 时间复杂度 O() - 空间复杂度 O()
+    // DP - 时间复杂度 O(N^2) - 空间复杂度 O(N)
     // - dp[i] 表示在升序数组里以nums[i]结尾最大整除子集的长度
     // - 状态转移方程: {
     //   dp[i] = max(dp[i], dp[j] + 1), j in [0,i)

@@ -1,4 +1,4 @@
-package algorithm.leetcode.string;
+package algorithm.leetcode.string.kmp;
 
 /**
  * 实现 strStr()
@@ -13,7 +13,7 @@ public class Lc_28_实现strStr {
         Lc_28_实现strStr lc = new Lc_28_实现strStr();
         String haystack = "hello", needle = "ll";
 
-        System.out.println("在字符串\"" + haystack + "\"中, \"" + needle + "\"出现的第一个位置是" + lc.strStrSlidingWindow(haystack, needle));
+        System.out.println("在字符串\"" + haystack + "\"中, \"" + needle + "\"出现的第一个位置是" + lc.strStrSlidingWindowKMP(haystack, needle));
     }
 
     // 滑动窗口
@@ -34,6 +34,7 @@ public class Lc_28_实现strStr {
 
     // KMP - 时间复杂度 O(N + M) - 空间复杂度 O(M)
     public int strStrSlidingWindowKMP(String ss, String pp) {
+        if (pp == null || pp.length() == 0) return 0;
         int n = ss.length(), m = pp.length();
 
         // 增加哨兵
