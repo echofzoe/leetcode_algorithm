@@ -51,51 +51,14 @@ public class MyTest {
             a >>= 1;
         }
         System.out.println(Integer.toBinaryString(a));
+
+        // ------
+        System.out.println(Integer.toBinaryString((-1 << 11)));
     }
 
     @Test
     public void test4() {
-//        System.out.println(Integer.toBinaryString((-1 << 11)));
-//        int[] nums = {1, 2, 4};
-//        int k = 5;
-//        System.out.println(maxFrequency(nums, k));
+        
     }
-
-//    public int maxFrequency(int[] nums, int k) {
-//        int n = nums.length, res = 0;
-//        Arrays.sort(nums);
-//
-//        int[][] diff = new int[n][2];
-//        int[] cnt = new int[nums[n - 1] + 1];
-//        cnt[nums[0]]++;
-//        for (int i = 1; i < n; i++) {
-//            diff[i - 1][0] = i - 1;
-//            diff[i - 1][1] = nums[i] - nums[i - 1];
-//
-//            cnt[nums[i]]++;
-//        }
-//        Arrays.sort(diff, Comparator.comparingInt(a -> a[1]));
-//
-//        int idx = 1;
-//        while (k > 0) {
-//            while (k > 0) {
-//                int a = diff[idx][0], b = diff[idx][1];
-//                if (k < b) break;
-//
-//                cnt[nums[a]]--;
-//                cnt[nums[a] + 1]++;
-//
-//                if (idx > 1) {
-//                    diff[idx - 1][1] = nums[]
-//                }
-//
-//                k -= diff[idx++][1];
-//            }
-//
-//            idx = 1;
-//        }
-//
-//        return Arrays.stream(cnt).max().getAsInt();
-//    }
 
 }
