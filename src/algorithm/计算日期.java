@@ -1,15 +1,15 @@
-package algorithm.Date;
+package algorithm;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class calculateDate_计算日期 {
+public class 计算日期 {
 
     // 计算日期
     // - 给定一个天数 x,和当前的年curY,月curM,日curD,计算当前日期加上天数 x 后的日期
 
     public static void main(String[] args) {
-        calculateDate_计算日期 main = new calculateDate_计算日期();
+        计算日期 main = new 计算日期();
 
         System.out.println("2020.2.21 加上10天后的日期是 " + main.calculateDate(10, 2020, 2, 21));
         System.out.println("2017.7.20 加上5天后的日期是 " + main.calculateDate(5, 2017, 7, 20));

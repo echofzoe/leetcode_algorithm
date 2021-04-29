@@ -73,13 +73,10 @@ public class BluetoothUUID {
         String[] offset = {"0x2A19", "0x2902", "0x2A1C"};
 
         System.out.println(BluetoothUUID.getLowerCaseUUID(base, offset[0]));
-        System.out.println(BluetoothUUID.getUpperCaseUUID(base, offset[0]));
 
         System.out.println(BluetoothUUID.getLowerCaseUUID(base, offset[1]));
-        System.out.println(BluetoothUUID.getUpperCaseUUID(base, offset[1]));
 
         System.out.println(BluetoothUUID.getLowerCaseUUID(base, offset[2]));
-        System.out.println(BluetoothUUID.getUpperCaseUUID(base, offset[2]));
     }
 
 }
