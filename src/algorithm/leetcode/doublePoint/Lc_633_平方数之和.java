@@ -14,13 +14,11 @@ public class Lc_633_平方数之和 {
 
     // 二分查找 - 时间复杂度 O(根号C*logC) 其中枚举a的时间复杂度为O(根号C)，二分查找的时间复杂度为O(logC) - 空间复杂度 O(logC)
     public boolean judgeSquareSumBinarySearch(int c) {
-        long tmp = 0;
-        for (long a = 0; (tmp = a * a) <= c; a++) {
-            long b = c - tmp;
+        long t = 0;
+        for (long a = 0; (t = a * a) <= c; a++) {
+            long b = c - t;
 
-            if (binarySearch(0, b, b)) {
-                return true;
-            }
+            if (binarySearch(0, b, b)) return true;
         }
 
         return false;
@@ -39,7 +37,7 @@ public class Lc_633_平方数之和 {
         }
     }
 
-    // 双指针 - 时间复杂度 O() - 空间复杂度 O()
+    // 双指针 - 时间复杂度 O(根号C) - 空间复杂度 O(1)
     public boolean judgeSquareSumDoublePoint(int c) {
         int lo = 0, hi = (int) Math.sqrt(c);
 
@@ -52,6 +50,17 @@ public class Lc_633_平方数之和 {
             } else {
                 hi--;
             }
+        }
+
+        return false;
+    }
+
+    // 暴力匹配 - 时间复杂度 O(根号C) - 空间复杂度 O(1)
+    public boolean judgeSquareSumBF(int c) {
+        long t = 0;
+        for (long a = 0; (t = a * a) <= c; a++) {
+            double b = Math.sqrt(c - t);
+            if ((int) b == b) return true;
         }
 
         return false;

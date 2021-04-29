@@ -1,4 +1,4 @@
-package algorithm.leetcode.numericalOperations;
+package algorithm.leetcode.math.数学问题;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +17,7 @@ public class Lc_204_计数质数 {
 
         System.out.println("小于" + n1 + "的质数一共有" + lc.countPrimesEnum(n1) + "个");
         System.out.println("小于" + n2 + "的质数一共有" + lc.countPrimes埃氏筛(n2) + "个");
+        System.out.println("小于" + n3 + "的质数一共有" + lc.countPrimes线性筛(n3) + "个");
     }
 
     // 枚举 - 时间复杂度 O(N√N) 单个数检查需要O(√N) 一共检查N个数 - 空间复杂度 O(1)

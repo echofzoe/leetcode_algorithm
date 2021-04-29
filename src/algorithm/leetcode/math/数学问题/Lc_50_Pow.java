@@ -1,4 +1,4 @@
-package algorithm.leetcode.numericalOperations;
+package algorithm.leetcode.math.数学问题;
 
 public class Lc_50_Pow {
 
