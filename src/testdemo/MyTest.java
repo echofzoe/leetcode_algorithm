@@ -58,6 +58,13 @@ public class MyTest {
 
     @Test
     public void test4() {
+        long x = 0x40000d24;
+//        long x = 0b00001000011000000000000000000000;
+        System.out.println(Long.toBinaryString(x));
+//        System.out.println(Long.toHexString(x));
+
+        long a = 0b1000000000000000000110101000000, b = 0b1000000000000000000110100100100;
+        System.out.println(Long.toString(a, 10) + " " + Long.toString(b, 10) + " " + Long.toString(a - b, 10));
     }
 
 }
