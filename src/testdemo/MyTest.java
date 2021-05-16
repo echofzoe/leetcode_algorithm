@@ -69,69 +69,7 @@ public class MyTest {
 
     @Test
     public void test5() {
-//        System.out.println(subsetXORSum(new int[]{1, 1, 1}));
-        System.out.println(minSwaps("111000"));
     }
 
-    public int minSwaps(String s) {
-        int n = s.length();
-        char[] cs = s.toCharArray();
-
-        int res = 0;
-
-        char prev = cs[0];
-        for (int i = 1; i < cs.length; i++) {
-            if (prev == cs[1]) {
-                res++;
-                cs[1] = cs[1] == '0' ? '1' : '0';
-            }
-            prev = cs[1];
-        }
-
-        return res / 2;
-    }
-
-    public int subsetXORSum(int[] nums) {
-        int n = nums.length;
-
-        int res = 0;
-
-        subsetsWithDup(nums);
-
-        for (int i = 0; i < ans.size(); i++) {
-            int t = 0;
-            for (int j = 0; j < ans.get(i).size(); j++) {
-                t ^= ans.get(i).get(j);
-            }
-
-            res += t;
-        }
-
-        return res;
-    }
-
-    List<Integer> t = new ArrayList<Integer>();
-    List<List<Integer>> ans = new ArrayList<List<Integer>>();
-
-    public void subsetsWithDup(int[] nums) {
-        Arrays.sort(nums);
-        int n = nums.length;
-        for (int mask = 0; mask < (1 << n); ++mask) {
-            t.clear();
-            boolean flag = true;
-            for (int i = 0; i < n; ++i) {
-                if ((mask & (1 << i)) != 0) {
-                    if (i > 0 && (mask >> (i - 1) & 1) == 0 && nums[i] == nums[i - 1]) {
-                        flag = false;
-                        break;
-                    }
-                    t.add(nums[i]);
-                }
-            }
-            if (flag) {
-                ans.add(new ArrayList<Integer>(t));
-            }
-        }
-    }
 
 }
