@@ -1,4 +1,4 @@
-package interview;
+package note;
 
 public class 判断大端序小端序 {
 

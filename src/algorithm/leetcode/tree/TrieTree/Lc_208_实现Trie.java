@@ -1,4 +1,4 @@
-package algorithm.leetcode.tree;
+package algorithm.leetcode.tree.TrieTree;
 
 /**
  * 实现 Trie (前缀树)
@@ -13,7 +13,7 @@ public class Lc_208_实现Trie {
         Lc_208_实现Trie lc = new Lc_208_实现Trie();
 
         System.out.println("初始化字典树");
-        Trie trie = new Trie();
+        Trie208 trie = new Trie208();
         System.out.println("插入\"apple\"");
         trie.insert("apple");
         System.out.println("字典树中有\"apple\"吗? " + trie.search("apple"));  // 返回 True
@@ -26,26 +26,27 @@ public class Lc_208_实现Trie {
 
 }
 
-class Trie {
+class Trie208 {
 
-    private Trie[] children;
+    private Trie208[] children;
     private boolean isWord;
 
     /**
      * Initialize your data structure here.
      */
-    public Trie() {
-        this.children = new Trie[26];
+    public Trie208() {
+        this.children = new Trie208[26];
+        this.isWord = false;
     }
 
     /**
      * Inserts a word into the trie.
      */
     public void insert(String word) {
-        Trie node = this;
+        Trie208 node = this;
         for (int i = 0; i < word.length(); i++) {
             int idx = word.charAt(i) - 'a';
-            if (node.children[idx] == null) node.children[idx] = new Trie();
+            if (node.children[idx] == null) node.children[idx] = new Trie208();
 
             node = node.children[idx];
         }
@@ -56,7 +57,7 @@ class Trie {
      * Returns if the word is in the trie.
      */
     public boolean search(String word) {
-        Trie node = searchPrefix(word);
+        Trie208 node = searchPrefix(word);
         return node != null && node.isWord;
     }
 
@@ -67,8 +68,8 @@ class Trie {
         return searchPrefix(prefix) != null;
     }
 
-    private Trie searchPrefix(String prefix) {
-        Trie node = this;
+    private Trie208 searchPrefix(String prefix) {
+        Trie208 node = this;
         for (int i = 0; i < prefix.length(); i++) {
             int idx = prefix.charAt(i) - 'a';
             if (node.children[idx] == null) return null;
