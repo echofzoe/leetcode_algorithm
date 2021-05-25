@@ -2,12 +2,16 @@ package algorithm.leetcode.graph.shortestPath;
 
 import java.util.*;
 
+/**
+ * 网络延迟时间
+ * <P>https://leetcode-cn.com/problems/network-delay-time/</P>
+ * <P>题解：https://leetcode-cn.com/problems/network-delay-time/solution/java-ban-dijkstra-spfa-floydxiang-xi-ti-jie-by-jer/</P>
+ * <P>博客：https://www.cnblogs.com/thousfeet/p/9229395.html</P>
+ *
+ * @author echofzoe
+ * @since 2021.5.25
+ */
 public class Lc_743_网络延迟时间 {
-
-    // 网络延迟时间
-    // https://leetcode-cn.com/problems/network-delay-time/
-    // 优质题解 - https://leetcode-cn.com/problems/network-delay-time/solution/java-ban-dijkstra-spfa-floydxiang-xi-ti-jie-by-jer/
-    // 优质博客 - https://www.cnblogs.com/thousfeet/p/9229395.html
 
     public static void main(String[] args) {
         Lc_743_网络延迟时间 lc = new Lc_743_网络延迟时间();
@@ -30,7 +34,7 @@ public class Lc_743_网络延迟时间 {
         // 迪克斯特拉
         int[] dist = dijkstra(graph, n, k);
 
-        int res = Arrays.stream(dist).max().getAsInt();
+        int res = Arrays.stream(dist).max().orElse(0);
         return res == 0x3f3f3f3f ? -1 : res;
     }
 
