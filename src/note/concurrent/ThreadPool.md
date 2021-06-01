@@ -144,6 +144,46 @@ private static class DefaultThreadFactory implements ThreadFactory {
 }
 ```
 
+### 任务队列
+
+- 使用`ThreadPoolExecutor`需要指定一个实现了`BlockingQueue`接口的任务等待队列
+- `ThreadPoolExecutor`的`API`文档中一共推荐了三种等待队列：
+  - **`SynchronousQueue:`**同步队列
+    - 每个插入操作都必须等待另一个线程执行相应的移除操作，反之亦然
+    - 队列内部无任何容量
+    - 无法查看同步队列，因为元素仅在您尝试删除它时才存在
+  - **`LinkedBlockingQueue:`**基于链表的可选界限的阻塞双端队列（默认容量是`Integer.MAX_VALUE`，即无界）
+    - 使用无界队列后，当核心线程都繁忙时，后续任务可以无限加入此队列，因此线程池中的线程数不会超过核心线程数，也就是说`maximumPoolSize = corePoolSize`
+    - 无界队列可以提高线程池的吞吐量，但代价是牺牲内存空间，甚至会导致内存溢出
+    - 使用时可以指定容量，使之成为一种有界队列
+  - **`ArrayBlockingQueue:`**基于数组的有界阻塞队列
+    - 在线程池初始化时需要指定队列的容量，并且容量后续无法再调整
+    - 这种有界队列有利于防止资源耗尽，但可能更难调整和控制
+- 此外，`JAVA`还提供了`4`种队列：
+  - **`PriorityBlockingQueue:`**支持优先级排序的无界阻塞队列
+    - 存放在`PriorityBlockingQueue`中的元素必须实现`Comparable`接口，这样才能通过实现`compareTo()`方法进行排序
+    - 优先级最高的元素将始终排在队列的头部
+    - `PriorityBlockingQueue`不能保证优先级一样的元素间的排序，也不保证当前队列中除了优先级最高的元素以外的元素间的排序
+  - **`DelayQueue:`**基于二叉堆的延迟队列，同时具备无界队列、阻塞队列、优先队列的特征
+    - 队列中必须存放实现了`Delayed`接口的类对象
+    - 队列通过执行延时来提取任务，时间没到，任务就取不出来
+  - **`LinkedBlockingDeque:`**基于链表的双端阻塞队列
+  - **`LinkedTransferQueue:`**基于链表的无界阻塞队列
+    - 这个队列比较特别的时，采用一种预占模式，意思就是消费者线程取元素时，如果队列不为空，则直接取走数据，若队列为空，那就生成一个节点（节点元素为`null`）入队，然后消费者线程被等待在这个节点上，后面生产者线程入队时发现有一个元素为null的节点，生产者线程就不入队了，直接就将元素填充到该节点，并唤醒该节点等待的线程，被唤醒的消费者线程取走元素
+
+### 线程池状态
+
+- 线程池状态通过`ctl`的高`3`位表示
+- 线程池共有`5`种状态
+  - **`RUNNING:`**当创建线程池后，初始时，线程池处于运行态
+  - **`SHUTDOWN:`**如果调用了`shutdown()`方法，则线程池处于`SHUTDOWN`状态，此时线程池不能够接受新的任务，但会等待所有任务执行完毕
+  - **`STOP:`**如果调用了`shutdownNow()`方法，则线程池处于`STOP`状态，此时线程池不能接受新的任务，并且会去尝试终止正在执行的任务
+  - **`TIDYING:`**当所有的任务已终止，`ctl`记录的任务数量为`0`，线程池会变为`TIDYING`状态
+    - 当线程池变为`TIDYING`状态时，会执行钩子函数`terminated()`。`terminated()`在`ThreadPoolExecutor`类中是空的，若用户想在线程池变为`TIDYING`时，进行相应的处理，可以通过重载`terminated()`函数来实现
+    - 当线程池在`SHUTDOWN`状态下，阻塞队列为空并且线程池中执行的任务也为空时，就会由 `SHUTDOWN -> TIDYING`
+    - 当线程池在`STOP`状态下，线程池中执行的任务为空时，就会由`STOP -> TIDYING`
+  - **`TERMINATED:`**当线程池处于`SHUTDOWN`或`STOP`状态，并且所有工作线程已经销毁，任务缓存队列已经清空或执行结束后，线程池被设置为`TERMINATED`状态
+
 ### 源码分析
 
 #### ThreadPoolExecutor
