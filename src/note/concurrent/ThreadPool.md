@@ -1,5 +1,149 @@
 ## 线程池
 
+### 概述
+
+#### 1. 设计理念
+
+1. 降低资源消耗
+   - 通过重复利用已创建的线程来降低由线程创建和销毁造成的资源消耗
+   - 线程的创建与销毁需要操作系统介入，届时`os`会由用户态切换到内核态来完成相关操作
+   - *线程池通过复用`corePoolSize`个线程来执行不同的任务*
+2. 提高响应速度
+   - 当任务到达时，池中如有空闲线程，则任务不必等待线程创建就能立即执行
+3. 方便线程管理
+   - 线程是稀缺资源，由用户无限制的创建显然是不合适的
+   - 使用线程池可以对池中线程进行统一的分配、调优与监控，方便管理
+
+#### 2. 设计思路
+
+![线程池的设计思路](..\assets\statics\线程池的设计思路.png)
+
+#### 3. 框架体系
+
+![线程池Executor框架体系](..\assets\statics\线程池Executor框架体系.png)
+
+- 线程池的真正实现类是`ThreadPoolExecutor`
+
+### 构造方法
+
+#### 源码
+
+```java
+// 在基础的构造方法之上，使用默认线程工厂和默认拒绝策略
+public ThreadPoolExecutor(int corePoolSize,
+                          int maximumPoolSize,
+                          long keepAliveTime,
+                          TimeUnit unit,
+                          BlockingQueue<Runnable> workQueue) {
+    this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
+         Executors.defaultThreadFactory(), defaultHandler);
+}
+
+// 在基础的构造方法之上，使用默认拒绝策略但要指定 线程工厂
+public ThreadPoolExecutor(int corePoolSize,
+                          int maximumPoolSize,
+                          long keepAliveTime,
+                          TimeUnit unit,
+                          BlockingQueue<Runnable> workQueue,
+                          ThreadFactory threadFactory) {
+    this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
+         threadFactory, defaultHandler);
+}
+
+// 在基础的构造方法之上，使用默认线程工厂但要指定 拒绝策略
+public ThreadPoolExecutor(int corePoolSize,
+                          int maximumPoolSize,
+                          long keepAliveTime,
+                          TimeUnit unit,
+                          BlockingQueue<Runnable> workQueue,
+                          RejectedExecutionHandler handler) {
+    this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
+         Executors.defaultThreadFactory(), handler);
+}
+
+// 基础的构造方法，根据给定的初始参数创建一个新的 ThreadPoolExecutor，被其它构造方法内部调用
+public ThreadPoolExecutor(int corePoolSize,
+                          int maximumPoolSize,
+                          long keepAliveTime,
+                          TimeUnit unit,
+                          BlockingQueue<Runnable> workQueue,
+                          ThreadFactory threadFactory,
+                          RejectedExecutionHandler handler) {
+    if (corePoolSize < 0 ||
+        maximumPoolSize <= 0 ||
+        maximumPoolSize < corePoolSize ||
+        keepAliveTime < 0)
+        throw new IllegalArgumentException();
+    if (workQueue == null || threadFactory == null || handler == null)
+        throw new NullPointerException();
+    this.corePoolSize = corePoolSize;
+    this.maximumPoolSize = maximumPoolSize;
+    this.workQueue = workQueue;
+    this.keepAliveTime = unit.toNanos(keepAliveTime);
+    this.threadFactory = threadFactory;
+    this.handler = handler;
+}
+```
+
+#### 参数说明
+
+- **`corePoolSize（必需）：`**核心线程数
+  - 池中一直保持存活的线程数，即使这些线程处于空闲状态
+  - 当`allowCoreThreadTimeOut`参数为`true`时，核心线程处于空闲状态的时间超过`keepAliveTime`后，也会被回收
+- **`maximumPoolSize（必需）：`**池中允许的线程数上限
+  - 当核心线程全部繁忙且任务队列也满了的时候，线程池会临时追加线程，直到总数达到这个上限
+- **`keepAliveTime（必需）：`**线程空闲时间上限
+  - 当非核心线程处于空闲状态的时间超过这个上限后，该线程会被回收
+  - `allowCoreThreadTimeOut`参数为`true`时，核心线程超时也会被回收
+- **`unit（必需）：`**`keepAliveTime`参数的时间单位
+  - 可选`TimeUnit.DAYS`、`TimeUnit.HOURS`、`TimeUnit.MINUTES`、`TimeUnit.SECONDS`等
+- **`workQueue（必需）：`**任务队列，采用阻塞队列实现
+  - 当核心线程全部繁忙时，后续由`execute()`方法提交的`Runnable`将存放在任务队列中，等待被线程处理
+- **`threadFactory（可选）：`**线程工厂，指定线程池创建线程的方式
+- **`handler（可选）：`**拒绝策略
+  - 当线程池中线程数量达到`maximumPoolSize`且`workQueue`也满了的时候，后续提交的任务将被拒绝
+  - `handler`可以指定用什么方式拒绝任务，共有`4`种拒绝策略
+
+### 拒绝策略
+
+- **`AbortPolicy（缺省）：`**直接丢弃任务并抛出`RejectedExecutionException`异常
+- **`CallerRunsPolicy：`**直接运行任务的`run()`方法，但并非是由线程池的线程处理，而是交由任务的调用线程处理
+- **`DiscardPolicy：`**直接丢弃任务，不抛出任何异常
+- **`DiscardOldestPolicy：`**将当前处于等待队列队头的等待任务强行取出，再试图将当前被拒绝的任务提交到线程池执行
+
+### 默认线程工厂
+
+- 一般不建议使用`DefaultThreadFactory`，因为它生成的线程名为线程编号，很含糊，业务出问题时不好定位
+
+```java
+private static class DefaultThreadFactory implements ThreadFactory {
+    private static final AtomicInteger poolNumber = new AtomicInteger(1);
+    private final ThreadGroup group;
+    private final AtomicInteger threadNumber = new AtomicInteger(1);
+    private final String namePrefix;
+
+    DefaultThreadFactory() {
+        SecurityManager s = System.getSecurityManager();
+        group = (s != null) ? s.getThreadGroup() :
+        Thread.currentThread().getThreadGroup();
+        namePrefix = "pool-" +
+            poolNumber.getAndIncrement() +
+            "-thread-";
+    }
+
+    public Thread newThread(Runnable r) {
+        Thread t = new Thread(group, r,
+                              namePrefix + threadNumber.getAndIncrement(),
+                              0);
+        if (t.isDaemon())
+            t.setDaemon(false);
+        if (t.getPriority() != Thread.NORM_PRIORITY)
+            t.setPriority(Thread.NORM_PRIORITY);
+        return t;
+    }
+}
+```
+
 ### 源码分析
 
 #### ThreadPoolExecutor
@@ -11,8 +155,8 @@
 private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
 // 表示在 ctl 中，低 COUNT_BITS 位是用于存放当前线程数量的位，这里是 32 - 3 = 29 位
 private static final int COUNT_BITS = Integer.SIZE - 3;
-// 表示低 COUNT_BITS 位所能表达的最大数值，为 000 11111111111111111111111111111
-private static final int CAPACITY = (1 << COUNT_BITS) - 1;
+// CAPACITY，表示低 COUNT_BITS 位所能表达的最大数值，为 000 11111111111111111111111111111
+private static final int COUNT_MASK = (1 << COUNT_BITS) - 1;
 
 // runState is stored in the high-order bits
 // 111 00000000000000000000000000000 (负数)
@@ -103,6 +247,7 @@ private volatile boolean allowCoreThreadTimeOut;
 // 核心线程数量限制
 private volatile int corePoolSize;
 // 线程池最大线程数量限制
+// - the effective limit is maximumPoolSize & COUNT_MASK
 private volatile int maximumPoolSize;
 
 // 缺省的拒绝策略
