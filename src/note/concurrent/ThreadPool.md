@@ -175,14 +175,18 @@ private static class DefaultThreadFactory implements ThreadFactory {
 
 - 线程池状态通过`ctl`的高`3`位表示
 - 线程池共有`5`种状态
-  - **`RUNNING:`**当创建线程池后，初始时，线程池处于运行态
-  - **`SHUTDOWN:`**如果调用了`shutdown()`方法，则线程池处于`SHUTDOWN`状态，此时线程池不能够接受新的任务，但会等待所有任务执行完毕
-  - **`STOP:`**如果调用了`shutdownNow()`方法，则线程池处于`STOP`状态，此时线程池不能接受新的任务，并且会去尝试终止正在执行的任务
+  - **`RUNNING:`**线程池的初始化状态，能够接收新任务，以及对已添加的任务进行处理
+    - 线程池一旦被创建，就处于运行态
+  - **`SHUTDOWN:`**不接收新任务，但能处理已添加的任务
+    - 如果调用了`shutdown()`方法，则线程池由`RUNNING -> SHUTDOWN`
+  - **`STOP:`**不接收新任务，也不处理已添加的任务，并且会中断正在处理的任务
+    - 如果调用了`shutdownNow()`方法，则线程池由`(RUNNING or SHUTDOWN) -> STOP`
   - **`TIDYING:`**当所有的任务已终止，`ctl`记录的任务数量为`0`，线程池会变为`TIDYING`状态
-    - 当线程池变为`TIDYING`状态时，会执行钩子函数`terminated()`。`terminated()`在`ThreadPoolExecutor`类中是空的，若用户想在线程池变为`TIDYING`时，进行相应的处理，可以通过重载`terminated()`函数来实现
     - 当线程池在`SHUTDOWN`状态下，阻塞队列为空并且线程池中执行的任务也为空时，就会由 `SHUTDOWN -> TIDYING`
     - 当线程池在`STOP`状态下，线程池中执行的任务为空时，就会由`STOP -> TIDYING`
-  - **`TERMINATED:`**当线程池处于`SHUTDOWN`或`STOP`状态，并且所有工作线程已经销毁，任务缓存队列已经清空或执行结束后，线程池被设置为`TERMINATED`状态
+    - 当线程池变为`TIDYING`状态时，会执行钩子函数`terminated()`。`terminated()`在`ThreadPoolExecutor`类中是空的，若用户想在线程池变为`TIDYING`时，进行相应的处理，可以通过重载`terminated()`函数来实现
+  - **`TERMINATED:`**线程池被彻底终止
+    - 线程池处于`TIDYING`，并执行完`terminated()`方法，就会被设置为`TERMINATED`状态
 
 ### 源码分析
 
