@@ -27,14 +27,12 @@ public class Lc_2_两数相加 {
 
     // 模拟 - 时间复杂度 O(max(M,N)) - 空间复杂度 O(1)
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-
-        ListNode list = new ListNode();
+        ListNode list = new ListNode(-1);
         ListNode dummy = list;
 
-        int res = 0, carry = 0;
-
+        int carry = 0;  // 进位
         while (l1 != null || l2 != null) {
-            int a = 0, b = 0;
+            int a = 0, b = 0, c = 0;
 
             if (l1 != null) {
                 a = l1.val;
@@ -46,13 +44,17 @@ public class Lc_2_两数相加 {
                 l2 = l2.next;
             }
 
-            list.next = new ListNode();
+            c = a + b + carry;
+
+            list.next = new ListNode(c % 10);
             list = list.next;
-            list.val = (a + b + carry) % 10;
-            carry = (a + b + carry) / 10;
+
+            carry = c / 10;
         }
 
-        if (carry > 0) list.next = new ListNode(carry);
+        if (carry > 0) {
+            list.next = new ListNode(carry);
+        }
 
         return dummy.next;
     }
