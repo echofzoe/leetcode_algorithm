@@ -2,20 +2,17 @@ package algorithm.leetcode.matrix;
 
 import java.util.Arrays;
 
+/**
+ * 旋转图像
+ * <P>https://leetcode-cn.com/problems/rotate-image/</P>
+ *
+ * @author echofzoe
+ * @since unknown
+ * @updated 2021.6.6
+ */
 public class Lc_48_旋转图像 {
 
-    // 旋转图像
-    // https://leetcode-cn.com/problems/rotate-image/
-
-
-    // eg: i = 0, j = 1
-    // 0,0          i,j          0,2          0,3
-    //
-    // 1,0          1,1          1,2          j,n-1-i
-    //
-    // n-1-j,i      2,1          2,2          2,3
-    //
-    // 3,0          3,1          n-1-i,n-1-j  3,3
+    // 原地旋转递推式: mat[i][j] = mat[n - 1 - j][i]
 
     public static void main(String[] args) {
         Lc_48_旋转图像 lc = new Lc_48_旋转图像();
