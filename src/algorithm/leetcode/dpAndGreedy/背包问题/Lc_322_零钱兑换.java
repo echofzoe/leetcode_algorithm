@@ -1,4 +1,4 @@
-package algorithm.leetcode.dpAndGreedy;
+package algorithm.leetcode.dpAndGreedy.背包问题;
 
 import java.util.Arrays;
 
@@ -14,16 +14,16 @@ public class Lc_322_零钱兑换 {
         int amount2 = 111;
         int amount3 = 1111;
 
-        System.out.println("最少使用" + lc.coinChangeRecursive(coins, amount1) + "枚面额在" + Arrays.toString(coins) + "里的硬币可以凑成总金额" + amount1);
-        System.out.println("最少使用" + lc.coinChangeRecursiveWithMemory(coins, amount2) + "枚面额在" + Arrays.toString(coins) + "里的硬币可以凑成总金额" + amount2);
-        System.out.println("最少使用" + lc.coinChangeDp(coins, amount3) + "枚面额在" + Arrays.toString(coins) + "里的硬币可以凑成总金额" + amount3);
+        System.out.println("最少使用 " + lc.coinChangeBFRecursive(coins, amount1) + " 枚面额在" + Arrays.toString(coins) + "里的硬币可以凑成总金额" + amount1);
+        System.out.println("最少使用 " + lc.coinChangeRecursiveWithMemory(coins, amount2) + " 枚面额在" + Arrays.toString(coins) + "里的硬币可以凑成总金额" + amount2);
+        System.out.println("最少使用 " + lc.coinChangeDp(coins, amount3) + " 枚面额在" + Arrays.toString(coins) + "里的硬币可以凑成总金额" + amount3);
     }
 
-    int[] coins;
-    int[] memo;
+    private int[] coins;
+    private int[] memo;
 
     // 暴力递归 - 时间复杂度 O(N^k) k为coins的长度 - 空间复杂度 O(N) 为递归栈的开销
-    public int coinChangeRecursive(int[] coins, int amount) {
+    public int coinChangeBFRecursive(int[] coins, int amount) {
         // initialize
         this.coins = coins;
 
@@ -76,8 +76,39 @@ public class Lc_322_零钱兑换 {
         return memo[amount];
     }
 
-    // dp + 迭代 自底向上 - 时间复杂度 O(N*k) k为coins的长度 - 空间复杂度 O(1)
+    // DP - 时间复杂度 O(N*k) k为coins的长度 - 空间复杂度 O(1)
     public int coinChangeDp(int[] coins, int amount) {
+        int n = coins.length;
+
+        // dp[i][j] 表示前i个硬币中能组合成金额j的方案数
+        /*
+            边界条件：{
+                dp[0][0] = 0
+                其余位置初始化为最大值
+            }
+            状态转移方程：{
+                dp[i][j] = min(dp[i][j], dp[i - 1][j - k * nums[i - 1]] + k), 1 <= i <= n && 0 <= j <= amount && 0 <= k*nums[i-1] <= j
+            }
+         */
+        int[][] dp = new int[n + 1][amount + 1];
+        // base case
+        for (int i = 0; i <= n; i++) Arrays.fill(dp[i], amount + 1);
+        dp[0][0] = 0;
+
+        for (int i = 1; i <= n; i++) {
+            int cur = coins[i - 1];
+            for (int j = 0; j <= amount; j++) {
+                for (int k = 0; k * cur <= j; k++) {
+                    dp[i][j] = Math.min(dp[i][j], dp[i - 1][j - k * cur] + k);
+                }
+            }
+        }
+
+        return dp[n][amount] == amount + 1 ? -1 : dp[n][amount];
+    }
+
+    // DP (完全背包空间优化) - 时间复杂度 O(N*k) k为coins的长度 - 空间复杂度 O(1)
+    public int coinChangeDp1(int[] coins, int amount) {
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, amount + 1);
 
