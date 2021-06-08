@@ -1,4 +1,4 @@
-package algorithm.leetcode.backtrack;
+package algorithm.leetcode.dpAndGreedy.背包问题;
 
 import java.util.Arrays;
 
@@ -29,34 +29,8 @@ public class Lc_494_目标和 {
         System.out.println("输出：" + lc.findTargetSumWays(nums, target));  // 5
     }
 
-    // 回溯 - 时间复杂度 O(2^N) 回溯需要遍历所有不同的表达式，共有2^N种不同的表达式 - 空间复杂度 O(N) 为dfs递归调用的栈空间
-    private int n, res, target;
-    private int[] nums;
-
-    public int findTargetSumWays(int[] nums, int target) {
-        this.n = nums.length;
-        this.nums = nums;
-        this.res = 0;
-        this.target = target;
-
-        dfs(0, 0);
-
-        return res;
-    }
-
-    private void dfs(int idx, int sum) {
-        if (idx == n) {
-            if (sum == target) res++;
-            return;
-        }
-        
-        int cur = nums[idx];
-        dfs(idx + 1, sum + cur);
-        dfs(idx + 1, sum - cur);
-    }
-
     // DP - 时间复杂度 O(N*L) N为数组长度，L为数组元素和范围 - 空间复杂度 O(N*L)
-    public int findTargetSumWays1(int[] nums, int target) {
+    public int findTargetSumWays(int[] nums, int target) {
         int n = nums.length;
 
         int sum = 0;
