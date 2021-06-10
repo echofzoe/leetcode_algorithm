@@ -1,4 +1,4 @@
-package algorithm.leetcode.dpAndGreedy.背包问题;
+package algorithm.leetcode.dpAndGreedy.背包问题.完全背包;
 
 import java.util.Arrays;
 
@@ -80,11 +80,12 @@ public class Lc_322_零钱兑换 {
     public int coinChangeDp(int[] coins, int amount) {
         int n = coins.length;
 
-        // dp[i][j] 表示前i个硬币中能组合成金额j的方案数
+        // dp[i][j] 表示前i个硬币中能组合成金额j的最少硬币数量
         /*
             边界条件：{
-                dp[0][0] = 0
-                其余位置初始化为最大值
+                1. 0个硬币能组合成0个金额的所需最少硬币数为0
+                - dp[0][0] = 0
+                2. 其余位置初始化为最大值，意为无效值
             }
             状态转移方程：{
                 dp[i][j] = min(dp[i][j], dp[i - 1][j - k * nums[i - 1]] + k), 1 <= i <= n && 0 <= j <= amount && 0 <= k*nums[i-1] <= j

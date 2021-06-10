@@ -1,4 +1,4 @@
-package algorithm.leetcode.dpAndGreedy.背包问题;
+package algorithm.leetcode.dpAndGreedy.背包问题.完全背包;
 
 import java.util.Arrays;
 
