@@ -35,7 +35,8 @@ public class Lc_879_盈利计划 {
         // dp[i][j][k] 表示考虑前i件物品，使用人数不超过j，所得利润至少为k的方案数
         /*
             边界条件：{
-                dp[0][0][0] = 1, 在0份工作里选择0个员工从而获得的工作利润至少为0的盈利计划的总数是1
+                1. 在0份工作里选择j个员工从而获得的工作利润至少为0的盈利计划的总数是1
+                - dp[0][j][0] = 1, 0 <= j <= n
             }
             状态转移方程：{
                 1. 当前选择的员工人数小于当前工作需要的员工人数以至于无法完成工作
@@ -46,7 +47,7 @@ public class Lc_879_盈利计划 {
          */
         int[][][] dp = new int[l + 1][n + 1][minProfit + 1];
         // base case
-        dp[0][0][0] = 1;
+        for (int j = 0; j <= n; j++) dp[0][j][0] = 1;
 
         for (int i = 1; i <= l; i++) {
             int curGroup = group[i - 1], curProfit = profit[i - 1];
@@ -58,12 +59,7 @@ public class Lc_879_盈利计划 {
             }
         }
 
-        int sum = 0;
-        for (int j = 0; j <= n; j++) {
-            sum = (sum + dp[l][j][minProfit]) % MOD;
-        }
-
-        return sum;
+        return dp[l][n][minProfit];
     }
 
     // DP 空间优化 - 时间复杂度 O(l * n * minProfit) 其中l为数组group的长度 - 空间复杂度 O(n * minProfit)
@@ -75,7 +71,7 @@ public class Lc_879_盈利计划 {
 
         int[][] dp = new int[n + 1][minProfit + 1];
         // base case
-        for (int i = 0; i <= n; i++) dp[i][0] = 1;
+        for (int j = 0; j <= n; j++) dp[j][0] = 1;
 
         for (int i = 1; i <= l; i++) {
             int curGroup = group[i - 1], curProfit = profit[i - 1];
