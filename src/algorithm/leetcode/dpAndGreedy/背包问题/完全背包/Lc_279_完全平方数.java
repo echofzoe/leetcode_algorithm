@@ -1,6 +1,8 @@
 package algorithm.leetcode.dpAndGreedy.背包问题.完全背包;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 完全平方数
@@ -20,19 +22,17 @@ public class Lc_279_完全平方数 {
                 "给你一个整数 n ，返回和为 n 的完全平方数的 最少数量 。\n" +
                 "完全平方数 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，1、4、9 和 16 都是完全平方数，而 3 和 11 不是。\n");
         System.out.println("输入：n = " + n1);
-        System.out.println("输出：" + lc.numSquares(n1));
+        System.out.println("输出：" + lc.numSquares(n1));  // 3
         System.out.println("\n输入：n = " + n2);
-        System.out.println("输出：" + lc.numSquares(n2));
+        System.out.println("输出：" + lc.numSquares(n2));  // 2
     }
 
     // DP - 时间复杂度 O(N * √N) - 空间复杂度 O(N)
     public int numSquares(int n) {
         // 预处理候选的完全平方数
         int maxSquare = (int) Math.sqrt(n);
-        int[] squareCandidates = new int[maxSquare + 1];
-        for (int i = 1; i <= maxSquare; i++) {
-            squareCandidates[i] = i * i;
-        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= maxSquare; i++) list.add(i * i);
 
         // dp[i] 表示和为i的完全平方数的最少数量
         /*
@@ -40,19 +40,20 @@ public class Lc_279_完全平方数 {
                 dp[0] = 0
             }
             状态转移方程：{
-                dp[i] = dp[i - squareCandidates[j]] + 1, squareCandidates[j] < i && 1 <= j <= maxSquare
+                dp[i] = min(dp[i], dp[i - list.get[j - 1]] + 1), list.get[j-1] <= i && 1 <= j <= maxSquare
             }
          */
         int[] dp = new int[n + 1];
         // base case
-        Arrays.fill(dp, Integer.MAX_VALUE);
+        Arrays.fill(dp, 0x3f3f3f3f);
         dp[0] = 0;
 
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= maxSquare; j++) {
-                if (squareCandidates[j] > i) break;
+                int cur = list.get(j - 1);
+                if (cur > i) break;
 
-                dp[i] = Math.min(dp[i], dp[i - squareCandidates[j]] + 1);
+                dp[i] = Math.min(dp[i], dp[i - cur] + 1);
             }
         }
 
