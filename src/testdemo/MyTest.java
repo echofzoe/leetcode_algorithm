@@ -160,6 +160,7 @@ public class MyTest {
 
     @Test
     public void test6() {
+        System.out.println(0xbf3f3f3f);
     }
 
 }
