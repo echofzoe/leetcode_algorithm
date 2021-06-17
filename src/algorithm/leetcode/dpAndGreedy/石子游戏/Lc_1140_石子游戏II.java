@@ -38,7 +38,7 @@ public class Lc_1140_石子游戏II {
             }
          */
         int[][] dp = new int[n][n + 1];
-        
+
         int sum = 0;
         for (int i = n - 1; i >= 0; i--) {
             sum += piles[i];

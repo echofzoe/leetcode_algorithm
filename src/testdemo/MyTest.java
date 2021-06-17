@@ -1,14 +1,8 @@
 package testdemo;
 
-import algorithm.leetcode.utils.BinaryTreeSerialize;
-import algorithm.leetcode.utils.TreeNode;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MyTest {
 
@@ -133,11 +127,6 @@ public class MyTest {
 
     static byte[][] map =
             {
-//                    {11, 12, 15, 18, 20},
-//                    {16, 20, 20, 20, 21},
-//                    {15, 20, 29, 20, 23},
-//                    {14, 20, 20, 20, 24},
-//                    {13, 20, 25, 20, 29}
                     {11, 12, 15},
                     {16, 20, 20},
                     {15, 20, 29}
@@ -159,8 +148,8 @@ public class MyTest {
     }
 
     @Test
-    public void test6() {
-        System.out.println(0xbf3f3f3f);
+    public void test6() throws InterruptedException {
+
     }
 
 }

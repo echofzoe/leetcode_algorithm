@@ -1,4 +1,4 @@
-package algorithm.leetcode.dpAndGreedy.二维DP问题;
+package algorithm.leetcode.dpAndGreedy;
 
 /**
  * 奇怪的打印机
@@ -6,6 +6,7 @@ package algorithm.leetcode.dpAndGreedy.二维DP问题;
  *
  * @author echofzoe
  * @since 2021.5.24
+ * @updated 2021.6.17
  */
 public class Lc_664_奇怪的打印机 {
 
@@ -23,32 +24,38 @@ public class Lc_664_奇怪的打印机 {
     }
 
     // DP - 时间复杂度 O(N^3) - 空间复杂度 O(N^2)
-    /*
-        dp[i][j] 表示打印机打印字符串区间[i, j]时需要的最少打印次数
-        状态转移方程: {
-            dp[i][j] = dp[i][j - 1], s[i] = s[j]
-            dp[i][j] = min(dp[i][k] + dp[i + 1][j]), s[1] != s[j], i <= k < j
-        }
-     */
     public int strangePrinter(String s) {
-        int n;
-        if (s == null || (n = s.length()) == 0) return 0;
-        char[] cs = s.toCharArray();
+        int n = s.length();
 
+        // dp[i][j] 表示打印机打印字符串区间[i,j]所需的最少打印次数
+        /*
+            边界条件：{
+                1. 打印一个字符的最少打印次数为1
+                - dp[i][i] = 1
+                2. 因为求最少次数，故除dp[i][i]之外的有效状态都初始化为最大值，方便后面的比较最小
+                - dp[i][j] = 0x3f3f3f3f, i < j
+            }
+            状态转移方程：{
+                dp[i][j] = dp[i][j - 1], s[i] == s[j]
+                dp[i][j] = min(dp[i][k] + dp[k + 1][j]), i <= k < j && s[i] != s[j]
+            }
+        */
         int[][] dp = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                if (i == j) dp[i][j] = 1;
+                else dp[i][j] = 0x3f3f3f3f;
+            }
+        }
 
+        char[] cs = s.toCharArray();
         for (int i = n - 1; i >= 0; i--) {
             for (int j = i + 1; j < n; j++) {
-                dp[i][i] = 1;
-
-                if (cs[i] == cs[j]) {
-                    dp[i][j] = dp[i][j - 1];
-                } else {
-                    int a = Integer.MAX_VALUE;
+                if (cs[i] == cs[j]) dp[i][j] = dp[i][j - 1];
+                else {
                     for (int k = i; k < j; k++) {
-                        a = Math.min(a, dp[i][k] + dp[k + 1][j]);
+                        dp[i][j] = Math.min(dp[i][j], dp[i][k] + dp[k + 1][j]);
                     }
-                    dp[i][j] = a;
                 }
             }
         }

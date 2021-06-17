@@ -20,33 +20,32 @@ public class Jzo_20_表示数值的字符串 {
 
     // BF - 时间复杂度 O(N) - 空间复杂度 O(1)
     public boolean isNumber(String s) {
-        if (s == null || s.length() == 0) return false;
-        int n = s.length();
+        int n;
+        if (s == null || (n = s.length()) == 0) return false;
+
         char[] cs = s.toCharArray();
 
         boolean isNum = false, isDot = false, isE = false;
 
         for (int i = 0; i < n; i++) {
-            if (cs[i] >= '0' && cs[i] <= '9') {
-                isNum = true;
-            } else if (cs[i] == '.') {
-                if (isDot || isE) {
-                    // 小数点前可以没有数字，但不能有重复的小数点和'e'或'E'
-                    return false;
-                }
-                isDot = true;
-            } else if (cs[i] == 'e' || cs[i] == 'E') {
-                if (!isNum || isE) {
-                    // 'e'和'E'前面必须有整数，且前面不能有小数点和重复的'e'或'E'
-                    return false;
-                }
+            char c = cs[i];
+
+            if (c == 'e' || c == 'E') {
+                // 'e'和'E'前面必须有整数，且前面不能有小数点和重复的'e'或'E'
+                if (!isNum || isE) return false;
+
                 isE = true;
                 isNum = false;  // 重置整数标识，因为'e'或'E'后面必须接上整数
-            } else if (cs[i] == '+' || cs[i] == '-') {
-                if (i != 0 && cs[i - 1] != 'e' && cs[i - 1] != 'E') {
-                    // 正负号只能出现在第一个位置，或者紧跟在'e'或'E'的后面
-                    return false;
-                }
+            } else if (c == '+' || c == '-') {
+                // 正负号只能出现在第一个位置，或者紧跟在'e'或'E'的后面
+                if (i != 0 && cs[i - 1] != 'e' && cs[i - 1] != 'E') return false;
+            } else if (c == '.') {
+                // 小数点前可以没有数字，但不能有重复的小数点和'e'或'E'
+                if (isDot || isE) return false;
+
+                isDot = true;
+            } else if (c >= '0' && c <= '9') {
+                isNum = true;
             } else {
                 // 其他情况均非法
                 return false;

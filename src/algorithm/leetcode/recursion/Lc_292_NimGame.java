@@ -9,15 +9,21 @@ public class Lc_292_NimGame {
 
     public static void main(String[] args) {
         Lc_292_NimGame lc = new Lc_292_NimGame();
-        int n = 100;
+        int n = 5;
 
         System.out.print("如果堆中有 " + n + " 块石头，那么你永远");
-        if (lc.canWinNim_3(n)) {
+        if (lc.canWinNim_2(n)) {
             System.out.print("会");
         } else {
             System.out.print("不会");
         }
         System.out.println("赢得比赛");
+    }
+
+    // math
+    public boolean canWinNim(int n) {
+        // return (n % 4) != 0;
+        return (n & 3) != 0;
     }
 
     // brutal force - 时间复杂度太高
@@ -27,70 +33,52 @@ public class Lc_292_NimGame {
     }
 
     // brutal force with memorandum
-    private HashMap<Integer, Boolean> map = new HashMap<>();
+    private Boolean[] memo;
+
     private boolean canWinNim_2(int n) {
+        memo = new Boolean[n + 1];
+
+        return dfs(n);
+    }
+
+    private boolean dfs(int n) {
         if (n < 4) return true;
 
-        if (map.containsKey(n)) return map.get(n);
-        map.put(1, true);
-        map.put(2, true);
-        map.put(3, true);
+        if (memo[n] != null) return memo[n];
 
-        boolean a = map.containsKey(n - 1) ? !map.get(n - 1) : !canWinNim_2(n - 1);
-        boolean b = map.containsKey(n - 2) ? !map.get(n - 2) : !canWinNim_2(n - 2);
-        boolean c = map.containsKey(n - 3) ? !map.get(n - 3) : !canWinNim_2(n - 3);
+        // 前三种选择中有一种能让对手输，那么自己就能赢
+        memo[n] = (!dfs(n - 1)) || (!dfs(n - 2)) || (!dfs(n - 3));
 
-        map.put(n, a || b || c);
-        return map.get(n);
+        return memo[n];
     }
 
     // dp with O(n) space
     private boolean canWinNim_3(int n) {
         if (n < 4) return true;
 
-        boolean[] canWin = new boolean[n + 1];    // 让出 index0
-        canWin[1] = canWin[2] = canWin[3] = true;
+        boolean[] dp = new boolean[n + 1];    // 让出 index0
+        dp[1] = dp[2] = dp[3] = true;
         for (int i = 4; i <= n; i++) {
-            canWin[i] = !canWin[i - 1] || !canWin[i - 2] || !canWin[i - 3];
+            dp[i] = !dp[i - 1] || !dp[i - 2] || !dp[i - 3];
         }
-        return canWin[n];
+        return dp[n];
     }
 
     // dp with O(1) space
     private boolean canWinNim_4(int n) {
         if (n < 4) return true;
 
-        boolean canWin = false;
-        boolean a = true;
-        boolean b = true;
-        boolean c = true;
+        boolean a, b, c, t;
+        a = b = c = true;
+        t = false;
 
         for (int i = 4; i <= n; i++) {
-            canWin = !a || !b || !c;
+            t = !a || !b || !c;
             a = b;
             b = c;
-            c = canWin;
+            c = t;
         }
-        return canWin;
-    }
-
-    // dp from end to start
-    private boolean check(boolean[] array, int i) {
-        if (i >= array.length) return false;
-        return array[i];
-    }
-
-    private boolean canWinNim(int n) {
-        if (n < 4) return true;
-
-        boolean[] array = new boolean[n + 1];    // 让出 index0
-        array[n] = true;    // 从后往前推，最后一个是自己拿的时候，必赢
-        for (int i = n - 1; i > 0; i--) {
-            if (!check(array, i + 1) || !check(array, i + 2) || !check(array, i + 3)) {
-                array[i] = true;
-            }
-        }
-        return array[1];
+        return t;
     }
 
 }
