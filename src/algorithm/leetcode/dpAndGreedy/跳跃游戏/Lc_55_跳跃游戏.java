@@ -2,66 +2,74 @@ package algorithm.leetcode.dpAndGreedy.跳跃游戏;
 
 import java.util.Arrays;
 
+/**
+ * 跳跃游戏
+ * <P>https://leetcode-cn.com/problems/jump-game/</P>
+ *
+ * @author echofzoe
+ * @since unknown
+ * @updated  2021.6.17
+ */
 public class Lc_55_跳跃游戏 {
-
-    // 跳跃游戏
-    // https://leetcode-cn.com/problems/jump-game/
 
     public static void main(String[] args) {
         Lc_55_跳跃游戏 lc = new Lc_55_跳跃游戏();
         int[] input1 = {2, 3, 1, 1, 4};
         int[] input2 = {3, 2, 1, 0, 4};
-
-        System.out.println("在跳跃游戏" + Arrays.toString(input1) + "中，" + (lc.canJumpGreedy(input1) ? "能" : "不能") + "到达最后一个位置");
-        System.out.println("在跳跃游戏" + Arrays.toString(input2) + "中，" + (lc.canJumpDP(input2) ? "能" : "不能") + "到达最后一个位置");
+        
+        System.out.println("给定一个非负整数数组 nums ，你最初位于数组的 第一个下标 。\n" +
+                "数组中的每个元素代表你在该位置可以跳跃的最大长度。\n" +
+                "判断你是否能够到达最后一个下标。\n");
+        System.out.println("输入：" + Arrays.toString(input1));
+        System.out.println("输出：" + lc.canJumpGreedy(input1));
+        System.out.println("输入：" + Arrays.toString(input2));
+        System.out.println("输出：" + lc.canJumpDP(input2));
     }
 
     // 贪心 - 时间复杂度 O(N) - 空间复杂度 O(1)
     public boolean canJumpGreedy(int[] nums) {
         int n = nums.length;
 
-        int last = 0;  // 实时最远到达位置
-
-        for (int i = 0; i < n; i++) {
-            last = Math.max(last, i + nums[i]);
-
-            if (last >= n - 1) return true;
-
-            if (last == i) break;
+        int far = 0;
+        for (int i = 0; i < n && far < n - 1; i++) {
+            far = Math.max(far, i + nums[i]);
+            if (far == i) break;
         }
 
-        return false;
+        return far >= n - 1;
     }
 
-    // DFS 记忆化 - 时间复杂度 O(N^2) - 空间复杂度 O(1)
-    boolean flag = false;
+    // DFS + 记忆化（超时） - 时间复杂度 O(N^2) - 空间复杂度 O(1)
+    private boolean[] vis;
+    private int[] nums;
+    private boolean res;
+    private int n;
 
     public boolean canJumpDFS(int[] nums) {
+        n = nums.length;
+        vis = new boolean[n];
+        this.nums = nums;
 
-        boolean[] visited = new boolean[nums.length];
+        dfs(0);
 
-        dfs(nums, 0, visited);
-
-        return flag;
+        return res;
     }
 
-    private void dfs(int[] nums, int start, boolean[] visited) {
-        if (start >= nums.length - 1) {
-            flag = true;
+    private void dfs(int idx) {
+        // exit
+        if (idx >= n - 1) {
+            res = true;
             return;
         }
 
-        if (flag) return;
+        // pruning
+        if (vis[idx] || res) return;
 
-        if (visited[start]) return;
+        // mark
+        vis[idx] = true;
 
-        visited[start] = true;
-
-        if (nums[start] == 0) return;
-
-        for (int i = 1; i <= nums[start]; i++) {
-            dfs(nums, start + i, visited);
-        }
+        // dfs
+        for (int i = 1; i <= nums[idx]; i++) dfs(idx + i);
     }
 
     // DP - 时间复杂度 O(N^2) - 空间复杂度 O(N)

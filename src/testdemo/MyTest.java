@@ -149,7 +149,28 @@ public class MyTest {
 
     @Test
     public void test6() throws InterruptedException {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int i = 0;
+                while (true) {
+                    if (i++ == 1000000000) {
+                        System.out.println(Thread.currentThread().getName());
+                    }
+                }
+            }
+        }, "test thread");
 
+        thread.start();
+        thread.sleep(5000);
+        thread.join(5000);
+
+        int i = 0;
+        while (true) {
+            if (i++ == 1000000000) {
+                System.out.println(Thread.currentThread().getName());
+            }
+        }
     }
 
 }
