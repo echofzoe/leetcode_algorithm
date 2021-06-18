@@ -35,7 +35,7 @@ public class Lc_45_跳跃游戏II {
             far = Math.max(far, i + nums[i]);
 
             if (i == boundary) {
-                
+
                 res++;
                 boundary = far;
             }
