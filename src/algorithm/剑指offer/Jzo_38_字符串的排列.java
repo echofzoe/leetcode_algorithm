@@ -20,24 +20,28 @@ public class Jzo_38_字符串的排列 {
     }
 
     // DFS - 时间复杂度 O(N! * N) - 空间复杂度 O(N^2)
+    private int n;
     private List<String> res;
     private char[] cs;
 
     public String[] permutation(String s) {
-        this.res = new LinkedList<>();
-        this.cs = s.toCharArray();
+        n = s.length();
+        res = new LinkedList<>();
+        cs = s.toCharArray();
+
         dfs(0);
-        return res.toArray(new String[res.size()]);
+
+        return res.toArray(new String[0]);
     }
 
     private void dfs(int idx) {
-        if (idx == cs.length - 1) {
+        if (idx == n - 1) {
             res.add(String.valueOf(cs));
             return;
         }
 
         Set<Character> set = new HashSet<>();  // 在这里就进行剪枝，而不是把所有的结果都算出来后，再用Set进行去重
-        for (int i = idx; i < cs.length; i++) {
+        for (int i = idx; i < n; i++) {
             if (set.contains(cs[i])) continue;  // 重复，剪枝
             set.add(cs[i]);
 
