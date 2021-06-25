@@ -2,6 +2,7 @@ package testdemo;
 
 import org.junit.Test;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 public class MyTest {
@@ -61,11 +62,25 @@ public class MyTest {
 
         long a = 0b1000000000000000000110101000000, b = 0b1000000000000000000110100100100;
         System.out.println(Long.toString(a, 10) + " " + Long.toString(b, 10) + " " + Long.toString(a - b, 10));
+
+        // 获取当前时间
+        System.out.println(formatTimeYMDHMSF(System.currentTimeMillis()));
+    }
+
+    private String formatTimeYMDHMSF(long time) {
+        Timestamp ts = new Timestamp(time);
+        String timeStr = ts.toString();
+        System.out.println(timeStr);
+        String[] array = timeStr.split(" ");
+        if (array.length == 2) {
+            return array[1];
+        } else {
+            return array[0];
+        }
     }
 
     @Test
     public void test5() {
-
     }
 
 }
