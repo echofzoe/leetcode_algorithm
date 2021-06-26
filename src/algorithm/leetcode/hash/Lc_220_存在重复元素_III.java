@@ -27,6 +27,7 @@ public class Lc_220_存在重复元素_III {
     public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
         int n = nums.length;
 
+        // TreeSet 为有序的去重集合，且内部采用二分查找
         TreeSet<Long> ts = new TreeSet<>();
         for (int i = 0; i < n; i++) {
             Long x = (long) nums[i];
@@ -38,6 +39,8 @@ public class Lc_220_存在重复元素_III {
             if (hi != null && hi - x <= t) return true;
 
             ts.add(x);
+
+            // 滑动窗口
             if (i >= k) ts.remove((long) nums[i - k]);
         }
 
@@ -48,29 +51,37 @@ public class Lc_220_存在重复元素_III {
     public boolean containsNearbyAlmostDuplicate1(int[] nums, int k, int t) {
         int n = nums.length;
 
-        // id = 桶id, b = 每个桶的大小
-        long id = 0, b = (long) t + 1;
+        // b = 每个桶的大小
+        long b = (long) t + 1;
         Map<Long, Long> map = new HashMap<>();
 
         for (int i = 0; i < n; i++) {
             long x = (long) nums[i];
 
-            id = getId(x, b);
+            // 计算x所属桶的id
+            long id = getId(x, b);
 
-            // 查同一个桶
-            if (map.containsKey(id)) return true;
-            // 查相邻的桶
-            if (map.containsKey(id - 1) && x - map.get(id - 1) <= t) return true;
-            if (map.containsKey(id + 1) && map.get(id + 1) - x <= t) return true;
+            // 查同一个桶和相邻的桶
+            if (map.containsKey(id)
+                    || (map.containsKey(id - 1) && x - map.get(id - 1) <= t)
+                    || (map.containsKey(id + 1) && map.get(id + 1) - x <= t))
+                return true;
 
-            map.put(id, x);  // 入桶
-            if (i >= k) map.remove(getId(nums[i - k], b));  // 滑动窗口
+            // 入桶
+            map.put(id, x);
+
+            // 滑动窗口
+            if (i >= k) map.remove(getId(nums[i - k], b));
         }
 
         return false;
     }
 
+    /**
+     * 分桶
+     * b = (t + 1) * a + b, 0 <= b <= t
+     */
     private long getId(long x, long b) {
-        return x >= 0 ? x / b : x / b - 1;
+        return x >= 0 ? x / b : (x + 1) / b - 1;
     }
 }
