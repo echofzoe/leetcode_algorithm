@@ -83,42 +83,4 @@ public class MyTest {
     public void test5() {
     }
 
-    public boolean canBeIncreasing(int[] nums) {
-        int n = nums.length;
-
-        // 第一个栈模拟 "pre >= cur 时，删除 pre" 的情况
-        Deque<Integer> dq1 = new LinkedList<>() {{
-            offerLast(nums[0]);
-        }};
-
-        // 第二个栈模拟 "pre >= cur 时，删除 cur" 的情况
-        Deque<Integer> dq2 = new LinkedList<>() {{
-            offerLast(nums[0]);
-        }};
-
-        // cnt1、cnt2 各自记录栈1、栈2模拟情况下删除的次数
-        // 删除次数>1时，已经不符合题意，直接返回false即可
-        int cnt1 = 0, cnt2 = 0;
-
-        for (int i = 1; i < n; i++) {
-            int x = nums[i];
-
-            while (!dq1.isEmpty() && x <= dq1.peekLast()) {
-                dq1.pollLast();
-                cnt1++;
-            }
-            dq1.offerLast(x);
-
-            if (dq2.isEmpty() || x > dq2.peekLast()) {
-                dq2.offerLast(x);
-            } else {
-                cnt2++;
-            }
-
-            if (cnt1 > 1 && cnt2 > 1) return false;
-        }
-
-        return true;
-    }
-
 }
