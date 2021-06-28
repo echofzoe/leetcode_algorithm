@@ -81,6 +81,7 @@ public class MyTest {
 
     @Test
     public void test5() {
+        System.out.println(Integer.bitCount(Integer.MAX_VALUE));
     }
 
 }
