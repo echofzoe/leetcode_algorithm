@@ -23,15 +23,17 @@ public class Lc_46_全排列 {
         System.out.println("没有重复数字的序列" + Arrays.toString(input) + "的所有可能的全排列有" + Arrays.deepToString(lc.permute(input).toArray()));
     }
 
-    // 回溯 - 时间复杂度 O() - 空间复杂度 O()
+    private int n;
     private List<List<Integer>> res;
     private List<Integer> tmp;
-    private int n;
+    private int[] nums;
+    private boolean[] vis;
 
+    // 回溯（交换） - 时间复杂度 O(n * n!) - 空间复杂度 O(n)
     public List<List<Integer>> permute(int[] nums) {
+        this.n = nums.length;
         this.res = new ArrayList<>();
         this.tmp = new ArrayList<>();
-        this.n = nums.length;
 
         tmp = Arrays.stream(nums).boxed().collect(Collectors.toList());
 
@@ -41,11 +43,13 @@ public class Lc_46_全排列 {
     }
 
     private void dfs(List<Integer> tmp, int idx) {
+        // exit
         if (idx == n) {
             res.add(new ArrayList<>(tmp));
             return;
         }
 
+        // dfs
         for (int i = idx; i < n; i++) {
             swap(tmp, idx, i);
             dfs(tmp, idx + 1);
@@ -58,6 +62,40 @@ public class Lc_46_全排列 {
         int t = tmp.get(i);
         tmp.set(i, tmp.get(j));
         tmp.set(j, t);
+    }
+
+    // 回溯（累加） - 时间复杂度 O(n * n!) - 空间复杂度 O(n)
+    public List<List<Integer>> permute1(int[] nums) {
+        n = nums.length;
+        res = new ArrayList<>();
+        tmp = new ArrayList<>();
+        this.nums = nums;
+        vis = new boolean[n];
+
+        dfs1(0);
+
+        return res;
+    }
+
+    private void dfs1(int idx) {
+        // exit
+        if (idx == n) {
+            res.add(new ArrayList<>(tmp));
+            return;
+        }
+
+        // dfs
+        for (int i = 0; i < n; i++) {
+            if (vis[i]) continue;
+
+            vis[i] = true;
+            tmp.add(nums[i]);
+            dfs1(idx + 1);
+
+            // backtrace
+            tmp.remove(tmp.size() - 1);
+            vis[i] = false;
+        }
     }
 
 }

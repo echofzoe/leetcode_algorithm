@@ -19,11 +19,13 @@ public class Jzo_38_字符串的排列 {
         System.out.println("字符串\"" + s + "\"中字符的所有排列为" + Arrays.toString(jz.permutation(s)));
     }
 
-    // DFS - 时间复杂度 O(N! * N) - 空间复杂度 O(N^2)
     private int n;
     private List<String> res;
     private char[] cs;
+    private StringBuilder sb;
+    private boolean[] vis;
 
+    // 回溯（交换） - 时间复杂度 O(N! * N) - 空间复杂度 O(N^2) 为递归过程中辅助Set累计存储的最大数量
     public String[] permutation(String s) {
         n = s.length();
         res = new LinkedList<>();
@@ -55,6 +57,42 @@ public class Jzo_38_字符串的排列 {
         char tmp = cs[a];
         cs[a] = cs[b];
         cs[b] = tmp;
+    }
+
+    // 回溯（累加） - 时间复杂度 O(N! * N) - 空间复杂度 O(N)
+    public String[] permutation1(String s) {
+        n = s.length();
+        res = new LinkedList<>();
+        cs = s.toCharArray();
+        sb = new StringBuilder();
+        vis = new boolean[n];
+
+        Arrays.sort(cs);
+
+        dfs1(0);
+
+        return res.toArray(new String[0]);
+    }
+
+    private void dfs1(int idx) {
+        // exit
+        if (idx == n) {
+            res.add(sb.toString());
+            return;
+        }
+
+        // dfs
+        for (int i = 0; i < n; i++) {
+            if (vis[i] || (i > 0 && !vis[i - 1] && cs[i] == cs[i - 1])) continue;
+
+            vis[i] = true;
+            sb.append(cs[i]);
+            dfs1(idx + 1);
+
+            // backtrace
+            sb.deleteCharAt(sb.length() - 1);
+            vis[i] = false;
+        }
     }
 
 }
