@@ -81,7 +81,64 @@ public class MyTest {
 
     @Test
     public void test5() {
-        System.out.println(Integer.bitCount(Integer.MAX_VALUE));
+        String s = "A1";
+        int x = 1000;
+        System.out.println(calc16To10(s));
+        System.out.println(calc10To16(x));
+    }
+
+    private int calc16To10(String s) {
+        int n = s.length(), res = 0;
+
+        Map<Character, Integer> m = new HashMap<>() {{
+            put('A', 10);
+            put('B', 11);
+            put('C', 12);
+            put('D', 13);
+            put('E', 14);
+            put('F', 15);
+        }};
+
+        for (int i = n - 1; i >= 0; i--) {
+            char c = s.charAt(i);
+            if (c < 'A') {
+                res += (c - '0') * Math.pow(16, n - 1 - i);
+            } else {
+                res += m.get(c) * Math.pow(16, n - 1 - i);
+            }
+        }
+
+        return res;
+    }
+
+    private String calc10To16(int x) {
+        StringBuilder res = new StringBuilder();
+
+        Map<Integer, Character> m = new HashMap<>() {{
+            put(10, 'A');
+            put(11, 'B');
+            put(12, 'C');
+            put(13, 'D');
+            put(14, 'E');
+            put(15, 'F');
+        }};
+
+        while (x > 0) {
+            int t = x % 16;
+            if (t < 10) {
+                res.append((char) (t + '0'));
+            } else {
+                res.append(m.get(t));
+            }
+
+            x /= 16;
+        }
+
+        return res.reverse().toString();
+    }
+
+    @Test
+    public void test6() {
     }
 
 }
