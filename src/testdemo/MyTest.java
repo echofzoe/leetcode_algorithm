@@ -81,10 +81,15 @@ public class MyTest {
 
     @Test
     public void test5() {
-        String s = "A1";
+        String s = "1A";
         int x = 1000;
-        System.out.println(calc16To10(s));
-        System.out.println(calc10To16(x));
+        System.out.println("16进制 0x" + s + " == 10进制 " + calc16To10(s));
+        System.out.println("10进制 " + x + " == 16进制 0x" + calc10To16(x));
+
+        s = "10";
+        x = 200;
+        System.out.println("32进制 " + s + " == 10进制 " + calc32To10(s));
+        System.out.println("10进制 " + x + " == 32进制 " + calc10To32(x));
     }
 
     private int calc16To10(String s) {
@@ -132,6 +137,88 @@ public class MyTest {
             }
 
             x /= 16;
+        }
+
+        return res.reverse().toString();
+    }
+
+    private int calc32To10(String s) {
+        int n = s.length(), res = 0;
+
+        Map<Character, Integer> m = new HashMap<>() {{
+            put('A', 10);
+            put('B', 11);
+            put('C', 12);
+            put('D', 13);
+            put('E', 14);
+            put('F', 15);
+            put('G', 16);
+            put('H', 17);
+            put('I', 18);
+            put('J', 19);
+            put('K', 20);
+            put('L', 21);
+            put('M', 22);
+            put('N', 23);
+            put('O', 24);
+            put('P', 25);
+            put('Q', 26);
+            put('R', 27);
+            put('S', 28);
+            put('T', 29);
+            put('U', 30);
+            put('V', 31);
+        }};
+
+        for (int i = n - 1; i >= 0; i--) {
+            char c = s.charAt(i);
+            if (c < 'A') {
+                res += (c - '0') * Math.pow(32, n - 1 - i);
+            } else {
+                res += m.get(c) * Math.pow(32, n - 1 - i);
+            }
+        }
+
+        return res;
+    }
+
+    private String calc10To32(int x) {
+        StringBuilder res = new StringBuilder();
+
+        Map<Integer, Character> m = new HashMap<>() {{
+            put(10, 'A');
+            put(11, 'B');
+            put(12, 'C');
+            put(13, 'D');
+            put(14, 'E');
+            put(15, 'F');
+            put(16, 'G');
+            put(17, 'H');
+            put(18, 'I');
+            put(19, 'J');
+            put(20, 'K');
+            put(21, 'L');
+            put(22, 'M');
+            put(23, 'N');
+            put(24, 'O');
+            put(25, 'P');
+            put(26, 'Q');
+            put(27, 'R');
+            put(28, 'S');
+            put(29, 'T');
+            put(30, 'U');
+            put(31, 'V');
+        }};
+
+        while (x > 0) {
+            int t = x % 32;
+            if (t < 10) {
+                res.append((char) (t + '0'));
+            } else {
+                res.append(m.get(t));
+            }
+
+            x /= 32;
         }
 
         return res.reverse().toString();
