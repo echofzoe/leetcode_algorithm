@@ -3,17 +3,24 @@ package algorithm.leetcode.linkedlist;
 import algorithm.leetcode.utils.ListNode;
 import algorithm.leetcode.utils.ListNodeSerialize;
 
-public class Lc_82_II_删除排序链表中的重复元素 {
-
-    // 删除排序链表中的重复元素 II
-    // https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/
+/**
+ * 删除排序链表中的重复元素 II
+ * <P>https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/</P>
+ *
+ * @author echofzoe
+ * @since unknown
+ * @date 2021.7.2
+ */
+public class Lc_82_删除排序链表中的重复元素_II {
 
     public static void main(String[] args) {
-        Lc_82_II_删除排序链表中的重复元素 lc = new Lc_82_II_删除排序链表中的重复元素();
-        ListNode head = new ListNode(1);
-        lc.listInitialize(head);    // [1,1,2,3,3]
+        Lc_82_删除排序链表中的重复元素_II lc = new Lc_82_删除排序链表中的重复元素_II();
 
-        System.out.println("去除" + ListNodeSerialize.serialize(head) + "中所有重复的元素，只保留原始链表中没有重复出现的数字的结果是" + ListNodeSerialize.serialize(lc.deleteDuplicates(head)));
+        ListNode head = new ListNode(1);
+        lc.listInitialize(head);  // [1,1,2,3,3]
+
+        System.out.println("输入：head = " + ListNodeSerialize.serialize(head));
+        System.out.println("输出：" + ListNodeSerialize.serialize(lc.deleteDuplicates(head)));
     }
 
     // 模拟 - 时间复杂度 O(N) - 空间复杂度 O(1)
@@ -26,7 +33,7 @@ public class Lc_82_II_删除排序链表中的重复元素 {
         while (head != null) {
             if (head.next == null || head.val != head.next.val) {
                 tail.next = head;
-                tail = head;
+                tail = tail.next;
             }
 
             while (head.next != null && head.val == head.next.val) {
