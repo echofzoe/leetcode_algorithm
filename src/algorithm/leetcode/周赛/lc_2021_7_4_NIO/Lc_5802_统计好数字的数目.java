@@ -22,7 +22,7 @@ public class Lc_5802_统计好数字的数目 {
         System.out.println("输出：" + lc.countGoodNumbers(n));  // 999999111
     }
 
-    // 快速幂 - 时间复杂度 O() - 空间复杂度 O()
+    // 快速幂 - 时间复杂度 O(logN) - 空间复杂度 O(1)
     private final int MOD = 1000000007;
 
     public int countGoodNumbers(long n) {
