@@ -35,6 +35,7 @@ public class Lc_726_原子的数量 {
         cs = formula.toCharArray();
 
         Deque<Map<String, Integer>> stack = new LinkedList<>();
+        stack.push(new HashMap<>());
 
         idx = 0;
         while (idx < n) {
@@ -45,6 +46,7 @@ public class Lc_726_原子的数量 {
                 stack.push(new HashMap<>());
             } else if (c == ')') {
                 idx++;
+
                 int num = parseNum();
                 Map<String, Integer> popMap = stack.pop();
                 Map<String, Integer> topMap = stack.peek();
@@ -54,23 +56,22 @@ public class Lc_726_原子的数量 {
                     topMap.put(atom, topMap.getOrDefault(atom, 0) + v * num);
                 }
             } else {
-                int num = parseNum();
+                // ！下面两句有严格的先后关系！
                 String atom = parseAtom();
-                Map<String, Integer> topMap = stack.pop();
-                topMap.put(atom, topMap.getOrDefault(atom, 0) + 1);
+                int num = parseNum();
+                Map<String, Integer> topMap = stack.peek();
+                topMap.put(atom, topMap.getOrDefault(atom, 0) + num);
             }
         }
 
-        Map<String, Integer> m = stack.pop();
-        TreeMap<String, Integer> t =  new TreeMap<>(m);
+        TreeMap<String, Integer> t = new TreeMap<>(stack.pop());
 
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, Integer> entry: t.entrySet()) {
+        for (Map.Entry<String, Integer> entry : t.entrySet()) {
             String atom = entry.getKey();
             int v = entry.getValue();
-
             sb.append(atom);
-            if (v > 0) sb.append(v);
+            if (v > 1) sb.append(v);
         }
 
         return sb.toString();
@@ -90,6 +91,7 @@ public class Lc_726_原子的数量 {
     private String parseAtom() {
         StringBuilder sb = new StringBuilder();
         sb.append(cs[idx++]);
+
         while (idx < n && Character.isLowerCase(cs[idx])) {
             sb.append(cs[idx++]);
         }
