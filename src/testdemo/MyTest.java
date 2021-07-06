@@ -226,17 +226,7 @@ public class MyTest {
 
     @Test
     public void test6() {
-    }
 
-    public int countGoodNumbers(long n) {
-        final int MOD = 1000000007;
-
-        long res = 1, a = n / 2;
-        for (long i = 0; i < a; i++) {
-            res = (res * 20) % MOD;
-        }
-
-        return (n & 1) == 1 ? (int) (res * 5 % MOD) : (int) res;
     }
 
 }
