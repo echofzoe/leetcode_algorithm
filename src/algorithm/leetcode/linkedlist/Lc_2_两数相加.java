@@ -22,53 +22,56 @@ public class Lc_2_两数相加 {
                 "请你将两个数相加，并以相同形式返回一个表示和的链表。\n" +
                 "你可以假设除了数字 0 之外，这两个数都不会以 0 开头。");
         System.out.println("输入：l1 = " + ListNodeSerialize.serialize(l1) + ", l2 = " + ListNodeSerialize.serialize(l2));
-        System.out.println("输出：" + ListNodeSerialize.serialize(lc.addTwoNumbers(l1, l2)));
+        System.out.println("输出：" + ListNodeSerialize.serialize(lc.addTwoNumbers(l1, l2)));  // [7,0,4,0,1]
     }
 
     // 模拟 - 时间复杂度 O(max(M,N)) - 空间复杂度 O(1)
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode list = new ListNode(-1);
-        ListNode dummy = list;
+        ListNode dummy = new ListNode(-1, l1), tail = new ListNode(-1);
 
-        int carry = 0;  // 进位
+        int carry = 0;
         while (l1 != null || l2 != null) {
-            int a = 0, b = 0, c = 0;
+            int sum = 0;
 
-            if (l1 != null) {
-                a = l1.val;
-                l1 = l1.next;
-            }
-
+            sum += carry;
+            sum += l1 == null ? 0 : l1.val;
             if (l2 != null) {
-                b = l2.val;
+                sum += l2.val;
                 l2 = l2.next;
             }
 
-            c = a + b + carry;
+            carry = sum / 10;
+            sum %= 10;
 
-            list.next = new ListNode(c % 10);
-            list = list.next;
+            if (l1 == null) {
+                tail.next = new ListNode(sum);
+                l1 = tail.next;
+            }
+            else l1.val = sum;
 
-            carry = c / 10;
+            tail = l1;
+            l1 = l1.next;
         }
 
-        if (carry > 0) {
-            list.next = new ListNode(carry);
-        }
+        if (carry > 0) tail.next = new ListNode(carry);
 
         return dummy.next;
     }
 
     private void listInitialize(ListNode l1, ListNode l2) {
-        // l1 = [9]
-        l1.val = 9;
+        // l1 = [2,4,9]
+        ListNode t1 = l1;
+        t1.val = 2;
+        t1.next = new ListNode(4);
+        t1 = t1.next;
+        t1.next = new ListNode(9);
 
-        // l2 = [1,9,9,9]
+        // l2 = [5,6,4,9]
         ListNode t2 = l2;
-        t2.val = 1;
-        t2.next = new ListNode(9);
+        t2.val = 5;
+        t2.next = new ListNode(6);
         t2 = t2.next;
-        t2.next = new ListNode(9);
+        t2.next = new ListNode(4);
         t2 = t2.next;
         t2.next = new ListNode(9);
     }
