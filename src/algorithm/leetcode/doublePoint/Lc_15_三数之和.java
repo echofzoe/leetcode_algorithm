@@ -4,44 +4,56 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 三数之和
+ * <P>https://leetcode-cn.com/problems/3sum/</P>
+ *
+ * @author echofzoe
+ * @updated 2021.7.7
+ * @since unknown
+ */
 public class Lc_15_三数之和 {
-
-    // 三数之和
-    // https://leetcode-cn.com/problems/3sum/
 
     public static void main(String[] args) {
         Lc_15_三数之和 lc = new Lc_15_三数之和();
+
         int[] nums = new int[]{-1, 0, 1, 2, -1, -4};
 
-        System.out.println("数组 " + Arrays.toString(nums) + " 中三数之和等于0的三元组有 " + Arrays.deepToString(new List[]{lc.threeSum(nums)}));
-
+        System.out.println("给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。\n" +
+                "注意：答案中不可以包含重复的三元组。\n");
+        System.out.println("输入：nums = " + Arrays.toString(nums));
+        System.out.println("输出：" + lc.threeSum(nums));  // [[-1,-1,2],[-1,0,1]]
     }
 
     // 排序 + 双指针 - 时间复杂度 O(N^2) - 空间复杂度 O(logN) 为排序数组所使用的额外空间
     public List<List<Integer>> threeSum(int[] nums) {
-        int n = nums.length;
-        if (n < 3) return null;
+        List<List<Integer>> res = new ArrayList<>();
+        int n;
+        if (nums == null || (n = nums.length) < 3) return res;
 
         Arrays.sort(nums);
-        List<List<Integer>> res = new ArrayList<>();
 
+        // 枚举 a
         for (int k = 0; k < n - 2; k++) {
-            if (nums[k] > 0) break;
+            int a = nums[k];
 
-            if (k > 0 && nums[k] == nums[k - 1]) continue;
+            if (a > 0) break;  // 剪枝
+            if (k > 0 && a == nums[k - 1]) continue;  // 去重
 
-            int i = k + 1, j = nums.length - 1;
-
+            // 枚举 b、c
+            int i = k + 1, j = n - 1;
             while (i < j) {
-                int sum = nums[k] + nums[i] + nums[j];
+                int b = nums[i], c = nums[j];
+                int sum = a + b + c;
+
                 if (sum < 0) {
                     while (i < j && nums[i] == nums[++i]) ;
                 } else if (sum > 0) {
                     while (i < j && nums[j] == nums[--j]) ;
                 } else {
-                    res.add(new ArrayList<>(Arrays.asList(nums[k], nums[i], nums[j])));
+                    res.add(Arrays.asList(a, b, c));
 
-                    // 去重,收缩边界
+                    // 去重，收缩边界
                     while (i < j && nums[i] == nums[++i]) ;
                     while (i < j && nums[j] == nums[--j]) ;
                 }

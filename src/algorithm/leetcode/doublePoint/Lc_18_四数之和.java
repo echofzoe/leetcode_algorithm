@@ -4,42 +4,65 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 四数之和
+ * <P>https://leetcode-cn.com/problems/4sum/</P>
+ *
+ * @author echofzoe
+ * @updated 2021.7.7
+ * @since unknown
+ */
 public class Lc_18_四数之和 {
-
-    // 四数之和
-    // https://leetcode-cn.com/problems/4sum/
 
     public static void main(String[] args) {
         Lc_18_四数之和 lc = new Lc_18_四数之和();
-        int[] input = {1, 0, -1, 0, -2, 2};
-        int target = 0;
 
-        System.out.println("数组" + Arrays.toString(input) + "中四数之和等于" + target + "的不包含重复的四元组集合为 " + Arrays.deepToString(lc.fourSum(input, target).toArray()));
+        int[] nums = {1, -2, -5, -4, -3, 3, 3, 5};
+        int target = -11;
+
+        System.out.println("输入：nums = " + Arrays.toString(nums) + ", target = " + target);
+        System.out.println("输出：" + lc.fourSum(nums, target));  // [[-5, -4, -3, 1]]
     }
 
     // 排序 + 双指针 - 时间复杂度 O(N^3) - 空间复杂度 O(logN) 为排序所用额外空间
     public List<List<Integer>> fourSum(int[] nums, int target) {
         List<List<Integer>> res = new ArrayList<>();
-        if (nums == null || nums.length < 4) return res;
+        int n;
+        if (nums == null || (n = nums.length) < 4) return res;
 
         Arrays.sort(nums);
-        int length = nums.length;
-        for (int a = 0; a < length - 3; a++) {
-            if (a > 0 && nums[a] == nums[a - 1]) continue;
 
-            for (int b = a + 1; b < length - 2; b++) {
-                if (b > a + 1 && nums[b] == nums[b - 1]) continue;
-                int c = b + 1, d = length - 1;
-                while (c < d) {
-                    int sum = nums[a] + nums[b] + nums[c] + nums[d];
-                    if (sum > target) {
-                        while (c < d && nums[d] == nums[--d]) ;
-                    } else if (sum < target) {
-                        while (c < d && nums[c] == nums[++c]) ;
+        for (int i = 0; i < n - 3; i++) {
+            // 剪枝
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            if (nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] > target) break;
+            if (nums[i] + nums[n - 1] + nums[n - 2] + nums[n - 3] < target) continue;
+
+            int a = nums[i];
+
+            for (int j = i + 1; j < n - 2; j++) {
+                // 剪枝
+                if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+                if (a + nums[j] + nums[j + 1] + nums[j + 2] > target) break;
+                if (a + nums[j] + nums[n - 1] + nums[n - 2] < target) continue;
+
+                int b = nums[j];
+                // if (a + b > target) break;  // 有负数的情况下要去掉这句
+
+                int l = j + 1, r = n - 1;
+                while (l < r) {
+                    int c = nums[l], d = nums[r];
+                    int sum = a + b + c + d;
+
+                    if (sum < target) {
+                        while (l < r && nums[l] == nums[++l]) ;
+                    } else if (sum > target) {
+                        while (l < r && nums[r] == nums[--r]) ;
                     } else {
-                        res.add(Arrays.asList(nums[a], nums[b], nums[c], nums[d]));
-                        while (c < d && nums[c] == nums[++c]) ;
-                        while (c < d && nums[d] == nums[--d]) ;
+                        res.add(Arrays.asList(a, b, c, d));
+
+                        while (l < r && nums[l] == nums[++l]) ;
+                        while (l < r && nums[r] == nums[--r]) ;
                     }
                 }
             }
