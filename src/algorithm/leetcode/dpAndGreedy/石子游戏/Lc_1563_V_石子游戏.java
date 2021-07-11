@@ -1,4 +1,4 @@
-package algorithm.leetcode.dpAndGreedy;
+package algorithm.leetcode.dpAndGreedy.石子游戏;
 
 import java.util.Arrays;
 
