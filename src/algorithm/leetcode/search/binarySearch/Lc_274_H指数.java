@@ -1,4 +1,4 @@
-package algorithm.leetcode.sort;
+package algorithm.leetcode.search.binarySearch;
 
 import java.util.Arrays;
 
@@ -43,31 +43,22 @@ public class Lc_274_H指数 {
     
     // 模拟 + 二分 - 时间复杂度 O(NlogN) - 空间复杂度 O(1)
     public int hIndex1(int[] citations) {
-        int n = citations.length;
+        int n;
+        if (citations == null || (n = citations.length) == 0) return 0;
 
         Arrays.sort(citations);
+        if (citations[n - 1] == 0) return 0;
 
-        // 二分引用次数
-        int l = 0, m, r = n;
+        // 二分至少被引用次数
+        int l = 0, m, r = n - 1;
         while (l < r) {
-            m = l + (r - l + 1) / 2;
+            m = l + (r - l) / 2;
 
-            if (check(citations, m)) l = m;
-            else r = m - 1;
+            if (citations[m] < n - m) l = m + 1;
+            else r = m;
         }
 
-        return l;
-    }
-
-    private boolean check(int[] cs, int m) {
-        int cnt = 0;
-        for (int x : cs) {
-            // 如果论文引用次数 >= 当前引用次数，符合要求的篇数 +1
-            if (x >= m) cnt++;
-        }
-
-        //如果符合要求篇数 >= 引用次数,则当前值可以为 H 指数
-        return cnt >= m;
+        return n - l;
     }
 
 }
