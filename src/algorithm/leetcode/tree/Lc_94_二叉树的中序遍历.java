@@ -7,19 +7,26 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 二叉树的中序遍历
+ * <P>https://leetcode-cn.com/problems/binary-tree-inorder-traversal/</P>
+ *
+ * @author echofzoe
+ * @since unknown
+ * @updated 2021.7.14
+ */
 public class Lc_94_二叉树的中序遍历 {
-
-    // 二叉树的中序遍历
-    // https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
 
     public static void main(String[] args) {
         Lc_94_二叉树的中序遍历 lc = new Lc_94_二叉树的中序遍历();
+
         TreeNode root = new TreeNode(1);
         root.right = new TreeNode(2);
         root.right.left = new TreeNode(3);
 
-
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root) + " 的中序遍历结果是 " + lc.inorderTraversalIteration(root));
+        System.out.println("给定一个二叉树的根节点 root ，返回它的 中序 遍历。");
+        System.out.println("输入：root = " + BinaryTreeSerialize.serialize(root));
+        System.out.println("输出：" + lc.inorderTraversalIteration(root));  // [1,3,2]
     }
 
     List<Integer> res = new LinkedList<>();
@@ -28,19 +35,11 @@ public class Lc_94_二叉树的中序遍历 {
     public List<Integer> inorderTraversalRecursive(TreeNode root) {
         if (root == null) return res;
 
-        dfs(root);
+        inorderTraversalRecursive(root.left);
+        res.add(root.val);
+        inorderTraversalRecursive(root.right);
 
         return res;
-    }
-
-    private void dfs(TreeNode node) {
-        if (node == null) return;
-
-        dfs(node.left);
-
-        res.add(node.val);
-
-        dfs(node.right);
     }
 
     // 迭代 - 时间复杂度 O(N) - 空间复杂度 O(N)
@@ -48,23 +47,20 @@ public class Lc_94_二叉树的中序遍历 {
         if (root == null) return res;
 
         Deque<TreeNode> stack = new LinkedList<>();
+        TreeNode tmp = root;
 
-        TreeNode dummy = root;
-        while (dummy != null || !stack.isEmpty()) {
-
-            while (dummy != null) {
-                stack.offerFirst(dummy);
-                dummy = dummy.left;
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.offerLast(root);
+                root = root.left;
             }
 
-            dummy = stack.pollFirst();
-
-            res.add(dummy.val);
-
-            dummy = dummy.right;
-
+            root = stack.pollLast();
+            res.add(root.val);
+            root = root.right;
         }
 
+        root = tmp;  // 还原
         return res;
     }
 

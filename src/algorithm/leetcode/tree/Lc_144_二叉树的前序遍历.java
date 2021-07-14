@@ -7,17 +7,25 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 二叉树的前序遍历
+ * <P>https://leetcode-cn.com/problems/binary-tree-preorder-traversal/</P>
+ *
+ * @author echofzoe
+ * @since unknown
+ * @updated 2021.7.14
+ */
 public class Lc_144_二叉树的前序遍历 {
-
-    // 二叉树的前序遍历
-    // https://leetcode-cn.com/problems/binary-tree-preorder-traversal/
 
     public static void main(String[] args) {
         Lc_144_二叉树的前序遍历 lc = new Lc_144_二叉树的前序遍历();
+        
         TreeNode root = new TreeNode(1);
-        lc.treeInitialize(root);    // [1,null,2,3]
+        lc.treeInitialize(root);  // [1,null,2,3]
 
-        System.out.println("二叉树 " + BinaryTreeSerialize.serialize(root) + " 的前序遍历序列是 " + lc.preorderTraversalIteration(root).toString());
+        System.out.println("给你二叉树的根节点 root ，返回它节点值的 前序 遍历。");
+        System.out.println("输入：root = " + BinaryTreeSerialize.serialize(root));
+        System.out.println("输出：" + lc.preorderTraversalIteration(root));  // [1,2,3]
     }
 
     List<Integer> res = new LinkedList<>();
@@ -26,19 +34,11 @@ public class Lc_144_二叉树的前序遍历 {
     public List<Integer> preorderTraversalRecursive(TreeNode root) {
         if (root == null) return res;
 
-        dfs(root);
+        res.add(root.val);
+        preorderTraversalRecursive(root.left);
+        preorderTraversalRecursive(root.right);
 
         return res;
-    }
-
-    private void dfs(TreeNode node) {
-        if (node == null) return;
-
-        res.add(node.val);
-
-        dfs(node.left);
-
-        dfs(node.right);
     }
 
     // 迭代 - 时间复杂度 O(N) - 空间复杂度 O(N) 为迭代过程中显示栈的开销
@@ -46,17 +46,16 @@ public class Lc_144_二叉树的前序遍历 {
         if (root == null) return res;
 
         Deque<TreeNode> stack = new LinkedList<>() {{
-            offerFirst(root);
+            offerLast(root);
         }};
 
         while (!stack.isEmpty()) {
-            TreeNode node = stack.pollFirst();
+            TreeNode cur = stack.pollLast();
 
-            res.add(node.val);
+            res.add(cur.val);
 
-            if (node.right != null) stack.offerFirst(node.right);
-
-            if (node.left != null) stack.offerFirst(node.left);
+            if (cur.right != null) stack.offerLast(cur.right);
+            if (cur.left != null) stack.offerLast(cur.left);
         }
 
         return res;
