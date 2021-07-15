@@ -19,7 +19,7 @@ public class Jzo_33_二叉搜索树的后序遍历序列 {
 
         System.out.println("输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。如果是则返回 true，否则返回 false。假设输入的数组的任意两个数字都互不相同。");
         System.out.println("输入：postorder = " + Arrays.toString(postorder));
-        System.out.println("输出：" + lc.verifyPostorder(postorder));
+        System.out.println("输出：" + lc.verifyPostorder(postorder));  // false
     }
 
     // 递归 - 时间复杂度 O(N^2) - 空间复杂度 O(N) 最差情况下，树退化成链表，递归深度达到N

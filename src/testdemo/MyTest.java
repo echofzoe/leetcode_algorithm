@@ -86,8 +86,8 @@ public class MyTest {
         System.out.println("16进制 0x" + s + " == 10进制 " + calc16To10(s));
         System.out.println("10进制 " + x + " == 16进制 0x" + calc10To16(x));
 
-        s = "10";
-        x = 200;
+        s = "U0";
+        x = 990;
         System.out.println("32进制 " + s + " == 10进制 " + calc32To10(s));
         System.out.println("10进制 " + x + " == 32进制 " + calc10To32(x));
     }
