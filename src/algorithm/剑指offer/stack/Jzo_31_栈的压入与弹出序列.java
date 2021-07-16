@@ -1,4 +1,4 @@
-package algorithm.剑指offer;
+package algorithm.剑指offer.stack;
 
 import java.util.Arrays;
 import java.util.Deque;
