@@ -51,27 +51,24 @@ public class Lc_5794_求和游戏 {
 
         int cnt = cnt1 + cnt2;
         if (cnt == 0) return s1 != s2;  // 无'?'的情况
-        if (cnt1 == 0 && s1 < 9) return true;  // 左半部分无'?'但右半部分有，且s1<9，此时alice全部填9就能赢
+        if ((cnt & 1) == 1) return true;  // '?'数量为奇数的情况
 
-        // 模拟其他情况
-        // - alice总在左半部分贪心的+9，试图引起不想等，那么bob就得总是在左半部分+0，试图引起相等，右半部分则相反
-        boolean alice = true;  // true表示alice操作，false表bob操作
-        for (int i = 0; i < cnt; i++) {
-            if (cnt1 > 0) {
-                // 左半部分，alice总是贪心的+9，bob总是防御性的+0
-                if (alice) s1 += 9;
+        // 当'?'数量为偶数时，分类讨论，因为 Alice 想让 s1 != s2，故分为以下两种情况讨论：
+        // 1. s1 > s2
+        // - Alice 希望到游戏结束时 s1 > s2，故 Alice 必须在左边的'?'中放'9'、右边的'?'中放'0'
+        // - 为了应对这种情况，Bob 的操作相反
+        // - 在左边，Alice 可以操作 ceil(cnt1 / 2) 次; 在右边，Bob 可以操作 cnt2 - [ceil(cnt / 2) - ceil(cnt1 / 2)]
+        // 2. s1 < s2
+        // - Alice 希望到游戏结束时 s1 < s2，故 Alice 必须在左边的'?'中放'0'、右边的'?'中放'9'
+        // - 为了应对这种情况，Bob 的操作相反
+        // - 在左边，Bob 可以操作 ceil(cnt1 / 2) 次; 在右边，Alice 可以操作 cnt2 - (cnt / 2 - ceil(cnt1 / 2))
 
-                alice = !alice;
-                cnt1--;
-            } else {
-                // 右半部分，bob总是贪心的+9，alice总是防御性的+0
-                if (!alice) s2 += 9;
+        return s1 + ceil(cnt1) * 9 > s2 + (cnt2 - (ceil(cnt) - ceil(cnt1))) * 9
+                || s1 + cnt1 / 2 * 9 < s2 + (cnt2 - (cnt / 2 - cnt1 / 2)) * 9;
+    }
 
-                alice = !alice;
-            }
-        }
-
-        return s1 != s2;
+    private int ceil(int a) {
+        return (int) Math.ceil((double) a / 2);
     }
 
 }

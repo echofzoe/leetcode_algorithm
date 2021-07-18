@@ -14,7 +14,7 @@
 
   - 服务器响应报文结构
 
-    ![image-20210407171234523](D:\CODE\JAVA\leetcode_algorithm\src\interview\assets\statics\服务器响应报文结构.png)
+    ![image-20210407171234523](..\assets\statics\服务器响应报文结构.png)
 
 #### - URL
 
