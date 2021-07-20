@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.interview;
 
 public class 禽兽传染 {
 
