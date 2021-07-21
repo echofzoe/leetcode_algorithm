@@ -46,13 +46,15 @@ public class Lc_300_最长递增子序列 {
     }
 
     // DP - 时间复杂度 O(N^2) - 空间复杂度 O(N)
-    // - 定义 dp[i] 为考虑前 i 个元素，以第 i 个数字结尾的最长上升子序列的长度，注意 nums[i] 必须被选取
-    // - 状态转移方程: {
-    //   dp[i] = max(dp[x]) + 1, 0 <= x < i 且 nums[x] < nums[i]
-    // }
     public int lengthOfLISDP(int[] nums) {
         int n = nums.length;
 
+        // dp[i] 为考虑前 i 个元素，以第 i 个数字结尾的最长上升子序列的长度，注意 nums[i] 必须被选取
+        /*
+            状态转移方程：{
+                dp[i] = max(dp[j]) + 1, 0<=j<i && nums[j]<nums[i]
+            }
+         */
         int[] dp = new int[n];
         // base case
         Arrays.fill(dp, 1);

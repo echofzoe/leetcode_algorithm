@@ -2,28 +2,36 @@ package algorithm.leetcode.dpAndGreedy.股票问题;
 
 import java.util.Arrays;
 
+/**
+ * 买卖股票的最佳时机含手续费
+ * <P>https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/</P>
+ *
+ * @author echofzoe
+ * @updated 2021.7.21
+ * @since unknown
+ */
 public class Lc_714_买卖股票的最佳时机含手续费 {
-
-    // 买卖股票的最佳时机含手续费
-    // https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
 
     public static void main(String[] args) {
         Lc_714_买卖股票的最佳时机含手续费 lc = new Lc_714_买卖股票的最佳时机含手续费();
-        int[] prices1 = {1, 3, 2, 8, 4, 9};
-        int[] prices2 = {2, 3, 1, 16, 7, 9};
+
+        int[] prices = {1, 3, 2, 8, 4, 9};
         int fee = 2;
 
-        System.out.println("在股票价格数组" + Arrays.toString(prices1) + "和交易手续费" + fee + "的条件下所能获取的最大利润为" + lc.maxProfitDp(prices1, fee));
-        System.out.println("在股票价格数组" + Arrays.toString(prices2) + "和交易手续费" + fee + "的条件下所能获取的最大利润为" + lc.maxProfitGreedy(prices2, fee));
+        System.out.println("给定一个整数数组 prices，其中第 i 个元素代表了第 i 天的股票价格 ；整数 fee 代表了交易股票的手续费用。\n" +
+                "你可以无限次地完成交易，但是你每笔交易都需要付手续费。如果你已经购买了一个股票，在卖出它之前你就不能再继续购买股票了。\n" +
+                "返回获得利润的最大值。\n" +
+                "注意：这里的一笔交易指买入持有并卖出股票的整个过程，每笔交易你只需要为支付一次手续费。\n");
+        System.out.println("输入：prices = " + Arrays.toString(prices));
+        System.out.println("输出：" + lc.maxProfitDp(prices, fee));
     }
 
     // DP - 时间复杂度 O(N) - 空间复杂度 O(N)
-    // - dp[i][0] 表示第i天不持有股票状态下的最大利润
-    // - dp[i][1] 表示第i天持有股票状态下的最大利润
     public int maxProfitDp(int[] prices, int fee) {
         int n = prices.length;
-        int[][] dp = new int[n][2];
 
+        // dp[i][0] 表示第i天不持有股票状态下的最大利润, dp[i][1] 表示第i天持有股票状态下的最大利润
+        int[][] dp = new int[n][2];
         // base case
         dp[0][0] = 0;
         dp[0][1] = -prices[0];
@@ -54,7 +62,7 @@ public class Lc_714_买卖股票的最佳时机含手续费 {
 
         return dp0;
     }
-    
+
     // 贪心 - 时间复杂度 O(N) - 空间复杂度 O(1)
     public int maxProfitGreedy(int[] prices, int fee) {
         int n = prices.length;

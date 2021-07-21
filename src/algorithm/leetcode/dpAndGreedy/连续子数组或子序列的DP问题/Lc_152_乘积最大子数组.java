@@ -24,32 +24,26 @@ public class Lc_152_乘积最大子数组 {
         System.out.println("- 输入：" + Arrays.toString(nums3) + "，输出：" + lc.maxProduct(nums3));
     }
 
-    // DP - 时间复杂度 O() - 空间复杂度 O()
-    /* - dp[i][j] 表示以 nums[i] 结尾的连续子数组的最值，
-       - 当 j = 0 时，表示计算的是最小值
-       - 当 j = 1 时，表示计算的是最大值
-       - 状态转移方程: {
-         dp[i][0] = Math.max(dp[i - 1][0] * nums[i], nums[i]), nums[i] >= 0
-         dp[i][1] = Math.max(dp[i - 1][1] * nums[i], nums[i]), nums[i] >= 0
-         dp[i][0] = Math.max(dp[i - 1][1] * nums[i], nums[i]), nums[i] < 0
-         dp[i][1] = Math.max(dp[i - 1][0] * nums[i], nums[i]), nums[i] < 0
-       }
-     */
+    // DP - 时间复杂度 O(N) - 空间复杂度 O(N)
     public int maxProduct(int[] nums) {
         int n = nums.length;
+        if (n == 1) return nums[0];
 
+        // dp[i][0] 表示以元素nums[i]结尾的连续子数组的最小值, dp[i][1] 表示以元素nums[i]结尾的连续子数组的最大值
         int[][] dp = new int[n][2];
         // base case
         dp[0][0] = nums[0];
         dp[0][1] = nums[0];
 
         for (int i = 1; i < n; i++) {
-            if (nums[i] >= 0) {
-                dp[i][0] = Math.min(dp[i - 1][0] * nums[i], nums[i]);
-                dp[i][1] = Math.max(dp[i - 1][1] * nums[i], nums[i]);
+            int cur = nums[i];
+
+            if (cur < 0) {
+                dp[i][0] = Math.min(dp[i - 1][1] * cur, cur);
+                dp[i][1] = Math.max(dp[i - 1][0] * cur, cur);
             } else {
-                dp[i][0] = Math.min(dp[i - 1][1] * nums[i], nums[i]);
-                dp[i][1] = Math.max(dp[i - 1][0] * nums[i], nums[i]);
+                dp[i][0] = Math.min(dp[i - 1][0] * cur, cur);
+                dp[i][1] = Math.max(dp[i - 1][1] * cur, cur);
             }
         }
 
