@@ -1,34 +1,46 @@
 package algorithm.leetcode.matrix;
 
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * 岛屿数量
+ * <P>https://leetcode-cn.com/problems/number-of-islands/</P>
+ *
+ * @author echofzoe
+ * @updated 2021.7.22
+ * @since unknown
+ */
 public class Lc_200_岛屿数量 {
-
-    // 岛屿数量
-    // https://leetcode-cn.com/problems/number-of-islands/
 
     public static void main(String[] args) {
         Lc_200_岛屿数量 lc = new Lc_200_岛屿数量();
+
         char[][] grid = {{'1', '1', '0', '0', '0'}, {'1', '1', '0', '0', '0'}, {'0', '0', '1', '0', '0'}, {'0', '0', '0', '1', '1'}};
 
-        System.out.println("二维网格地图: ");
-        for (char[] chars : grid) {
-            System.out.println(Arrays.toString(chars));
-        }
-        System.out.println("中, 岛屿的数量为: " + lc.numIslandsBFS(grid));
+        System.out.println("给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。\n" +
+                "岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。\n" +
+                "此外，你可以假设该网格的四条边均被水包围。\n");
+        System.out.println("输入：grid = " + Arrays.deepToString(grid));
+        System.out.println("输出：" + lc.numIslandsBFS(grid));  // 3
     }
 
     // DFS - 时间复杂度 O(MN) - 空间复杂度 O(MN)
-    public int numIslandsDFS(char[][] grid) {
-        int res = 0, vertical = grid.length, horizontal = grid[0].length;
+    private char[][] grid;
+    private int m, n;
 
-        for (int i = 0; i < vertical; i++) {
-            for (int j = 0; j < horizontal; j++) {
-                // 当前块为陆地时,以当前块为中心dfs其上下左右
+    public int numIslandsDFS(char[][] grid) {
+        this.grid = grid;
+        m = grid.length;
+        n = grid[0].length;
+
+        int res = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
-                    dfs(grid, i, j);
+                    dfs(i, j);
                     res++;
                 }
             }
@@ -37,24 +49,31 @@ public class Lc_200_岛屿数量 {
         return res;
     }
 
-    private void dfs(char[][] grid, int i, int j) {
-        if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == '0') return;
+    private final int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+    private void dfs(int i, int j) {
+        if (i < 0 || i >= m || j < 0 || j >= n) return;
+        if (grid[i][j] == '0') return;
+
         grid[i][j] = '0';
-        dfs(grid, i - 1, j);    // 上
-        dfs(grid, i + 1, j);    // 下
-        dfs(grid, i, j - 1);    // 左
-        dfs(grid, i, j + 1);    // 右
+
+        for (int[] dir : dirs) {
+            int x = i + dir[0], y = j + dir[1];
+            dfs(x, y);
+        }
     }
 
     // BFS - 时间复杂度 O(MN) - 空间复杂度 O(M+N)
     public int numIslandsBFS(char[][] grid) {
-        int res = 0, vertical = grid.length, horizontal = grid[0].length;
+        this.grid = grid;
+        m = grid.length;
+        n = grid[0].length;
 
-        for (int i = 0; i < vertical; i++) {
-            for (int j = 0; j < horizontal; j++) {
-                // 当前块为陆地时,以当前块为中心bfs其上下左右
+        int res = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
-                    bfs(grid, i, j);
+                    bfs(i, j);
                     res++;
                 }
             }
@@ -63,20 +82,22 @@ public class Lc_200_岛屿数量 {
         return res;
     }
 
-    private void bfs(char[][] grid, int i, int j) {
-        Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[]{i, j});
+    private void bfs(int i, int j) {
+        Deque<int[]> d = new LinkedList<>();
+        d.offerLast(new int[]{i, j});
 
-        while (!queue.isEmpty()) {
-            int[] cur = queue.poll();
+        while (!d.isEmpty()) {
+            int[] cur = d.pollFirst();
             i = cur[0];
             j = cur[1];
-            if (i >= 0 && i < grid.length && j >= 0 && j < grid[0].length && grid[i][j] == '1') {
-                grid[i][j] = '0';
-                queue.offer(new int[]{i - 1, j});
-                queue.offer(new int[]{i + 1, j});
-                queue.offer(new int[]{i, j - 1});
-                queue.offer(new int[]{i, j + 1});
+
+            if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == '0') continue;
+
+            grid[i][j] = '0';
+
+            for (int[] dir : dirs) {
+                int x = i + dir[0], y = j + dir[1];
+                d.offerLast(new int[]{x, y});
             }
         }
     }

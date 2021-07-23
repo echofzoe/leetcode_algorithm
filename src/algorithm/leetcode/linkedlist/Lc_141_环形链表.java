@@ -6,13 +6,19 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 环形链表
+ * <P>https://leetcode-cn.com/problems/linked-list-cycle/</P>
+ *
+ * @author echofzoe
+ * @since unknown
+ * @updated 2021.7.22
+ */
 public class Lc_141_环形链表 {
-
-    // 环形链表
-    // https://leetcode-cn.com/problems/linked-list-cycle/
 
     public static void main(String[] args) {
         Lc_141_环形链表 lc = new Lc_141_环形链表();
+
         ListNode head = new ListNode(3);
         lc.linkedListInitialize(head);    // head = [3,2,0,-4], pos = 1
 
