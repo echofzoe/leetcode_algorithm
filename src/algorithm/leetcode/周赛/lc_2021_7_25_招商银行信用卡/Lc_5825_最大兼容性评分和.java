@@ -58,7 +58,7 @@ public class Lc_5825_最大兼容性评分和 {
         }
 
         dfs(0, 0);
-        
+
         return res;
     }
 
