@@ -1,4 +1,4 @@
-package algorithm.排序算法.各集合排序操作;
+package algorithm.集合操作;
 
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ import java.util.*;
  * @author echofzoe
  * @since 2021.7.10
  */
-public class Sort_Java_Set {
+public class 集合排序 {
 
     @Test
     public void treeMapSort() {

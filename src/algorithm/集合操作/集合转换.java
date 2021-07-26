@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.集合操作;
 
 import org.junit.Test;
 
