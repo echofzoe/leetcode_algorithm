@@ -7,8 +7,8 @@ import java.util.Arrays;
  * <P>https://leetcode-cn.com/problems/longest-increasing-subsequence/</P>
  *
  * @author echofzoe
- * @updated 2021.7.26
  * @since unknown
+ * @updated 2021.7.27
  */
 public class Lc_300_最长递增子序列 {
 
@@ -27,37 +27,44 @@ public class Lc_300_最长递增子序列 {
     // - 考虑一个简单的贪心，如果我们要使上升子序列尽可能的长，则我们需要让序列上升得尽可能慢，因此我们希望每次在上升子序列最后加上的那个数尽可能的小
     public int lengthOfLIS(int[] nums) {
         int n = nums.length;
+        if (n <= 1) return n;
 
-        int[] d = new int[n];
-        int idx = 0;
-        d[idx] = nums[0];
+        int[] aux = new int[n];
+        // base case
+        aux[0] = nums[0];
 
-        for (int i = 1; i < n; i++) {
-            if (d[idx] < nums[i]) {
-                d[++idx] = nums[i];
-            } else {
-                int lo = 0, mid, hi = idx, pos = -1;
-                while (lo < hi) {
-                    mid = lo + (hi - lo) / 2;
-                    if (d[mid] < nums[i]) {
-                        pos = mid;
-                        lo = mid + 1;
-                    } else {
-                        hi = mid - 1;
-                    }
+        int end = 0;
+
+        for (int x : nums) {
+            // 当 nums[i] 大于 aux 数组的末尾值时，说明当前值可以插入到 aux 中形成一个更长的上升子序列
+            if (aux[end] < x) {
+                aux[++end] = x;
+            }
+            // 当 nums[i] 等于 aux 数组的末尾值时，什么也不做，因为以 nums[i] 结尾的最长上升子序列已存在
+            // 当 nums[i] 小于 aux 数组的末尾值时，在 aux 中二分查找合适的插入位置 x 并将 aux[x] 替换成 nums[i]
+            else {
+                int l = 0, m, r = end;
+
+                while (l < r) {
+                    m = l + (r - l) / 2;
+
+                    if (aux[m] < x) l = m + 1;
+                    else r = m;
                 }
 
-                d[pos + 1] = nums[i];
+                // 当前只让第 1 个严格大于 nums[i] 的数 aux[left] 变小，也就是变成 nums[i]
+                // 这一步操作是“无后效性”的，只考虑在索引为 left 时做出的最好选择，运用了贪心思想
+                aux[l] = x;
             }
         }
 
-        return idx + 1;
+        return ++end;
     }
 
     // DP - 时间复杂度 O(N^2) - 空间复杂度 O(N)
     public int lengthOfLISDP(int[] nums) {
         int n = nums.length;
-        if (n <= 1) return 1;
+        if (n <= 1) return n;
 
         // dp[i] 为考虑前 i 个元素，以第 i 个数字结尾的最长上升子序列的长度，注意 nums[i] 必须被选取
         /*
@@ -67,17 +74,20 @@ public class Lc_300_最长递增子序列 {
          */
         int[] dp = new int[n];
         // base case
-        Arrays.fill(dp, 1);
+        dp[0] = 1;
 
+        int res = 1;
         for (int i = 1; i < n; i++) {
+            dp[i] = 1;
             for (int j = 0; j < i; j++) {
                 if (nums[j] < nums[i]) {
                     dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
+            res = Math.max(res, dp[i]);
         }
 
-        return Arrays.stream(dp).max().getAsInt();
+        return res;
     }
 
 }
