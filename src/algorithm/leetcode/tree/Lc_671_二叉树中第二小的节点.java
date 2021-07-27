@@ -25,7 +25,7 @@ public class Lc_671_二叉树中第二小的节点 {
         System.out.println("输出：" + lc.findSecondMinimumValue(root));  // 5
     }
 
-    // 递归 - 时间复杂度 O(N) - 空间复杂度 O(N) 最坏情况下，遍历完所有子节点
+    // 递归 - 时间复杂度 O(N) - 空间复杂度 O(N) 最坏情况下，遍历整棵树
     public int findSecondMinimumValue(TreeNode root) {
         if (root == null || root.left == null || root.right == null) return -1;
 
