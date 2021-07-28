@@ -66,7 +66,7 @@ public class Lc_300_最长递增子序列 {
         int n = nums.length;
         if (n <= 1) return n;
 
-        // dp[i] 为考虑前 i 个元素，以第 i 个数字结尾的最长上升子序列的长度，注意 nums[i] 必须被选取
+            // dp[i] 为考虑前 i 个元素，以第 i 个数字结尾的最长上升子序列的长度，注意 nums[i] 必须被选取
         /*
             状态转移方程：{
                 dp[i] = max(dp[j]) + 1, 0 <= j < i && nums[j] < nums[i]

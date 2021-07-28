@@ -59,30 +59,34 @@ public class Jzo_45_把数组排成最小的数 {
         return sb.toString();
     }
 
-    private void quickSort(String[] arr, int lo, int hi) {
-        if (lo > hi) return;
+    private void quickSort(String[] ss, int l, int r) {
+        if (l >= r) return;
 
-        int i = lo, j = hi + 1;
-        String pivot = arr[lo];
+        int i = l, j = r + 1;
+        String pivot = ss[l];
 
         while (true) {
-            while (i < hi && (arr[i] + pivot).compareTo(pivot + arr[++i]) <= 0) ;
-            while (j > lo && (arr[--j] + pivot).compareTo(pivot + arr[j]) >= 0) ;
+            do {
+                ++i;
+            } while (i < r && (ss[i] + pivot).compareTo(pivot + ss[i]) <= 0);
+
+            while (j > l && (ss[--j] + pivot).compareTo(pivot + ss[j]) >= 0);
 
             if (i >= j) break;
 
-            swap(arr, i, j);
+            swap(ss, i, j);
         }
-        swap(arr, lo, j);
 
-        quickSort(arr, lo, j - 1);
-        quickSort(arr, j + 1, hi);
+        swap(ss, l, j);
+
+        quickSort(ss, l, j - 1);
+        quickSort(ss, j + 1, r);
     }
 
-    private void swap(String[] arr, int i, int j) {
-        String tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
+    private void swap(String[] ss, int i, int j) {
+        String tmp = ss[i];
+        ss[i] = ss[j];
+        ss[j] = tmp;
     }
 
 }
