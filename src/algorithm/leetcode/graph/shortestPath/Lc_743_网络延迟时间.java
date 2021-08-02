@@ -25,16 +25,17 @@ public class Lc_743_网络延迟时间 {
     // dijkstra + 堆优化 + 邻接表 - 时间复杂度 O(E*logE + V) E为图中边数,V为图中顶点数 - 空间复杂度 O(N)
     public int networkDelayTime(int[][] times, int n, int k) {
         // 构图 - 邻接表
+        // <point1, {[point2, distance2], [point3, distance3], ...}>
         Map<Integer, List<int[]>> graph = new HashMap<>();
-        for (int[] e : times) {
-            int x = e[0], y = e[1], d = e[2];
-            graph.computeIfAbsent(x, t -> new ArrayList<>()).add(new int[]{y, d});
+        for (int[] t : times) {
+            int x = t[0], y = t[1], d = t[2];
+            graph.computeIfAbsent(x, key -> new ArrayList<>()).add(new int[]{y, d});
         }
 
         // 迪克斯特拉
         int[] dist = dijkstra(graph, n, k);
 
-        int res = Arrays.stream(dist).max().orElse(0);
+        int res = Arrays.stream(dist).max().orElse(0x3f3f3f3f);
         return res == 0x3f3f3f3f ? -1 : res;
     }
 
@@ -55,6 +56,7 @@ public class Lc_743_网络延迟时间 {
             if (vis[poll]) continue;
             vis[poll] = true;
 
+            // 遍历当前节点的邻居，实时更新最短路径
             List<int[]> list = graph.getOrDefault(poll, Collections.emptyList());
             for (int[] arr : list) {
                 int next = arr[0];
