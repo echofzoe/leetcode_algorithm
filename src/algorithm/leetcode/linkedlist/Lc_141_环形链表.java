@@ -11,8 +11,8 @@ import java.util.Set;
  * <P>https://leetcode-cn.com/problems/linked-list-cycle/</P>
  *
  * @author echofzoe
- * @since unknown
  * @updated 2021.7.22
+ * @since unknown
  */
 public class Lc_141_环形链表 {
 
@@ -41,14 +41,24 @@ public class Lc_141_环形链表 {
 
     // Floyd 判圈算法 - 时间复杂度 O(N) - 空间复杂度 O(1)
     public boolean hasCycleFloyd(ListNode head) {
-        ListNode slow = head, fast = head;
+//        ListNode slow = head, fast = head;
+//
+//        do {
+//            if (fast == null || fast.next == null) return false;
+//
+//            slow = slow.next;
+//            fast = fast.next.next;
+//        } while (slow != fast);
 
-        do {
+        if (head == null) return false;
+
+        ListNode slow = head, fast = head.next;
+        while (slow != fast) {
             if (fast == null || fast.next == null) return false;
 
             slow = slow.next;
             fast = fast.next.next;
-        } while (slow != fast);
+        }
 
         return true;
     }
