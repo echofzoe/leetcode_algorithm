@@ -13,12 +13,18 @@ public class Lc_413_等差数列划分 {
 
     public static void main(String[] args) {
         Lc_413_等差数列划分 lc = new Lc_413_等差数列划分();
+
         int[] nums = {1, 2, 3, 4};
 
-        System.out.println("数组" + Arrays.toString(nums) + "中所有为等差数组的子数组的个数是" + lc.numberOfArithmeticSlicesDP(nums));
+        System.out.println("如果一个数列 至少有三个元素 ，并且任意两个相邻元素之差相同，则称该数列为等差数列。\n" +
+                "  - 例如，[1,3,5,7,9]、[7,7,7,7] 和 [3,-1,-5,-9] 都是等差数列。\n" +
+                "给你一个整数数组 nums ，返回数组 nums 中所有为等差数组的 子数组 个数。\n" +
+                "子数组 是数组中的一个连续序列。\n");
+        System.out.println("输入：nums = " + Arrays.toString(nums));
+        System.out.println("输出：" + lc.numberOfArithmeticSlicesDP(nums));
     }
 
-    // DP - 时间复杂度 O() - 空间复杂度 O()
+    // DP - 时间复杂度 O(N) - 空间复杂度 O(N)
     // - dp[i] 表示以 A[i] 为结尾的等差递增子区间的个数
     // -- eg: A = [0, 1, 2, 3, 4]
     // -- dp[2] = 1, [0, 1, 2]
@@ -35,8 +41,7 @@ public class Lc_413_等差数列划分 {
 
         int[] dp = new int[n];
         // base case
-        dp[0] = 0;
-        dp[1] = 0;
+        dp[0] = dp[1] = 0;
 
         for (int i = 2; i < n; i++) {
             if (nums[i] - nums[i - 1] == nums[i - 1] - nums[i - 2]) {
@@ -45,28 +50,6 @@ public class Lc_413_等差数列划分 {
         }
 
         return Arrays.stream(dp).sum();
-    }
-
-    // 暴力 - 时间复杂度 O() - 空间复杂度 O()
-    public int numberOfArithmeticSlicesBF(int[] nums) {
-        int n = nums.length;
-        if (n < 3) return 0;
-
-        int res = 0;
-        for (int i = 0; i < n - 2; i++) {
-            int d = nums[i + 1] - nums[i];
-
-            for (int j = i + 2; j < n; j++) {
-                int k;
-                for (k = i + 1; k <= j; k++) {
-                    if (nums[k] - nums[k - 1] != d) break;
-                }
-
-                if (k > j) res++;
-            }
-        }
-
-        return res;
     }
 
 }
