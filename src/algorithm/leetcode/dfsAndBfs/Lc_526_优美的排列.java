@@ -58,7 +58,7 @@ public class Lc_526_优美的排列 {
         return ans;
     }
 
-    // 状态压缩 dfs - 时间复杂度 O() - 空间复杂度 O()
+    // 状态压缩 dfs - 时间复杂度 O(N!) - 空间复杂度 O(N)
     private int[] mem;
 
     public int countArrangement1(int n) {
