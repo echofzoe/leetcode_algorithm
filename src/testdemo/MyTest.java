@@ -226,6 +226,7 @@ public class MyTest {
 
     @Test
     public void test6() {
+        System.out.println(12 / 10);
     }
 
 }
