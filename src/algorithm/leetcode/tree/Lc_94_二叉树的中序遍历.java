@@ -21,8 +21,10 @@ public class Lc_94_二叉树的中序遍历 {
         Lc_94_二叉树的中序遍历 lc = new Lc_94_二叉树的中序遍历();
 
         TreeNode root = new TreeNode(1);
-        root.right = new TreeNode(2);
-        root.right.left = new TreeNode(3);
+        root.left = new TreeNode(2);
+        root.left.right = new TreeNode(4);
+        root.right = new TreeNode(3);
+        root.right.left = new TreeNode(5);
 
         System.out.println("给定一个二叉树的根节点 root ，返回它的 中序 遍历。");
         System.out.println("输入：root = " + BinaryTreeSerialize.serialize(root));

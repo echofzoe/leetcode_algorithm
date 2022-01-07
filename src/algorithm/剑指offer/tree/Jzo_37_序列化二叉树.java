@@ -67,6 +67,7 @@ public class Jzo_37_序列化二叉树 {
     public TreeNode deserialize(String data) {
         if (data.length() == 2) return null;
         String[] vals = data.substring(1, data.length() - 1).split(",");
+
         int n = vals.length;
 
         TreeNode root = new TreeNode(Integer.parseInt(vals[0]));
